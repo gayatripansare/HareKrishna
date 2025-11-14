@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- Add these permissions -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -11,12 +15,64 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ISKCONTemple">
+
+        <activity
+            android:name=".PaymentSuccessActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PaymentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DonateActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ISKON_Sign_up"
+            android:exported="false" />
+        <activity
+            android:name=".ISKON_Sign_in"
+            android:exported="false" />
+        <activity
+            android:name=".RegistrationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".YouthForum"
+            android:exported="false" />
+        <activity
+            android:name=".Screen6"
+            android:exported="false" />
+        <activity
+            android:name=".Screen5"
+            android:exported="false" />
+        <activity
+            android:name=".Screen3"
+            android:exported="false" />
+
+        <!-- Friend's Temple Finder Activity -->
+        <activity
+            android:name=".MainActivity2"
+            android:exported="false"
+            android:label="Temple Finder" />
+
+        <activity
+           android:name=".YouthForum"
+           android:exported="false" />
+
+<!--        <activity-->
+<!--            android:name=".YouthForum"-->
+<!--            android:exported="false"-->
+<!--            android:label="Youth Forum"-->
+<!--            android:parentActivityName=".MainActivity">-->
+<!--            <meta-data-->
+<!--                android:name="android.support.PARENT_ACTIVITY"-->
+<!--                android:value=".MainActivity" />-->
+<!--        </activity>-->
+
+        <!-- YOUR MAIN APP (LAUNCHER) -->
         <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

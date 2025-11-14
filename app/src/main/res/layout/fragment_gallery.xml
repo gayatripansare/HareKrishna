@@ -286,6 +286,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
+                    android:src="@drawable/janmastamievent"
                     android:background="@drawable/sanatana_gradient"
                     android:contentDescription="Event Image" />
 
@@ -327,6 +328,7 @@
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
                     android:background="@drawable/gradient_card_orange"
+                    android:src="@drawable/event2"
                     android:contentDescription="Event Image" />
 
                 <View
@@ -337,7 +339,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Daily Aarti"
+                    android:text="Krishna Jula"
                     android:textColor="@color/white"
                     android:textSize="18sp"
                     android:textStyle="bold"

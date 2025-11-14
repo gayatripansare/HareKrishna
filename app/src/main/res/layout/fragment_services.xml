@@ -174,8 +174,7 @@
                             android:layout_height="50dp"
                             android:text="🏠"
                             android:textSize="32sp"
-                            android:gravity="center"
-                             />
+                            android:gravity="center" />
 
                         <LinearLayout
                             android:layout_width="0dp"
@@ -254,8 +253,7 @@
                             android:layout_height="50dp"
                             android:text="📚"
                             android:textSize="32sp"
-                            android:gravity="center"
-                             />
+                            android:gravity="center" />
 
                         <LinearLayout
                             android:layout_width="0dp"
@@ -334,8 +332,7 @@
                             android:layout_height="50dp"
                             android:text="🎓"
                             android:textSize="32sp"
-                            android:gravity="center"
-                             />
+                            android:gravity="center" />
 
                         <LinearLayout
                             android:layout_width="0dp"
@@ -404,40 +401,39 @@
                 android:layout_marginBottom="16dp"
                 android:fontFamily="sans-serif-medium" />
 
-            <!-- Row: Donation & Puja -->
+            <!-- Row: Donation & Youth Forum -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginBottom="12dp">
 
-                <!-- Donation -->
+                <!-- Donation ImageButton -->
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/card_donation_service"
                     android:layout_width="0dp"
-                    android:layout_height="140dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginEnd="6dp"
                     app:cardCornerRadius="12dp"
-                    app:cardElevation="4dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:foreground="?android:attr/selectableItemBackground">
+                    app:cardElevation="4dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:gravity="center"
-                        android:background="@drawable/gradient_card_red"
-                        android:padding="16dp">
+                        android:background="@drawable/gradient_card_red">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="💰"
-                            android:textSize="36sp"
-                            android:layout_marginBottom="8dp" />
+                        <ImageButton
+                            android:id="@+id/btn_donation_service"
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"
+                            android:background="@android:color/transparent"
+                            android:contentDescription="Donation Service"
+                            android:scaleType="fitCenter"
+                            android:padding="16dp"
+                            android:src="@android:drawable/ic_dialog_info"
+                            android:tint="@color/white" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -446,7 +442,7 @@
                             android:textSize="15sp"
                             android:textStyle="bold"
                             android:textColor="@color/white"
-                            android:gravity="center" />
+                            android:paddingBottom="8dp" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -454,58 +450,55 @@
                             android:text="80G Tax Benefits"
                             android:textSize="11sp"
                             android:textColor="@color/white"
-                            android:gravity="center"
-                            android:layout_marginTop="4dp" />
+                            android:paddingBottom="12dp" />
 
                     </LinearLayout>
 
                 </androidx.cardview.widget.CardView>
 
-                <!-- Puja Booking -->
+                <!-- Youth Forum ImageButton -->
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/card_puja_booking"
                     android:layout_width="0dp"
-                    android:layout_height="140dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginStart="6dp"
                     app:cardCornerRadius="12dp"
-                    app:cardElevation="4dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:foreground="?android:attr/selectableItemBackground">
+                    app:cardElevation="4dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:gravity="center"
-                        android:background="@color/sacred_green"
-                        android:padding="16dp">
+                        android:background="@color/sacred_green">
+
+                        <ImageButton
+                            android:id="@+id/btn_youth_forum"
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"
+                            android:background="@android:color/transparent"
+                            android:contentDescription="Youth Forum"
+                            android:scaleType="fitCenter"
+                            android:padding="16dp"
+                            android:src="@android:drawable/ic_menu_my_calendar"
+                            android:tint="@color/white" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="🪔"
-                            android:textSize="36sp"
-                            android:layout_marginBottom="8dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Puja Booking"
+                            android:text="Youth Forum"
                             android:textSize="15sp"
                             android:textStyle="bold"
                             android:textColor="@color/white"
-                            android:gravity="center" />
+                            android:paddingBottom="8dp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Special Occasions"
+                            android:text="Age 18-30 | Sun 6PM"
                             android:textSize="11sp"
                             android:textColor="@color/white"
-                            android:gravity="center"
-                            android:layout_marginTop="4dp" />
+                            android:paddingBottom="12dp" />
 
                     </LinearLayout>
 

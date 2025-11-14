@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
@@ -53,18 +54,10 @@ class ContactUsFragment : Fragment() {
             }
         }
 
-        // Location/Map
-        view.findViewById<CardView>(R.id.card_location).setOnClickListener {
-            // Replace with actual coordinates
-            val gmmIntentUri = Uri.parse("geo:19.8762,74.9461?q=ISKCON+Kopergaon")
-            val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
-            mapIntent.setPackage("com.google.android.apps.maps")
-
-            if (mapIntent.resolveActivity(requireActivity().packageManager) != null) {
-                startActivity(mapIntent)
-            } else {
-                Toast.makeText(context, "Google Maps not installed", Toast.LENGTH_SHORT).show()
-            }
+        // Visit Temple Button - Navigate to new screen
+        view.findViewById<Button>(R.id.btn_visit_temple).setOnClickListener {
+            val intent = Intent(requireActivity(), MainActivity2::class.java)
+            startActivity(intent)
         }
     }
 }

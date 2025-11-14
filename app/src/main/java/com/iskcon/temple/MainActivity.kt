@@ -15,12 +15,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Set default fragment (Home)
         if (savedInstanceState == null) {
             loadFragment(HomeFragment())
         }
 
-        // Setup custom bottom navigation
         setupCustomBottomNavigation()
     }
 
@@ -31,54 +29,46 @@ class MainActivity : AppCompatActivity() {
         val navServices = findViewById<LinearLayout>(R.id.nav_services_custom)
         val navMore = findViewById<LinearLayout>(R.id.nav_more_custom)
 
-        // Home
         navHome.setOnClickListener {
             selectTab(R.id.nav_home_custom)
             clearBackStack()
             loadFragment(HomeFragment())
         }
 
-        // Darshan
         navDarshan.setOnClickListener {
             selectTab(R.id.nav_darshan_custom)
             clearBackStack()
             loadFragment(DarshanFragment())
         }
 
-        // Schedule
         navSchedule.setOnClickListener {
             selectTab(R.id.nav_schedule_custom)
             clearBackStack()
             loadFragment(ScheduleFragment())
         }
 
-        // Services
         navServices.setOnClickListener {
             selectTab(R.id.nav_services_custom)
             clearBackStack()
             loadFragment(ServicesFragment())
         }
 
-        // More
         navMore.setOnClickListener {
             selectTab(R.id.nav_more_custom)
             clearBackStack()
             loadFragment(MoreFragment())
         }
 
-        // Set initial selection
         selectTab(R.id.nav_home_custom)
     }
 
     private fun selectTab(tabId: Int) {
-        // Reset all tabs to default color
         updateTabColor(R.id.nav_home_custom, false)
         updateTabColor(R.id.nav_darshan_custom, false)
         updateTabColor(R.id.nav_schedule_custom, false)
         updateTabColor(R.id.nav_services_custom, false)
         updateTabColor(R.id.nav_more_custom, false)
 
-        // Highlight selected tab
         updateTabColor(tabId, true)
         currentSelectedTab = tabId
     }
@@ -116,9 +106,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
+        // If there's a backstack (like from Gallery), pop it
         if (supportFragmentManager.backStackEntryCount > 0) {
             supportFragmentManager.popBackStack()
-        } else {
+        }
+        // If not on home, go to home
+        else if (currentSelectedTab != R.id.nav_home_custom) {
+            findViewById<LinearLayout>(R.id.nav_home_custom)?.performClick()
+        }
+        // If on home, exit app
+        else {
             super.onBackPressed()
         }
     }

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="GridItemContainer">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_columnWeight">1</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:padding">8dp</item>
+    </style>
+
+    <style name="GridImageButton">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">80dp</item>
+        <item name="android:scaleType">fitCenter</item>
+        <item name="android:background">?android:attr/selectableItemBackground</item>
+    </style>
+
+    <style name="GridItemTitle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <!-- Base application theme -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        <!-- Customize your theme here -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/backgroundColor</item>
+    </style>
+
+    <!-- Button Style -->
+    <style name="DonateButtonStyle" parent="Widget.MaterialComponents.Button">
+        <item name="android:textColor">@color/textWhite</item>
+        <item name="backgroundTint">@color/donateButton</item>
+        <item name="cornerRadius">8dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="RoundedImageView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">12dp</item>
+    </style>
+</resources>

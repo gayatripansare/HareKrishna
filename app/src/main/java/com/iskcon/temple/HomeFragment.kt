@@ -1,5 +1,6 @@
 package com.iskcon.temple
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,34 +17,62 @@ class HomeFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
 
-        setupQuickNavigation(view)
+        setupQuickAccessCards(view)
 
         return view
     }
 
-    private fun setupQuickNavigation(view: View) {
-        // Daily Schedule
+    private fun setupQuickAccessCards(view: View) {
+        // Daily Schedule Card
         view.findViewById<CardView>(R.id.card_schedule)?.setOnClickListener {
-            requireActivity().findViewById<CardView>(R.id.nav_schedule_custom)?.performClick()
+            navigateToSchedule()
         }
 
-        // Services
+        // Scripture Card (Services)
         view.findViewById<CardView>(R.id.card_services)?.setOnClickListener {
-            requireActivity().findViewById<CardView>(R.id.nav_services_custom)?.performClick()
+            navigateToServices()
         }
 
-        // Gallery
+        // Gallery Card
         view.findViewById<CardView>(R.id.card_gallery)?.setOnClickListener {
-            val galleryFragment = GalleryFragment()
-            requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, galleryFragment)
-                .addToBackStack("home")
-                .commit()
+            navigateToGallery()
         }
 
-        // More
+        // More Card
         view.findViewById<CardView>(R.id.card_more)?.setOnClickListener {
-            requireActivity().findViewById<CardView>(R.id.nav_more_custom)?.performClick()
+            navigateToMore()
         }
+    }
+
+    private fun navigateToSchedule() {
+        val scheduleFragment = ScheduleFragment()
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, scheduleFragment)
+            .addToBackStack("home")
+            .commit()
+    }
+
+    private fun navigateToServices() {
+        val servicesFragment = ServicesFragment()
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, servicesFragment)
+            .addToBackStack("home")
+            .commit()
+    }
+
+    private fun navigateToGallery() {
+        val galleryFragment = GalleryFragment()
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, galleryFragment)
+            .addToBackStack("home")
+            .commit()
+    }
+
+    private fun navigateToMore() {
+        val moreFragment = MoreFragment()
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, moreFragment)
+            .addToBackStack("home")
+            .commit()
     }
 }

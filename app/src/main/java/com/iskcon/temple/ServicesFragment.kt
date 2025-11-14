@@ -1,8 +1,7 @@
 package com.iskcon.temple
 
-
-
 import android.app.Dialog
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -10,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -31,7 +31,7 @@ class ServicesFragment : Fragment() {
     }
 
     private fun setupServiceCards(view: View) {
-        // Annadan
+        // Main Service Cards
         view.findViewById<CardView>(R.id.card_annadan).setOnClickListener {
             showServiceImageDialog(
                 "Annadan (Food Distribution)",
@@ -40,7 +40,6 @@ class ServicesFragment : Fragment() {
             )
         }
 
-        // House Program
         view.findViewById<CardView>(R.id.card_house_program).setOnClickListener {
             showServiceImageDialog(
                 "House Program",
@@ -49,7 +48,6 @@ class ServicesFragment : Fragment() {
             )
         }
 
-        // Book Distribution
         view.findViewById<CardView>(R.id.card_book_distribution).setOnClickListener {
             showServiceImageDialog(
                 "Book Distribution",
@@ -58,7 +56,6 @@ class ServicesFragment : Fragment() {
             )
         }
 
-        // Value Education
         view.findViewById<CardView>(R.id.card_value_education).setOnClickListener {
             showServiceImageDialog(
                 "Value Education in Schools",
@@ -67,14 +64,17 @@ class ServicesFragment : Fragment() {
             )
         }
 
-        // Donation
-        view.findViewById<CardView>(R.id.card_donation_service).setOnClickListener {
+        // Other Services - ImageButtons
+        view.findViewById<ImageButton>(R.id.btn_donation_service).setOnClickListener {
+            val intent = Intent(requireContext(), DonateActivity::class.java)
+            startActivity(intent)
             Toast.makeText(context, "Donation - 80G Tax Benefits Available\nContact temple for details", Toast.LENGTH_LONG).show()
         }
 
-        // Puja Booking
-        view.findViewById<CardView>(R.id.card_puja_booking).setOnClickListener {
-            Toast.makeText(context, "Puja Booking - Special occasions\nContact: +91 98765 43210", Toast.LENGTH_LONG).show()
+        view.findViewById<ImageButton>(R.id.btn_youth_forum).setOnClickListener {
+            // Open Youth Forum Activity
+            val intent = Intent(requireContext(), YouthForum::class.java)
+            startActivity(intent)
         }
     }
 

@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- FIRST PAGE - Main Screen -->
+    <ScrollView
+        android:id="@+id/mainLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="20dp"
+                android:text="ISKCON"
+                android:background="#FF9800"
+                android:textColor="#000000"
+                android:textSize="32sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Finder"
+                android:textSize="20sp"
+                android:textColor="#666666"
+                android:gravity="center"
+                android:paddingTop="10dp"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_margin="0dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/img_1"
+                android:background="#B3E5FC"
+                android:contentDescription="Temple Image"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="20dp"
+                android:padding="15dp"
+                android:background="#F5F5F5"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="📍"
+                    android:textColor="#050505"
+                    android:textSize="24sp"
+                    android:layout_marginEnd="10dp"/>
+
+                <EditText
+                    android:id="@+id/locationInput"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="Enter Location (e.g. Kopargaon)"
+                    android:textSize="16sp"
+                    android:textColorHint="#050505"
+                    android:textColor="#050505"
+                    android:background="@android:color/transparent"
+                    android:inputType="text"/>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/findButton"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_margin="20dp"
+                android:text="Find Temples"
+                android:textSize="18sp"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#FF9800"
+                android:textAllCaps="false"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <!-- SECOND PAGE - Temple List -->
+    <LinearLayout
+        android:id="@+id/templeListLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#FFFFFF"
+        android:visibility="gone">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="15dp"
+            android:gravity="center_vertical"
+            android:background="#FF9800">
+
+            <TextView
+                android:id="@+id/backButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="←"
+                android:textSize="28sp"
+                android:textColor="#FFFFFF"
+                android:padding="10dp"
+                android:clickable="true"
+                android:focusable="true"/>
+
+            <TextView
+                android:id="@+id/locationText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Temples near you"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:layout_marginStart="10dp"/>
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/templeContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="15dp">
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+    <!-- THIRD PAGE - Temple Detail with Map -->
+    <ScrollView
+        android:id="@+id/templeDetailLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Header -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="15dp"
+                android:gravity="center_vertical"
+                android:background="#FF9800">
+
+                <TextView
+                    android:id="@+id/backButtonDetail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="←"
+                    android:textSize="28sp"
+                    android:textColor="#FFFFFF"
+                    android:padding="10dp"
+                    android:clickable="true"
+                    android:focusable="true"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Temple Details"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:layout_marginStart="10dp"/>
+            </LinearLayout>
+
+            <!-- ✅ TEMPLE IMAGE - ADD THIS -->
+            <ImageView
+                android:id="@+id/detailTempleImage"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:scaleType="centerCrop"
+                android:contentDescription="Temple Image"
+                android:background="#E0E0E0"/>
+
+            <!-- Temple Info -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:id="@+id/detailTempleName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Temple Name"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:textColor="#000000"/>
+
+                <TextView
+                    android:id="@+id/detailRating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="⭐ 4.8"
+                    android:textSize="18sp"
+                    android:textColor="#FF9800"
+                    android:layout_marginTop="8dp"/>
+
+                <!-- Address Section -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="📍 Address"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
+                    android:layout_marginTop="20dp"/>
+
+                <TextView
+                    android:id="@+id/detailAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Address"
+                    android:textSize="14sp"
+                    android:textColor="#666666"
+                    android:layout_marginTop="5dp"/>
+
+                <!-- Phone Section -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="📞 Contact"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
+                    android:layout_marginTop="20dp"/>
+
+                <TextView
+                    android:id="@+id/detailPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Phone"
+                    android:textSize="14sp"
+                    android:textColor="#666666"
+                    android:layout_marginTop="5dp"/>
+
+                <!-- Timing Section -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="🕐 Timings"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
+                    android:layout_marginTop="20dp"/>
+
+                <TextView
+                    android:id="@+id/detailTiming"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Timing"
+                    android:textSize="14sp"
+                    android:textColor="#666666"
+                    android:layout_marginTop="5dp"/>
+
+                <!-- Description Section -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="ℹ About"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
+                    android:layout_marginTop="20dp"/>
+
+                <TextView
+                    android:id="@+id/detailDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Description"
+                    android:textSize="14sp"
+                    android:textColor="#666666"
+                    android:layout_marginTop="5dp"
+                    android:lineSpacingExtra="4dp"/>
+
+                <!-- Map Buttons -->
+                <Button
+                    android:id="@+id/openMapButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="🗺 View on Google Maps"
+                    android:textSize="16sp"
+                    android:textColor="#FFFFFF"
+                    android:backgroundTint="#4CAF50"
+                    android:layout_marginTop="30dp"
+                    android:textAllCaps="false"/>
+
+                <Button
+                    android:id="@+id/directionsButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="🧭 Get Directions"
+                    android:textSize="16sp"
+                    android:textColor="#FFFFFF"
+                    android:backgroundTint="#00BCD4"
+                    android:layout_marginTop="10dp"
+                    android:textAllCaps="false"/>
+
+                <Button
+                    android:id="@+id/callButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="📞 Call Temple"
+                    android:textSize="16sp"
+                    android:textColor="#FFFFFF"
+                    android:backgroundTint="#2196F3"
+                    android:layout_marginTop="10dp"
+                    android:textAllCaps="false"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="24dp"
+    android:background="#F5F5F5">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="32dp"
+            android:gravity="center">
+
+            <!-- Success Icon -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="✓"
+                android:textSize="80sp"
+                android:textColor="#4CAF50"
+                android:textStyle="bold"
+                android:paddingBottom="16dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Payment Successful!"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:gravity="center"
+                android:paddingBottom="8dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Thank you for your generous donation to ISKCON"
+                android:textSize="14sp"
+                android:textColor="#666666"
+                android:gravity="center"
+                android:paddingBottom="24dp" />
+
+            <!-- Payment Details -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#E0E0E0"
+                android:layout_marginBottom="16dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="8dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="Payment ID:"
+                    android:textSize="14sp"
+                    android:textColor="#666666" />
+
+                <TextView
+                    android:id="@+id/tvPaymentId"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="PAY123456789"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
+                    android:gravity="end" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="8dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="Donation Type:"
+                    android:textSize="14sp"
+                    android:textColor="#666666" />
+
+                <TextView
+                    android:id="@+id/tvDonationType"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="Annadaan"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
+                    android:gravity="end" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="16dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="Amount:"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/tvDonationAmount"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="₹ 3,000"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="#F46538"
+                    android:gravity="end" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#E0E0E0"
+                android:layout_marginBottom="16dp" />
+
+
+
+            <!-- Back to Home Button -->
+            <Button
+                android:id="@+id/btnBackHome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="BACK TO HOME"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:backgroundTint="#F46538"
+                android:paddingVertical="14dp" />
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hare Krishna! May Lord Krishna bless you."
+        android:textSize="14sp"
+        android:textStyle="italic"
+        android:textColor="#666666"
+        android:gravity="center"
+        android:paddingTop="24dp" />
+
+</LinearLayout>

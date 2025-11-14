@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Header Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#FFFFFF"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:gravity="center"
+                android:paddingBottom="8dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" IT'S TIME TO CONTRIBUTE"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                android:textColor="#F6F3F3"
+                android:background="#D8F46538"
+                android:gravity="center"
+                android:paddingBottom="12dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:gravity="center"
+                android:paddingBottom="8dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Your donation to ISKCON can support various initiatives such as feeding programs for the needy, educational outreach, temple construction, and preservation of cultural heritage. By contributing, you're not only aiding the organization but also participating in the noble endeavor of spreading love, compassion, and spiritual wisdom. Every donation, no matter how big or small, makes a meaningful difference in the lives of others and helps sustain the mission of ISKCON."
+                android:textSize="14sp"
+                android:textColor="#090808"
+                android:lineSpacingExtra="4dp" />
+
+        </LinearLayout>
+
+        <!-- Annadaan Section -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#F4F0E6"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="220dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/annadan"
+                    android:contentDescription="Annadaan - Food Distribution" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Annadaan"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        android:textColor="#000000"
+                        android:gravity="center"
+                        android:paddingBottom="8dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Your contribution can ignite change, making a difference in the lives of millions facing hunger."
+                        android:textSize="14sp"
+                        android:textColor="#090808"
+                        android:gravity="center"
+                        android:paddingBottom="16dp"
+                        android:lineSpacingExtra="2dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="(Per Plate Rs.30)                                                                                     100 Plates: Rs.3,000                                                             200 Plates: Rs.6,000                                                                                 500 Plates: Rs.15,000                                                        1000 Plates: Rs.30,000"
+                        android:textSize="14sp"
+                        android:textColor="#666666"
+                        android:gravity="center"
+                        android:paddingBottom="16dp"
+                        android:lineSpacingExtra="2dp" />
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Enter Amount (₹)"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etAnnadaanAmount"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="numberDecimal"
+                            android:maxLines="1" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <Button
+                        android:id="@+id/btnDonateAnnadaan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="DONATE NOW"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:backgroundTint="#F46538"
+                        android:layout_marginTop="12dp"
+                        android:paddingVertical="14dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Gitadaan Section -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#F4F0E6"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="220dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/gitadan"
+                    android:contentDescription="Gitadaan - Book Distribution" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingBottom="8dp"
+                        android:text="Gitadaan"
+                        android:textColor="#000000"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:lineSpacingExtra="2dp"
+                        android:paddingBottom="16dp"
+                        android:text="राजविद्या राजगुह्यम् - Help the people to reconnect with the lost Indian Vedic wisdom."
+                        android:textColor="#090808"
+                        android:textSize="14sp" />
+
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:lineSpacingExtra="2dp"
+                        android:paddingBottom="16dp"
+                        android:text="(Per Gita Rs.200)                                                         DONATE 15 Bhagvad Gita: Rs.3,000                        DONATE 25 Bhagvad Gita: Rs.5,000                        DONATE 50 Bhagvad Gita: Rs.10,000                                                                      DONATE 75 Bhagvad Gita: Rs.15,000"
+                        android:textColor="#666666"
+                        android:textSize="14sp" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Enter Amount (₹)">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etGitadaanAmount"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="numberDecimal"
+                            android:maxLines="1" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <Button
+                        android:id="@+id/btnDonateGitadaan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:backgroundTint="#F46538"
+                        android:paddingVertical="14dp"
+                        android:text="DONATE NOW"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Janmashtami Section -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#F4F0E6"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="220dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/janmashtami"
+                    android:contentDescription="Temple Donation" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Temple Donation"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        android:textColor="#000000"
+                        android:gravity="center"
+                        android:paddingBottom="8dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Support the ISKCON temple's mission of spreading love and spiritual enlightenment. Donate today to help us with our various Seva initiatives."
+                        android:textSize="14sp"
+                        android:textColor="#090808"
+                        android:gravity="center"
+                        android:paddingBottom="16dp"
+                        android:lineSpacingExtra="2dp" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Enter Amount (₹)"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etJanmashtamiAmount"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="numberDecimal"
+                            android:maxLines="1" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <Button
+                        android:id="@+id/btnDonateJanmashtami"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="DONATE NOW"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:backgroundTint="#F46538"
+                        android:layout_marginTop="12dp"
+                        android:paddingVertical="14dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Bottom Spacing -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="16dp" />
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

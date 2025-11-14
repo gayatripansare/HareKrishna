@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF9E6"
+    android:fillViewport="true"
+    tools:context=".ISKON_Sign_up">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:padding="16dp">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/kopargaon_logo"
+            app:shapeAppearanceOverlay="@style/RoundedImageView"/>
+
+        <TextView
+            android:id="@+id/iskon_h1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Create Your Account"
+            android:textSize="26sp"
+            android:textColor="@color/Redorange"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:id="@+id/discription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Join our devotional community"
+            android:textSize="16sp"
+            android:layout_marginBottom="24dp"/>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp"
+            app:cardUseCompatPadding="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="24dp">
+
+                <EditText
+                    android:id="@+id/devotee_signup_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="Email Address"
+                    android:inputType="textEmailAddress"
+                    android:background="@drawable/edittext_background"
+                    android:padding="14dp"
+                    android:drawableStart="@drawable/ic_email"
+                    android:drawablePadding="12dp"/>
+
+                <EditText
+                    android:id="@+id/devotee_signup_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:ems="10"
+                    android:hint="Password"
+                    android:inputType="textPassword"
+                    android:background="@drawable/edittext_background"
+                    android:padding="14dp"
+                    android:drawableStart="@drawable/ic_lock"
+                    android:drawablePadding="12dp"/>
+
+                <Button
+                    android:id="@+id/devotee_signup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:backgroundTint="@color/Redorange"
+                    android:text="Sign Up"
+                    android:textColor="@android:color/white"
+                    android:paddingTop="14dp"
+                    android:paddingBottom="14dp"
+                    android:textSize="16sp"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="24dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Already have an account? "
+                android:textSize="16sp"/>
+
+            <Button
+                android:id="@+id/devotee_Signin_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sign In"
+                style="?android:attr/borderlessButtonStyle"
+                android:textColor="@color/Redorange"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "688972813339",
+    "project_id": "iskon-kopargaon-lr",
+    "storage_bucket": "iskon-kopargaon-lr.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:688972813339:android:6c9c39c154b84138a954be",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXK2CPRzitM8Zs-GUt-8Qn3zBRYLK4B-8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:688972813339:android:35a8c9ec91fa9df6a954be",
+        "android_client_info": {
+          "package_name": "com.iskcon.temple"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXK2CPRzitM8Zs-GUt-8Qn3zBRYLK4B-8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
