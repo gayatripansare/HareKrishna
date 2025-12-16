@@ -41,7 +41,8 @@
     <color name="donateButton">#FF9800</color>
     <color name="donateButtonPressed">#F57C00</color>
 
-
+    <color name="iskcon_orange">#FF9933</color>
+    <color name="iskcon_saffron">#FF6600</color>
     <color name="orange">#FFA500</color>
     <color name="Redorange">#FF4D00</color>
 </resources>

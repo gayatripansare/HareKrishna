@@ -2,11 +2,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Add these permissions -->
+    <!-- Existing permissions -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
+    <!-- NEW: Festival notification permissions -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+
     <application
+        android:name=".IskconApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -54,18 +60,8 @@
             android:label="Temple Finder" />
 
         <activity
-           android:name=".YouthForum"
-           android:exported="false" />
-
-<!--        <activity-->
-<!--            android:name=".YouthForum"-->
-<!--            android:exported="false"-->
-<!--            android:label="Youth Forum"-->
-<!--            android:parentActivityName=".MainActivity">-->
-<!--            <meta-data-->
-<!--                android:name="android.support.PARENT_ACTIVITY"-->
-<!--                android:value=".MainActivity" />-->
-<!--        </activity>-->
+            android:name=".YouthForum"
+            android:exported="false" />
 
         <!-- YOUR MAIN APP (LAUNCHER) -->
         <activity
