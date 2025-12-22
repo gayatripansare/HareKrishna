@@ -65,11 +65,11 @@ class ISKON_Sign_in : AppCompatActivity() {
                 if (task.isSuccessful) {
                     Toast.makeText(this, "Login successful! Hare Krishna! 🙏", Toast.LENGTH_SHORT).show()
 
-                    // Navigate back to MainActivity
-                    val intent = Intent(this, HomeFragment::class.java)
+                    // Navigate to MainActivity (which hosts HomeFragment)
+                    val intent = Intent(this, MainActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
                     startActivity(intent)
-//                    finish()
+                    finish()  // Close sign-in activity
                 } else {
                     Toast.makeText(
                         this,
