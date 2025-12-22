@@ -60,7 +60,20 @@ dependencies {
     implementation("androidx.work:work-runtime-ktx:2.9.0")
     implementation("com.google.firebase:firebase-messaging:23.4.0")
 
+    implementation("com.cloudinary:cloudinary-android:2.5.0")
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+
     implementation("androidx.work:work-runtime-ktx:2.9.0")
 // ✅ ADD THIS for accurate Hindu calendar
     implementation("com.ibm.icu:icu4j:74.1")
+
+
+        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
+        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.7.3")
+
+        // Firebase
+        implementation("com.google.firebase:firebase-firestore-ktx:24.10.0")
+    
 }

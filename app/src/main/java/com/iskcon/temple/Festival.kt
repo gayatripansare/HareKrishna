@@ -1,13 +1,17 @@
 package com.iskcon.temple
 
-
-
 data class Festival(
-    val id: String,              // Unique identifier like "janmashtami"
-    val name: String,            // Festival name like "Janmashtami"
-    val description: String,     // Description like "Appearance day of Lord Krishna"
-    val date: String,            // Date in format "26-08-2025"
-    val month: Int,              // Month number (1-12)
-    val day: Int,                // Day number (1-31)
-    val isLunarDate: Boolean = true  // True for Hindu calendar festivals
-)
+    val id: String = "",
+    val name: String = "",
+    val description: String = "",
+    val date: String = "",           // Format: "DD-MM-YYYY"
+    val month: Int = 0,
+    val day: Int = 0,
+    val year: Int = 0,
+    val fasting: String = "",        // ✅ Make sure this field exists!
+    val isLunarDate: Boolean = true,
+    val isEditable: Boolean = true
+) {
+    // Empty constructor for Firestore
+    constructor() : this("", "", "", "", 0, 0, 0, "", true, true)
+}
