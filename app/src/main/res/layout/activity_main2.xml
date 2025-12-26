@@ -44,46 +44,59 @@
                 android:background="#B3E5FC"
                 android:contentDescription="Temple Image"/>
 
+            <!-- Quick Location Buttons Section -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Choose your city:"
+                android:textSize="18sp"
+                android:textColor="#333333"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_marginTop="30dp"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_margin="20dp"
-                android:padding="15dp"
-                android:background="#F5F5F5"
-                android:gravity="center_vertical">
+                android:orientation="vertical"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="40dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="📍"
-                    android:textColor="#050505"
-                    android:textSize="24sp"
-                    android:layout_marginEnd="10dp"/>
+                <Button
+                    android:id="@+id/kopargaonButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:text="Kopargaon Temples"
+                    android:textSize="18sp"
+                    android:textColor="#FFFFFF"
+                    android:backgroundTint="#4CAF50"
+                    android:layout_marginBottom="15dp"
+                    android:textAllCaps="false"/>
 
-                <EditText
-                    android:id="@+id/locationInput"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:hint="Enter Location (e.g. Kopargaon)"
-                    android:textSize="16sp"
-                    android:textColorHint="#050505"
-                    android:textColor="#050505"
-                    android:background="@android:color/transparent"
-                    android:inputType="text"/>
+                <Button
+                    android:id="@+id/shirdiButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:text="Shirdi Temples"
+                    android:textSize="18sp"
+                    android:textColor="#FFFFFF"
+                    android:backgroundTint="#2196F3"
+                    android:layout_marginBottom="15dp"
+                    android:textAllCaps="false"/>
+
+                <Button
+                    android:id="@+id/nashikButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:text="Nashik Temples"
+                    android:textSize="18sp"
+                    android:textColor="#FFFFFF"
+                    android:backgroundTint="#FF5722"
+                    android:textAllCaps="false"/>
+
             </LinearLayout>
-
-            <Button
-                android:id="@+id/findButton"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_margin="20dp"
-                android:text="Find Temples"
-                android:textSize="18sp"
-                android:textColor="#FFFFFF"
-                android:backgroundTint="#FF9800"
-                android:textAllCaps="false"/>
 
         </LinearLayout>
 
@@ -189,7 +202,7 @@
                     android:layout_marginStart="10dp"/>
             </LinearLayout>
 
-            <!-- ✅ TEMPLE IMAGE - ADD THIS -->
+            <!-- Temple Image -->
             <ImageView
                 android:id="@+id/detailTempleImage"
                 android:layout_width="match_parent"
@@ -312,16 +325,7 @@
                     android:layout_marginTop="30dp"
                     android:textAllCaps="false"/>
 
-                <Button
-                    android:id="@+id/directionsButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="🧭 Get Directions"
-                    android:textSize="16sp"
-                    android:textColor="#FFFFFF"
-                    android:backgroundTint="#00BCD4"
-                    android:layout_marginTop="10dp"
-                    android:textAllCaps="false"/>
+
 
                 <Button
                     android:id="@+id/callButton"
