@@ -278,6 +278,212 @@
 
         </LinearLayout>
 
+        <!-- Add this section RIGHT AFTER the Account section (after card_sign_in closes) -->
+
+        <!-- Admin Section (Only visible to admins) -->
+        <LinearLayout
+            android:id="@+id/admin_section"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="👑 Admin Panel"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/bhagwa_saffron"
+                android:layout_marginBottom="16dp"
+                android:fontFamily="sans-serif-medium" />
+
+            <!-- Manage Festivals -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/btn_manage_festivals"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp"
+                android:backgroundTint="@color/card_white"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="16dp"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:text="📅"
+                        android:textSize="28sp"
+                        android:gravity="center" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_marginStart="12dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Manage Festivals"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/dark_text" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Edit festival dates (2025-2026)"
+                            android:textSize="13sp"
+                            android:textColor="@color/gray_text"
+                            android:layout_marginTop="4dp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="›"
+                        android:textSize="32sp"
+                        android:textColor="@color/gray_text" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Add Custom Event -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/btn_add_event"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp"
+                android:backgroundTint="@color/card_white"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="16dp"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:text="➕"
+                        android:textSize="28sp"
+                        android:gravity="center" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_marginStart="12dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Add Custom Event"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/dark_text" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Create temple programs and special events"
+                            android:textSize="13sp"
+                            android:textColor="@color/gray_text"
+                            android:layout_marginTop="4dp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="›"
+                        android:textSize="32sp"
+                        android:textColor="@color/gray_text" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Upload Gallery -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/btn_upload_gallery"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp"
+                android:backgroundTint="@color/card_white"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="16dp"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:text="🖼️"
+                        android:textSize="28sp"
+                        android:gravity="center" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_marginStart="12dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Upload Gallery Image"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/dark_text" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Add deity and event photos"
+                            android:textSize="13sp"
+                            android:textColor="@color/gray_text"
+                            android:layout_marginTop="4dp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="›"
+                        android:textSize="32sp"
+                        android:textColor="@color/gray_text" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+        <!-- Then your existing "Other Options" section continues... -->
+
         <!-- Additional Options -->
         <LinearLayout
             android:layout_width="match_parent"

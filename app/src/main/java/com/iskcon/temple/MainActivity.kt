@@ -11,6 +11,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.cloudinary.android.MediaManager
 
 class MainActivity : AppCompatActivity() {
 
@@ -31,6 +32,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // Initialize Cloudinary
+        initCloudinary()
+
         // Request notification permission
         requestNotificationPermission()
 
@@ -39,6 +43,17 @@ class MainActivity : AppCompatActivity() {
         }
 
         setupCustomBottomNavigation()
+    }
+
+    private fun initCloudinary() {
+        try {
+            MediaManager.get()
+        } catch (e: IllegalStateException) {
+            val config = hashMapOf<String, Any>(
+                "cloud_name" to CloudinaryConfig.CLOUD_NAME
+            )
+            MediaManager.init(this, config)
+        }
     }
 
     private fun requestNotificationPermission() {

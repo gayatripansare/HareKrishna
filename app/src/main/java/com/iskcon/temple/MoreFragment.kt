@@ -7,16 +7,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class MoreFragment : Fragment() {
 
     private lateinit var auth: FirebaseAuth
+    private val firestore = FirebaseFirestore.getInstance()
+
+    // Admin section views
+    private var adminSection: LinearLayout? = null
+    private var btnManageFestivals: CardView? = null
+    private var btnAddEvent: CardView? = null
+    private var btnUploadGallery: CardView? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,27 +34,80 @@ class MoreFragment : Fragment() {
 
         auth = FirebaseAuth.getInstance()
 
-        // Setup click listeners for all options
+        // Initialize admin views (they might not exist in XML yet)
+        try {
+            adminSection = view.findViewById(R.id.admin_section)
+            btnManageFestivals = view.findViewById(R.id.btn_manage_festivals)
+            btnAddEvent = view.findViewById(R.id.btn_add_event)
+            btnUploadGallery = view.findViewById(R.id.btn_upload_gallery)
+
+            // Setup admin click listeners
+            setupAdminListeners()
+        } catch (e: Exception) {
+            // Admin section doesn't exist in XML yet, that's okay
+        }
+
+        // Setup regular click listeners for all options
         setupClickListeners(view)
 
         // Update Sign In card based on authentication status
         updateSignInCard(view)
+
+        // Check if user is admin and show admin section
+        checkAdminStatus()
 
         return view
     }
 
     override fun onResume() {
         super.onResume()
-        // Update the card when fragment becomes visible again
         view?.let { updateSignInCard(it) }
+        checkAdminStatus()
+    }
+
+    private fun setupAdminListeners() {
+        btnManageFestivals?.setOnClickListener {
+            startActivity(Intent(requireContext(), AdminFestivalActivity::class.java))
+        }
+
+        btnAddEvent?.setOnClickListener {
+            startActivity(Intent(requireContext(), AdminEventActivity::class.java))
+        }
+
+        btnUploadGallery?.setOnClickListener {
+            startActivity(Intent(requireContext(), AdminUploadActivity::class.java))
+        }
+    }
+
+    private fun checkAdminStatus() {
+        val currentUser = auth.currentUser
+        if (currentUser == null || adminSection == null) {
+            adminSection?.visibility = View.GONE
+            return
+        }
+
+        firestore.collection("users")
+            .document(currentUser.uid)
+            .get()
+            .addOnSuccessListener { document ->
+                if (document.exists()) {
+                    val role = document.getString("role")
+                    if (role == "admin") {
+                        adminSection?.visibility = View.VISIBLE
+                    } else {
+                        adminSection?.visibility = View.GONE
+                    }
+                } else {
+                    adminSection?.visibility = View.GONE
+                }
+            }
+            .addOnFailureListener {
+                adminSection?.visibility = View.GONE
+            }
     }
 
     private fun updateSignInCard(view: View) {
-        val currentUser = auth.currentUser
-        val signInCard = view.findViewById<CardView>(R.id.card_sign_in)
-
-        // You can optionally update the card appearance based on login status
-        // For now, we'll handle it in the click listener
+        // Existing logic remains the same
     }
 
     private fun setupClickListeners(view: View) {
@@ -61,19 +121,17 @@ class MoreFragment : Fragment() {
             navigateToContactUs()
         }
 
-        // Sign In / Register - Check if user is already logged in
+        // Sign In / Register
         view.findViewById<CardView>(R.id.card_sign_in)?.setOnClickListener {
             val currentUser = auth.currentUser
             if (currentUser != null) {
-                // User is already signed in, show options
                 showUserOptionsDialog(currentUser.email ?: "User")
             } else {
-                // User not signed in, navigate to sign in page
                 navigateToSignIn()
             }
         }
 
-        // Scriptures - Open in browser
+        // Scriptures
         view.findViewById<CardView>(R.id.card_scriptures)?.setOnClickListener {
             openScripturesInBrowser()
         }
@@ -116,8 +174,8 @@ class MoreFragment : Fragment() {
     private fun signOutUser() {
         auth.signOut()
         Toast.makeText(context, "Signed out successfully", Toast.LENGTH_SHORT).show()
-        // Optionally refresh the fragment
         view?.let { updateSignInCard(it) }
+        checkAdminStatus() // Hide admin section after logout
     }
 
     private fun navigateToAboutUs() {
@@ -137,7 +195,6 @@ class MoreFragment : Fragment() {
     }
 
     private fun navigateToSignIn() {
-        // Start the Sign In Activity
         val intent = Intent(requireContext(), ISKON_Sign_in::class.java)
         startActivity(intent)
     }
