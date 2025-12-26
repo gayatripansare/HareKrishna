@@ -1,5 +1,6 @@
 package com.iskcon.temple
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -88,14 +89,14 @@ class YouthForum : AppCompatActivity() {
 
     private fun openRegistrationOptions() {
         // Show dialog with registration options
-        val options = arrayOf("Call Temple", "WhatsApp", "Cancel")
+        val options = arrayOf("Call Temple", "Register via Google Form", "Cancel")
 
         android.app.AlertDialog.Builder(this)
             .setTitle("Register for Youth Forum")
             .setItems(options) { dialog, which ->
                 when (which) {
                     0 -> openPhoneDialer()
-                    1 -> openWhatsAppChat()
+                    1 -> openGoogleForm()
                     2 -> dialog.dismiss()
                 }
             }
@@ -104,7 +105,7 @@ class YouthForum : AppCompatActivity() {
 
     private fun openPhoneDialer() {
         try {
-            val phoneNumber = "tel:+919876543210" // Replace with your actual number
+            val phoneNumber = "919876543210"
             val intent = Intent(Intent.ACTION_DIAL).apply {
                 data = Uri.parse(phoneNumber)
             }
@@ -114,16 +115,13 @@ class YouthForum : AppCompatActivity() {
         }
     }
 
-    private fun openWhatsAppChat() {
+    private fun openGoogleForm() {
         try {
-            val phoneNumber = "919876543210" // Replace with your WhatsApp number (without +)
-            val message = "Hare Krishna! I want to register for the Youth Forum program"
-            val url = "https://wa.me/$phoneNumber?text=${Uri.encode(message)}"
-            val intent = Intent(Intent.ACTION_VIEW)
-            intent.data = Uri.parse(url)
+            val formUrl = "https://forms.gle/D6rRucLjoueXYbxw6"
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(formUrl))
             startActivity(intent)
         } catch (e: Exception) {
-            Toast.makeText(this, "WhatsApp not installed", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Unable to open Google Form", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -137,6 +135,8 @@ class YouthForum : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("GestureBackNavigation")
+    @Deprecated("This method has been deprecated in favor of using the\n      {@link OnBackPressedDispatcher} via {@link #getOnBackPressedDispatcher()}.\n      The OnBackPressedDispatcher controls how back button events are dispatched\n      to one or more {@link OnBackPressedCallback} objects.")
     override fun onBackPressed() {
         super.onBackPressed()
         finish()
