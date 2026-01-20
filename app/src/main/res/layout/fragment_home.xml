@@ -10,97 +10,47 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- Beautiful Header with Sanatana Colors -->
-        <androidx.cardview.widget.CardView
+        <!-- Beautiful Header with Auto-Scrolling Image Carousel -->
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="280dp"
-            android:layout_margin="0dp"
-            app:cardCornerRadius="0dp"
-            app:cardElevation="8dp">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:background="@color/cream_bg">
 
-            <RelativeLayout
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:text="हरे कृष्ण हरे कृष्ण, कृष्ण कृष्ण हरे हरे ।\nहरे राम हरे राम, राम राम हरे हरे ॥"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/bhagwa_saffron"
+                android:gravity="center"
+                android:lineSpacingExtra="6dp"
+                android:fontFamily="serif"
+                android:padding="12dp"
+                android:elevation="4dp"/>
 
-                <!-- Background Gradient -->
-                <View
+
+            <!-- Auto-Scrolling Image Carousel with Decorative Frame -->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="280dp"
+                android:background="@drawable/temple_image_frame">
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/image_slider"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/sanatana_gradient" />
+                    android:layout_margin="8dp" />
 
-                <!-- Content on top -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:padding="24dp">
+            </FrameLayout>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="ISKCON Kopergaon"
-                        android:textColor="@color/white"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:fontFamily="sans-serif-medium"
-                        android:shadowColor="#80000000"
-                        android:shadowDx="2"
-                        android:shadowDy="2"
-                        android:shadowRadius="4"
-                        android:gravity="center" />
+            <!-- Maha Mantra below carousel -->
 
-                    <ImageView
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:scaleType="centerCrop"
-                        android:background="@drawable/gradient_card_orange"
-                        android:src="@drawable/logo"
-                        android:contentDescription="Deity Image 1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Hare Krishna Hare Krishna Krishna Krishna Hare Hare Hare Rama Hare Rama Hare Hare"
-                        android:textColor="@color/golden_yellow"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:layout_marginTop="8dp"
-                        android:shadowColor="#80000000"
-                        android:shadowDx="1"
-                        android:shadowDy="1"
-                        android:shadowRadius="3"
-                        android:gravity="center" />
-
-                    <View
-                        android:layout_width="80dp"
-                        android:layout_height="3dp"
-                        android:background="@color/golden_yellow"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginBottom="16dp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Hare Krishna! 🙏"
-                        android:textColor="@color/white"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:shadowColor="#80000000"
-                        android:shadowDx="1"
-                        android:shadowDy="1"
-                        android:shadowRadius="3" />
-
-                </LinearLayout>
-
-            </RelativeLayout>
-
-        </androidx.cardview.widget.CardView>
+        </LinearLayout>
 
         <!-- Quick Access Section -->
-
-        <!-- Today's Schedule Card -->
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -117,95 +67,107 @@
                 android:textSize="22sp"
                 android:textStyle="bold" />
 
-            <!-- Quick Action Cards Grid -->
+            <!-- Staggered Cards Layout -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
-                <!-- Row 1 -->
+                <!-- Left Column -->
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="12dp"
-                    android:orientation="horizontal">
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    android:orientation="vertical">
 
-                    <!-- Daily Schedule Card -->
+                    <!-- Daily Schedule Card (Tall) -->
                     <androidx.cardview.widget.CardView
                         android:id="@+id/card_schedule"
-                        android:layout_width="0dp"
-                        android:layout_height="100dp"
-                        android:layout_marginEnd="6dp"
-                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="120dp"
+                        android:layout_marginBottom="12dp"
                         android:clickable="true"
                         android:focusable="true"
                         android:foreground="?android:attr/selectableItemBackground"
                         app:cardCornerRadius="16dp"
-                        app:cardElevation="6dp">
+                        app:cardElevation="8dp"
+                        app:cardBackgroundColor="@color/card_white">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="@drawable/gradient_card_orange"
                             android:gravity="center"
                             android:orientation="vertical"
-                            android:padding="1dp">
+                            android:padding="12dp">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="0dp"
-                                android:text="⏰"
-                                android:textSize="42sp" />
+                            <FrameLayout
+                                android:layout_width="55dp"
+                                android:layout_height="55dp"
+                                android:background="@drawable/circle_bg_golden"
+                                android:layout_marginBottom="8dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:text="⌛"
+                                    android:textSize="28sp" />
+                            </FrameLayout>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
                                 android:text="Daily Schedule"
-                                android:textColor="@color/white"
-                                android:textSize="15sp"
+                                android:textColor="@color/dark_text"
+                                android:textSize="13sp"
                                 android:textStyle="bold" />
 
                         </LinearLayout>
 
                     </androidx.cardview.widget.CardView>
 
-                    <!-- Temple Services Card -->
+                    <!-- Gallery Card (Short) -->
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/card_services"
-                        android:layout_width="0dp"
-                        android:layout_height="100dp"
-                        android:layout_marginStart="6dp"
-                        android:layout_weight="1"
+                        android:id="@+id/card_gallery"
+                        android:layout_width="match_parent"
+                        android:layout_height="90dp"
                         android:clickable="true"
                         android:focusable="true"
                         android:foreground="?android:attr/selectableItemBackground"
                         app:cardCornerRadius="16dp"
-                        app:cardElevation="6dp">
+                        app:cardElevation="8dp"
+                        app:cardBackgroundColor="@color/card_white">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="@drawable/gradient_card_blue"
                             android:gravity="center"
                             android:orientation="vertical"
-                            android:padding="1dp">
+                            android:padding="12dp">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="8dp"
-                                android:text="📜"
-                                android:textSize="42sp" />
+                            <FrameLayout
+                                android:layout_width="45dp"
+                                android:layout_height="45dp"
+                                android:background="@drawable/circle_bg_green"
+                                android:layout_marginBottom="6dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:text="🪷"
+                                    android:textSize="24sp" />
+                            </FrameLayout>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
-                                android:text="Services"
-                                android:textColor="@color/white"
-                                android:textSize="15sp"
+                                android:text="Gallery"
+                                android:textColor="@color/dark_text"
+                                android:textSize="13sp"
                                 android:textStyle="bold" />
 
                         </LinearLayout>
@@ -214,89 +176,102 @@
 
                 </LinearLayout>
 
-                <!-- Row 2 -->
+                <!-- Right Column -->
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:orientation="vertical">
 
-                    <!-- Gallery Card -->
+                    <!-- Services Card (Short) -->
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/card_gallery"
-                        android:layout_width="0dp"
-                        android:layout_height="100dp"
-                        android:layout_marginEnd="6dp"
-                        android:layout_weight="1"
+                        android:id="@+id/card_services"
+                        android:layout_width="match_parent"
+                        android:layout_height="90dp"
+                        android:layout_marginBottom="12dp"
                         android:clickable="true"
                         android:focusable="true"
                         android:foreground="?android:attr/selectableItemBackground"
                         app:cardCornerRadius="16dp"
-                        app:cardElevation="6dp">
+                        app:cardElevation="8dp"
+                        app:cardBackgroundColor="@color/card_white">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="@drawable/gradient_card_green"
                             android:gravity="center"
                             android:orientation="vertical"
-                            android:padding="1dp">
+                            android:padding="12dp">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="8dp"
-                                android:text="🦚"
-                                android:textSize="42sp" />
+                            <FrameLayout
+                                android:layout_width="45dp"
+                                android:layout_height="45dp"
+                                android:background="@drawable/circle_bg_blue"
+                                android:layout_marginBottom="6dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:text="📜"
+                                    android:textSize="24sp" />
+                            </FrameLayout>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
-                                android:text="Gallery"
-                                android:textColor="@color/white"
-                                android:textSize="15sp"
+                                android:text="Services"
+                                android:textColor="@color/dark_text"
+                                android:textSize="13sp"
                                 android:textStyle="bold" />
 
                         </LinearLayout>
 
                     </androidx.cardview.widget.CardView>
 
-                    <!-- More Options Card -->
+                    <!-- More Options Card (Tall) -->
                     <androidx.cardview.widget.CardView
                         android:id="@+id/card_more"
-                        android:layout_width="0dp"
-                        android:layout_height="100dp"
-                        android:layout_marginStart="6dp"
-                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="120dp"
                         android:clickable="true"
                         android:focusable="true"
                         android:foreground="?android:attr/selectableItemBackground"
                         app:cardCornerRadius="16dp"
-                        app:cardElevation="6dp">
+                        app:cardElevation="8dp"
+                        app:cardBackgroundColor="@color/card_white">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="@drawable/gradient_card_red"
                             android:gravity="center"
                             android:orientation="vertical"
-                            android:padding="1dp">
+                            android:padding="12dp">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="8dp"
-                                android:text="⋮"
-                                android:textColor="@color/white"
-                                android:textSize="42sp" />
+                            <FrameLayout
+                                android:layout_width="55dp"
+                                android:layout_height="55dp"
+                                android:background="@drawable/circle_bg_golden"
+                                android:layout_marginBottom="8dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:text="⋮"
+                                    android:textColor="@color/dark_text"
+                                    android:textSize="28sp" />
+                            </FrameLayout>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
                                 android:text="More"
-                                android:textColor="@color/white"
-                                android:textSize="15sp"
+                                android:textColor="@color/dark_text"
+                                android:textSize="13sp"
                                 android:textStyle="bold" />
 
                         </LinearLayout>
@@ -309,6 +284,7 @@
 
         </LinearLayout>
 
+        <!-- Today's Schedule Card -->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -431,6 +407,13 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/layout_events_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
@@ -485,6 +468,58 @@
 
         </androidx.cardview.widget.CardView>
 
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_todays_events"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:visibility="gone"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp"
+            android:backgroundTint="@color/card_white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🎉 "
+                        android:textSize="26sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Special Events Today"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/bhagwa_saffron"
+                        android:fontFamily="sans-serif-medium" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_events_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
         <!-- Temple Updates Card -->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -529,8 +564,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
-
-
 
                     <TextView
                         android:layout_width="wrap_content"
