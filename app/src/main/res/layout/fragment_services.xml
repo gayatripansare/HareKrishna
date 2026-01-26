@@ -11,42 +11,14 @@
         android:orientation="vertical">
 
         <!-- Header Section -->
-        <LinearLayout
+        <com.google.android.material.imageview.ShapeableImageView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@drawable/sanatana_gradient"
-            android:padding="24dp"
-            android:gravity="center">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="🪔"
-                android:textSize="48sp"
-                android:layout_marginBottom="8dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Temple Services"
-                android:textColor="@color/white"
-                android:textSize="28sp"
-                android:textStyle="bold"
-                android:fontFamily="sans-serif-medium"
-                android:gravity="center" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="सेवा परमो धर्मः"
-                android:textColor="@color/golden_yellow"
-                android:textSize="16sp"
-                android:layout_marginTop="4dp"
-                android:gravity="center" />
-
-        </LinearLayout>
-
+            android:layout_height="230dp"
+            android:contentDescription="Radha Krishna"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img_4"
+            android:layout_margin="10dp"
+            app:cornerSize="16dp" />
         <!-- Main Services Section -->
         <LinearLayout
             android:layout_width="match_parent"
