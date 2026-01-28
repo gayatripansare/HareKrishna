@@ -119,10 +119,7 @@ class MainActivity2: AppCompatActivity() {
                         "19.8993645,74.4901565", "+91 7204025975", "5:30 AM - 9:00 PM",
                         "Local ISKCON center in Kopargaon. Regular kirtans, bhajans and prasadam distribution. Peaceful atmosphere for devotion.",
                         R.drawable.radha_2),
-                    Temple("Hare Krishna Satsang,ISKCON Kopargaon", "Railway, Station Rd, Annapurna Nagar, Kopargaon, Maharashtra 423603", "1 km", "4.6",
-                        "19.8993194,74.4902109", "+91 8767045409", "6:00 AM - 8:30 PM",
-                        "Beautiful local temple with daily aarti and festivals. Active community participation and spiritual programs.",
-                        R.drawable.radhe_1)
+
                 )
             }
             searchLocation.contains("shirdi") -> {
