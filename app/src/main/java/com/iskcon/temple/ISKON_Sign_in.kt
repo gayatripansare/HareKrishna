@@ -83,11 +83,6 @@ class ISKON_Sign_in : AppCompatActivity() {
                 // Successfully fetched the role from Firestore
                 val welcomeMessage = if (role == UserRoleManager.ROLE_ADMIN) {
                     "Welcome Admin! Hare Krishna! 🙏"
-                    // Navigate to MainActivity (which hosts HomeFragment)
-                    val intent = Intent(this, MainActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
-                    startActivity(intent)
-                    finish()  // Close sign-in activity
                 } else {
                     "Login successful! Hare Krishna! 🙏"
                 }

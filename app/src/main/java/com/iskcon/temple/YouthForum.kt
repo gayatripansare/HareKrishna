@@ -4,16 +4,28 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
+import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.bumptech.glide.Glide
+import com.google.firebase.firestore.FirebaseFirestore
 
 class YouthForum : AppCompatActivity() {
+
+    private val firestore = FirebaseFirestore.getInstance()
+    private lateinit var ivQuickImage1: ImageView
+    private lateinit var ivQuickImage2: ImageView
+    private lateinit var cardQuickImage1: CardView
+    private lateinit var cardQuickImage2: CardView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +42,55 @@ class YouthForum : AppCompatActivity() {
             insets
         }
 
+        initQuickGalleryViews()
+        loadRecentYouthImages()
         setupClickListeners()
+    }
+
+    private fun initQuickGalleryViews() {
+        ivQuickImage1 = findViewById(R.id.iv_quick_youth_1)
+        ivQuickImage2 = findViewById(R.id.iv_quick_youth_2)
+        cardQuickImage1 = findViewById(R.id.card_quick_youth_1)
+        cardQuickImage2 = findViewById(R.id.card_quick_youth_2)
+    }
+
+    private fun loadRecentYouthImages() {
+        // No authentication check needed - public read allowed
+
+        firestore.collection("youth_gallery_images")
+            .limit(2)
+            .get()
+            .addOnSuccessListener { documents ->
+                val images = documents.mapNotNull { it.toObject(GalleryImage::class.java) }
+                    .sortedByDescending { it.timestamp }
+
+                Log.d("YouthForum", "✅ Fetched ${images.size} images from Firestore")
+
+                if (images.isNotEmpty()) {
+                    Glide.with(this)
+                        .load(images[0].imageUrl)
+                        .placeholder(R.drawable.deity_krishna)
+                        .error(R.drawable.deity_krishna)
+                        .centerCrop()
+                        .into(ivQuickImage1)
+                    cardQuickImage1.visibility = View.VISIBLE
+                }
+
+                if (images.size > 1) {
+                    Glide.with(this)
+                        .load(images[1].imageUrl)
+                        .placeholder(R.drawable.deity_krishna)
+                        .error(R.drawable.deity_krishna)
+                        .centerCrop()
+                        .into(ivQuickImage2)
+                    cardQuickImage2.visibility = View.VISIBLE
+                }
+
+                Log.d("YouthForum", "✅ Loaded ${images.size} quick access images")
+            }
+            .addOnFailureListener { exception ->
+                Log.e("YouthForum", "❌ Error loading quick images: ${exception.message}")
+            }
     }
 
     private fun setupClickListeners() {
@@ -39,35 +99,35 @@ class YouthForum : AppCompatActivity() {
             openRegistrationOptions()
         }
 
-        // Lectures Button - Navigate to Screen3
-        findViewById<ImageButton>(R.id.lecturesButton)?.setOnClickListener {
-            try {
-                val intent = Intent(this, Screen5::class.java)
-                startActivity(intent)
-            } catch (e: Exception) {
-                Toast.makeText(this, "Unable to open Lectures", Toast.LENGTH_SHORT).show()
-            }
+        // Lectures Button - Navigate to Screen5
+//        findViewById<ImageButton>(R.id.lecturesButton)?.setOnClickListener {
+//            try {
+//                val intent = Intent(this, Screen5::class.java)
+//                startActivity(intent)
+//            } catch (e: Exception) {
+//                Toast.makeText(this, "Unable to open Lectures", Toast.LENGTH_SHORT).show()
+//            }
+//        }
+//
+//        // Images Button - Navigate to Youth Gallery (CHANGED)
+//        findViewById<ImageButton>(R.id.imagesButton)?.setOnClickListener {
+//            openYouthGallery()
+//        }
+
+        // See More Images Button (NEW)
+        findViewById<Button>(R.id.btn_see_more_youth_images)?.setOnClickListener {
+            openYouthGallery()
         }
 
-        // Images Button - Navigate to Screen5
-        findViewById<ImageButton>(R.id.imagesButton)?.setOnClickListener {
-            try {
-                val intent = Intent(this, Screen6::class.java)
-                startActivity(intent)
-            } catch (e: Exception) {
-                Toast.makeText(this, "Unable to open Images", Toast.LENGTH_SHORT).show()
-            }
-        }
-
-        // Camps Button - Navigate to Screen6
-        findViewById<ImageButton>(R.id.campsButton)?.setOnClickListener {
-            try {
-                val intent = Intent(this, Screen3::class.java)
-                startActivity(intent)
-            } catch (e: Exception) {
-                Toast.makeText(this, "Unable to open Camps", Toast.LENGTH_SHORT).show()
-            }
-        }
+        // Camps Button - Navigate to Screen3
+//        findViewById<ImageButton>(R.id.campsButton)?.setOnClickListener {
+//            try {
+//                val intent = Intent(this, Screen3::class.java)
+//                startActivity(intent)
+//            } catch (e: Exception) {
+//                Toast.makeText(this, "Unable to open Camps", Toast.LENGTH_SHORT).show()
+//            }
+//        }
 
         // Info grid items
         findViewById<ImageButton>(R.id.imageButton)?.setOnClickListener {
@@ -87,8 +147,12 @@ class YouthForum : AppCompatActivity() {
         }
     }
 
+    private fun openYouthGallery() {
+        val intent = Intent(this, YouthGalleryActivity::class.java)
+        startActivity(intent)
+    }
+
     private fun openRegistrationOptions() {
-        // Show dialog with registration options
         val options = arrayOf("Call Temple", "Register via Google Form", "Cancel")
 
         android.app.AlertDialog.Builder(this)
@@ -105,7 +169,7 @@ class YouthForum : AppCompatActivity() {
 
     private fun openPhoneDialer() {
         try {
-            val phoneNumber = "919876543210"
+            val phoneNumber = "tel:919876543210"
             val intent = Intent(Intent.ACTION_DIAL).apply {
                 data = Uri.parse(phoneNumber)
             }
@@ -133,6 +197,11 @@ class YouthForum : AppCompatActivity() {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        loadRecentYouthImages() // Reload images when returning to this screen
     }
 
     @SuppressLint("GestureBackNavigation")

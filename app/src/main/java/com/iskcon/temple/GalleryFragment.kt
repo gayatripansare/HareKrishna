@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 
 class GalleryFragment : Fragment() {
 
@@ -152,78 +153,69 @@ class GalleryFragment : Fragment() {
 
     private fun loadDeityImages() {
         progressBar.visibility = View.VISIBLE
-        Log.d("GalleryFragment", "Loading deity images...")
 
         firestore.collection("gallery_images")
             .whereEqualTo("category", "deity")
-            .get()
-            .addOnSuccessListener { documents ->
-                Log.d("GalleryFragment", "✅ Loaded ${documents.size()} deity images")
+            .orderBy("timestamp", Query.Direction.DESCENDING)
+            .addSnapshotListener { snapshots, error ->
+                progressBar.visibility = View.GONE
+
+                if (error != null) {
+                    Log.e("GalleryFragment", "❌ Error loading deity images: ${error.message}")
+                    // Only show toast if there are actually no images to display
+                    if (deityImagesList.isEmpty()) {
+                        Toast.makeText(
+                            requireContext(),
+                            "Error loading deity images",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                    return@addSnapshotListener
+                }
 
                 deityImagesList.clear()
-
-                val sortedImages = documents.mapNotNull { doc ->
-                    try {
-                        val image = doc.toObject(GalleryImage::class.java)
-                        Log.d("GalleryFragment", "Deity image: ${image.title} - ${image.imageUrl}")
-                        image
-                    } catch (e: Exception) {
-                        Log.e("GalleryFragment", "Error parsing image: ${e.message}")
-                        null
+                if (snapshots != null && !snapshots.isEmpty) {
+                    for (document in snapshots.documents) {
+                        val image = document.toObject(GalleryImage::class.java)
+                        if (image != null) {
+                            deityImagesList.add(image)
+                        }
                     }
-                }.sortedByDescending { it.timestamp }
-
-                deityImagesList.addAll(sortedImages)
+                }
                 deityAdapter.updateImages(deityImagesList)
-                progressBar.visibility = View.GONE
-
-                Log.d("GalleryFragment", "Deity adapter updated with ${deityImagesList.size} images")
-            }
-            .addOnFailureListener { exception ->
-                Log.e("GalleryFragment", "❌ Error loading deity images: ${exception.message}")
-                Toast.makeText(
-                    requireContext(),
-                    "Error loading deity images: ${exception.message}",
-                    Toast.LENGTH_SHORT
-                ).show()
-                progressBar.visibility = View.GONE
+                Log.d("GalleryFragment", "✅ Loaded ${deityImagesList.size} deity images")
             }
     }
 
     private fun loadEventImages() {
-        Log.d("GalleryFragment", "Loading event images...")
-
         firestore.collection("gallery_images")
             .whereEqualTo("category", "events")
-            .get()
-            .addOnSuccessListener { documents ->
-                Log.d("GalleryFragment", "✅ Loaded ${documents.size()} event images")
+            .orderBy("timestamp", Query.Direction.DESCENDING)
+            .addSnapshotListener { snapshots, error ->
+                if (error != null) {
+                    Log.e("GalleryFragment", "❌ Error loading event images: ${error.message}")
+                    // Only show toast if there are actually no images to display
+                    if (eventImagesList.isEmpty()) {
+                        Toast.makeText(
+                            requireContext(),
+                            "Error loading event images",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                    return@addSnapshotListener
+                }
 
                 eventImagesList.clear()
-
-                val sortedImages = documents.mapNotNull { doc ->
-                    try {
-                        val image = doc.toObject(GalleryImage::class.java)
-                        Log.d("GalleryFragment", "Event image: ${image.title} - ${image.imageUrl}")
-                        image
-                    } catch (e: Exception) {
-                        Log.e("GalleryFragment", "Error parsing image: ${e.message}")
-                        null
+                if (snapshots != null && !snapshots.isEmpty) {
+                    for (document in snapshots.documents) {
+                        val image = document.toObject(GalleryImage::class.java)
+                        if (image != null) {
+                            eventImagesList.add(image)
+                        }
                     }
-                }.sortedByDescending { it.timestamp }
-
-                eventImagesList.addAll(sortedImages)
+                }
                 eventAdapter.updateImages(eventImagesList)
-
-                Log.d("GalleryFragment", "Event adapter updated with ${eventImagesList.size} images")
-            }
-            .addOnFailureListener { exception ->
-                Log.e("GalleryFragment", "❌ Error loading event images: ${exception.message}")
-                Toast.makeText(
-                    requireContext(),
-                    "Error loading event images: ${exception.message}",
-                    Toast.LENGTH_SHORT
-                ).show()
+                Log.d("GalleryFragment", "✅ Loaded ${eventImagesList.size} event images")
             }
     }
 
