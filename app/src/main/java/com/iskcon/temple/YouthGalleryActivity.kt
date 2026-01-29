@@ -15,7 +15,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
-class YouthGalleryActivity : AppCompatActivity() {
+class YouthGalleryActivity : BaseActivity() {
 
     private lateinit var rvYouthImages: RecyclerView
     private lateinit var fabAddImage: FloatingActionButton

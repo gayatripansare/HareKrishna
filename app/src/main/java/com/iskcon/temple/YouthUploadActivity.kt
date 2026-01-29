@@ -17,7 +17,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class YouthUploadActivity : AppCompatActivity() {
+class YouthUploadActivity : BaseActivity() {
 
     private lateinit var ivImagePreview: ImageView
     private lateinit var tvPreviewPlaceholder: TextView
@@ -47,6 +47,7 @@ class YouthUploadActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_youth_upload)
 
+        hideDonationFab()
         cloudinaryHelper = CloudinaryHelper(this)
         initViews()
         setupClickListeners()

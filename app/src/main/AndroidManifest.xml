@@ -29,6 +29,9 @@
         android:theme="@style/Theme.ISKCONTemple"
         tools:ignore="ExtraText">
         <activity
+            android:name=".BaseActivity"
+            android:exported="false" />
+        <activity
             android:name=".YouthGalleryActivity"
             android:exported="false" />
         <activity

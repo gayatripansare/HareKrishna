@@ -19,7 +19,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.bumptech.glide.Glide
 import com.google.firebase.firestore.FirebaseFirestore
 
-class YouthForum : AppCompatActivity() {
+class YouthForum : BaseActivity() {
 
     private val firestore = FirebaseFirestore.getInstance()
     private lateinit var ivQuickImage1: ImageView

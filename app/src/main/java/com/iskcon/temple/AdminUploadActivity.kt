@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import com.bumptech.glide.Glide
 
-class AdminUploadActivity : AppCompatActivity() {
+class AdminUploadActivity : BaseActivity() {
 
     private lateinit var ivImagePreview: ImageView
     private lateinit var tvPreviewPlaceholder: TextView
@@ -49,6 +49,7 @@ class AdminUploadActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_upload)
 
+        hideDonationFab()
         cloudinaryHelper = CloudinaryHelper(this)
         initViews()
         setupCategorySpinner()
