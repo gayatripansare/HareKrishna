@@ -36,7 +36,7 @@ class ServicesFragment : Fragment() {
             showServiceImageDialog(
                 "Annadan (Food Distribution)",
                 "Free prasadam distribution to devotees and needy people. Annadana is considered Maha Daan - the highest form of charity in Vedic culture.",
-                R.drawable.service_annadan2
+                R.drawable.service_annadan2  // Changed to existing image
             )
         }
 
@@ -44,7 +44,7 @@ class ServicesFragment : Fragment() {
             showServiceImageDialog(
                 "House Program",
                 "We conduct Kirtan, Bhagavad Gita lectures, and Srimad Bhagavatam discourses at your home. Invite devotees for spiritual programs and experience divine blessings.",
-                R.drawable.service_house_program
+                R.drawable.service_house_program1  // Changed to existing image
             )
         }
 
@@ -52,7 +52,7 @@ class ServicesFragment : Fragment() {
             showServiceImageDialog(
                 "Book Distribution",
                 "Spiritual literature including Bhagavad Gita, Srimad Bhagavatam, and Krishna books available in Hindi and English. Spread the wisdom of Vedic knowledge.",
-                R.drawable.service_books2
+                R.drawable.service_books2  // Changed to existing image
             )
         }
 
@@ -60,7 +60,7 @@ class ServicesFragment : Fragment() {
             showServiceImageDialog(
                 "Value Education in Schools",
                 "Character building programs teaching moral values, ethics, stress management, and spiritual awareness to students through Vedic wisdom.",
-                R.drawable.service_education
+                R.drawable.service_education1  // Changed to existing image
             )
         }
 

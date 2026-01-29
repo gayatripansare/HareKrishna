@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp"
+    android:backgroundTint="#FFF3E0">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="@drawable/gradient_card_orange">
+
+        <!-- Event Name -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="⭐"
+                android:textSize="24sp"
+                android:layout_marginEnd="8dp" />
+
+            <TextView
+                android:id="@+id/tv_event_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Janmashtami"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+
+        <!-- Event Description -->
+        <TextView
+            android:id="@+id/tv_event_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Appearance of Lord Krishna"
+            android:textSize="15sp"
+            android:textColor="@color/white"
+            android:alpha="0.9"
+            android:layout_marginStart="32dp" />
+
+        <!-- Fasting Info (if available) -->
+        <TextView
+            android:id="@+id/tv_event_fasting"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Fasting: Till midnight"
+            android:textSize="13sp"
+            android:textColor="@color/golden_yellow"
+            android:textStyle="italic"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="32dp"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

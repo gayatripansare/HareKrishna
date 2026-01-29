@@ -49,6 +49,7 @@
             android:textSize="17sp"
             android:textAlignment="center"/>
 
+        <!-- What you will get CardView -->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -119,6 +120,69 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
+        <!-- Quick Navigation CardView -->
+<!--        <androidx.cardview.widget.CardView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="16dp"-->
+<!--            android:layout_marginEnd="16dp"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            app:cardCornerRadius="12dp"-->
+<!--            app:cardElevation="4dp">-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="vertical"-->
+<!--                android:padding="16dp">-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Quick Navigation"-->
+<!--                    android:textAlignment="center"-->
+<!--                    android:textColor="@color/Redorange"-->
+<!--                    android:textSize="24sp"-->
+<!--                    android:textStyle="bold" />-->
+
+<!--                <GridLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:columnCount="3"-->
+<!--                    android:layout_marginTop="16dp">-->
+
+<!--                    <LinearLayout style="@style/GridItemContainer">-->
+<!--                        <ImageButton-->
+<!--                            android:id="@+id/lecturesButton"-->
+<!--                            style="@style/GridImageButton"-->
+<!--                            app:srcCompat="@drawable/ic_lectures_video"-->
+<!--                            android:contentDescription="Lectures"/>-->
+<!--                        <TextView style="@style/GridItemTitle" android:text="Lectures"/>-->
+<!--                    </LinearLayout>-->
+
+<!--                    <LinearLayout style="@style/GridItemContainer">-->
+<!--                        <ImageButton-->
+<!--                            android:id="@+id/imagesButton"-->
+<!--                            style="@style/GridImageButton"-->
+<!--                            app:srcCompat="@drawable/ic_images_gallery"-->
+<!--                            android:contentDescription="Images"/>-->
+<!--                        <TextView style="@style/GridItemTitle" android:text="Images"/>-->
+<!--                    </LinearLayout>-->
+
+<!--                    <LinearLayout style="@style/GridItemContainer">-->
+<!--                        <ImageButton-->
+<!--                            android:id="@+id/campsButton"-->
+<!--                            style="@style/GridImageButton"-->
+<!--                            app:srcCompat="@drawable/ic_camps2"-->
+<!--                            android:contentDescription="Camps"/>-->
+<!--                        <TextView style="@style/GridItemTitle" android:text="Camps"/>-->
+<!--                    </LinearLayout>-->
+
+<!--                </GridLayout>-->
+<!--            </LinearLayout>-->
+<!--        </androidx.cardview.widget.CardView>-->
+
+        <!-- Quick Access Gallery Section -->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -137,49 +201,98 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Quick Navigation"
+                    android:text="Quick Access - Youth Gallery"
                     android:textAlignment="center"
                     android:textColor="@color/Redorange"
                     android:textSize="24sp"
                     android:textStyle="bold" />
 
-                <GridLayout
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:columnCount="3"
+                    android:layout_marginTop="8dp"
+                    android:text="Latest Youth Event Images"
+                    android:textAlignment="center"
+                    android:textSize="14sp"
+                    android:textColor="@color/gray_text" />
+
+                <!-- Two Recent Images in Row -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
                     android:layout_marginTop="16dp">
 
-                    <LinearLayout style="@style/GridItemContainer">
-                        <ImageButton
-                            android:id="@+id/lecturesButton"
-                            style="@style/GridImageButton"
-                            app:srcCompat="@drawable/ic_lectures_video"
-                            android:contentDescription="Lectures"/>
-                        <TextView style="@style/GridItemTitle" android:text="Lectures"/>
-                    </LinearLayout>
+                    <!-- Image 1 -->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/card_quick_youth_1"
+                        android:layout_width="0dp"
+                        android:layout_height="150dp"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="8dp"
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="4dp"
+                        android:visibility="gone">
 
-                    <LinearLayout style="@style/GridItemContainer">
-                        <ImageButton
-                            android:id="@+id/imagesButton"
-                            style="@style/GridImageButton"
-                            app:srcCompat="@drawable/ic_images_gallery"
-                            android:contentDescription="Images"/>
-                        <TextView style="@style/GridItemTitle" android:text="Images"/>
-                    </LinearLayout>
+                        <ImageView
+                            android:id="@+id/iv_quick_youth_1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/deity_krishna"
+                            android:contentDescription="Recent Youth Image 1" />
 
-                    <LinearLayout style="@style/GridItemContainer">
-                        <ImageButton
-                            android:id="@+id/campsButton"
-                            style="@style/GridImageButton"
-                            app:srcCompat="@drawable/ic_camps2"
-                            android:contentDescription="Camps"/>
-                        <TextView style="@style/GridItemTitle" android:text="Camps"/>
-                    </LinearLayout>
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="#30000000" />
 
-                </GridLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- Image 2 -->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/card_quick_youth_2"
+                        android:layout_width="0dp"
+                        android:layout_height="150dp"
+                        android:layout_weight="1"
+                        android:layout_marginStart="8dp"
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="4dp"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:id="@+id/iv_quick_youth_2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/deity_krishna"
+                            android:contentDescription="Recent Youth Image 2" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="#30000000" />
+
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+                <!-- See More Button -->
+                <Button
+                    android:id="@+id/btn_see_more_youth_images"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:backgroundTint="@color/Redorange"
+                    android:text="See More Images 📸"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold"/>
+
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
+        <!-- Who's this for CardView -->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -236,6 +349,7 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
+        <!-- Registration Section -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

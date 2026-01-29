@@ -68,6 +68,12 @@ dependencies {
 // ✅ ADD THIS for accurate Hindu calendar
     implementation("com.ibm.icu:icu4j:74.1")
 
+        // ... existing dependencies
+        implementation("androidx.viewpager2:viewpager2:1.0.0")
+    implementation("androidx.cardview:cardview:1.0.0")
+    implementation("androidx.recyclerview:recyclerview:1.3.0")
+    
+
 
         implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
         implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
