@@ -113,6 +113,12 @@ class HomeFragment : Fragment() {
             .whereEqualTo("date", today)
             .get()
             .addOnSuccessListener { festivalsSnapshot ->
+                // ✅ SAFETY CHECK: Exit if fragment is detached
+                if (!isAdded || context == null) {
+                    Log.w("HomeFragment", "Fragment detached, skipping festivals load")
+                    return@addOnSuccessListener
+                }
+
                 Log.d("HomeFragment", "✅ Found ${festivalsSnapshot.size()} festivals")
 
                 festivalsSnapshot.forEach { doc ->
@@ -127,6 +133,12 @@ class HomeFragment : Fragment() {
                 loadCustomEvents(today, allEvents, layoutEventsContainer)
             }
             .addOnFailureListener { e ->
+                // ✅ SAFETY CHECK: Exit if fragment is detached
+                if (!isAdded || context == null) {
+                    Log.w("HomeFragment", "Fragment detached, skipping error handling")
+                    return@addOnFailureListener
+                }
+
                 Log.e("HomeFragment", "Error: ${e.message}")
                 loadCustomEvents(today, allEvents, layoutEventsContainer)
             }
@@ -137,6 +149,12 @@ class HomeFragment : Fragment() {
             .whereEqualTo("date", today)
             .get()
             .addOnSuccessListener { eventsSnapshot ->
+                // ✅ SAFETY CHECK: Exit if fragment is detached
+                if (!isAdded || context == null) {
+                    Log.w("HomeFragment", "Fragment detached, skipping custom events load")
+                    return@addOnSuccessListener
+                }
+
                 Log.d("HomeFragment", "✅ Found ${eventsSnapshot.size()} custom events")
 
                 eventsSnapshot.forEach { doc ->
@@ -151,12 +169,24 @@ class HomeFragment : Fragment() {
                 displayEvents(allEvents, container)
             }
             .addOnFailureListener { e ->
+                // ✅ SAFETY CHECK: Exit if fragment is detached
+                if (!isAdded || context == null) {
+                    Log.w("HomeFragment", "Fragment detached, skipping error handling")
+                    return@addOnFailureListener
+                }
+
                 Log.e("HomeFragment", "Error: ${e.message}")
                 displayEvents(allEvents, container)
             }
     }
 
     private fun displayEvents(events: List<EventItem>, container: LinearLayout) {
+        // ✅ SAFETY CHECK: Exit if fragment is detached
+        if (!isAdded || context == null) {
+            Log.w("HomeFragment", "Fragment detached, skipping displayEvents")
+            return
+        }
+
         container.removeAllViews()
 
         if (events.isEmpty()) {
@@ -166,8 +196,11 @@ class HomeFragment : Fragment() {
 
         Log.d("HomeFragment", "🎉 Displaying ${events.size} events")
 
+        // ✅ Get context once and reuse it
+        val ctx = requireContext()
+
         events.forEach { event ->
-            val eventLayout = LinearLayout(requireContext()).apply {
+            val eventLayout = LinearLayout(ctx).apply {
                 orientation = LinearLayout.VERTICAL
                 setPadding(32, 24, 32, 24)
                 setBackgroundColor(android.graphics.Color.parseColor("#FFD700"))
@@ -179,17 +212,17 @@ class HomeFragment : Fragment() {
                 }
             }
 
-            val titleLayout = LinearLayout(requireContext()).apply {
+            val titleLayout = LinearLayout(ctx).apply {
                 orientation = LinearLayout.HORIZONTAL
             }
 
-            val starIcon = TextView(requireContext()).apply {
+            val starIcon = TextView(ctx).apply {
                 text = "⭐ "
                 textSize = 20f
                 setTextColor(android.graphics.Color.parseColor("#FF6200"))
             }
 
-            val nameText = TextView(requireContext()).apply {
+            val nameText = TextView(ctx).apply {
                 text = event.name
                 textSize = 17f
                 setTypeface(null, android.graphics.Typeface.BOLD)
@@ -200,7 +233,7 @@ class HomeFragment : Fragment() {
             titleLayout.addView(nameText)
             eventLayout.addView(titleLayout)
 
-            val descText = TextView(requireContext()).apply {
+            val descText = TextView(ctx).apply {
                 text = event.description
                 textSize = 15f
                 setTextColor(android.graphics.Color.parseColor("#333333"))
@@ -209,7 +242,7 @@ class HomeFragment : Fragment() {
             eventLayout.addView(descText)
 
             if (event.fasting.isNotEmpty() && event.fasting != "—-") {
-                val fastingText = TextView(requireContext()).apply {
+                val fastingText = TextView(ctx).apply {
                     text = "Fasting: ${event.fasting}"
                     textSize = 13f
                     setTextColor(android.graphics.Color.parseColor("#FF6200"))
@@ -224,6 +257,9 @@ class HomeFragment : Fragment() {
     }
 
     private fun navigateToSchedule() {
+        // ✅ SAFETY CHECK before navigation
+        if (!isAdded || activity == null) return
+
         val scheduleFragment = ScheduleFragment()
         requireActivity().supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, scheduleFragment)
@@ -232,6 +268,9 @@ class HomeFragment : Fragment() {
     }
 
     private fun navigateToServices() {
+        // ✅ SAFETY CHECK before navigation
+        if (!isAdded || activity == null) return
+
         val servicesFragment = ServicesFragment()
         requireActivity().supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, servicesFragment)
@@ -240,6 +279,9 @@ class HomeFragment : Fragment() {
     }
 
     private fun navigateToGallery() {
+        // ✅ SAFETY CHECK before navigation
+        if (!isAdded || activity == null) return
+
         val galleryFragment = GalleryFragment()
         requireActivity().supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, galleryFragment)
@@ -248,6 +290,9 @@ class HomeFragment : Fragment() {
     }
 
     private fun navigateToMore() {
+        // ✅ SAFETY CHECK before navigation
+        if (!isAdded || activity == null) return
+
         val moreFragment = MoreFragment()
         requireActivity().supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, moreFragment)

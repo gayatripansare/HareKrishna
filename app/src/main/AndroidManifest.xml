@@ -37,9 +37,9 @@
         </activity>
 
         <!-- Base and Youth Activities -->
-        <activity
-            android:name=".BaseActivity"
-            android:exported="false" />
+<!--        <activity-->
+<!--            android:name=".BaseActivity"-->
+<!--            android:exported="false" />-->
 
         <activity
             android:name=".YouthGalleryActivity"
@@ -56,11 +56,13 @@
         <!-- Authentication Activities -->
         <activity
             android:name=".ISKON_Sign_in"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
 
         <activity
             android:name=".ISKON_Sign_up"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
 
         <activity
             android:name=".RegistrationActivity"

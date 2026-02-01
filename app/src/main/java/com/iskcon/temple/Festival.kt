@@ -10,7 +10,9 @@ data class Festival(
     val year: Int = 0,
     val fasting: String = "",        // ✅ Make sure this field exists!
     val isLunarDate: Boolean = true,
-    val isEditable: Boolean = true
+    val isEditable: Boolean = true,
+//    val editable: Boolean = false,
+//    val lunarDate: String = ""
 ) {
     // Empty constructor for Firestore
     constructor() : this("", "", "", "", 0, 0, 0, "", true, true)

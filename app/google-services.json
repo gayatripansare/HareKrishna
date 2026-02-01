@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "688972813339",
+    "firebase_url": "https://iskon-kopargaon-lr-default-rtdb.firebaseio.com",
     "project_id": "iskon-kopargaon-lr",
     "storage_bucket": "iskon-kopargaon-lr.firebasestorage.app"
   },
@@ -12,7 +13,12 @@
           "package_name": "com.example.myapplication"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "688972813339-dj29ghhnfhveni3nhcet9346kva21ogs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDXK2CPRzitM8Zs-GUt-8Qn3zBRYLK4B-8"
@@ -20,7 +26,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "688972813339-dj29ghhnfhveni3nhcet9346kva21ogs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     },
@@ -31,7 +42,20 @@
           "package_name": "com.iskcon.temple"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "688972813339-rkad82t2skq36ng9rg2cvad2nddv1nsa.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.iskcon.temple",
+            "certificate_hash": "899efa83a168fa5fc0ada3d8be1ca3a85fb80f48"
+          }
+        },
+        {
+          "client_id": "688972813339-dj29ghhnfhveni3nhcet9346kva21ogs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDXK2CPRzitM8Zs-GUt-8Qn3zBRYLK4B-8"
@@ -39,7 +63,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "688972813339-dj29ghhnfhveni3nhcet9346kva21ogs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

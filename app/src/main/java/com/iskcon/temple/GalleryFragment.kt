@@ -55,6 +55,9 @@ class GalleryFragment : Fragment() {
         Log.d("GalleryFragment", "onResume - Reloading gallery...")
         loadDeityImages()
         loadEventImages()
+
+        // Re-check admin status
+        checkAdminStatus()
     }
 
     private fun initViews(view: View) {
@@ -72,7 +75,7 @@ class GalleryFragment : Fragment() {
                 Toast.makeText(requireContext(), "Clicked: ${image.title}", Toast.LENGTH_SHORT).show()
             },
             onImageLongClick = { image ->
-                // ✅ Handle long press - check if admin
+                // Handle long press - check if admin
                 val currentUser = auth.currentUser
                 if (currentUser != null) {
                     firestore.collection("users")
@@ -101,7 +104,7 @@ class GalleryFragment : Fragment() {
                 Toast.makeText(requireContext(), "Clicked: ${image.title}", Toast.LENGTH_SHORT).show()
             },
             onImageLongClick = { image ->
-                // ✅ Handle long press - check if admin
+                // Handle long press - check if admin
                 val currentUser = auth.currentUser
                 if (currentUser != null) {
                     firestore.collection("users")
@@ -121,7 +124,7 @@ class GalleryFragment : Fragment() {
             }
         )
         rvEventImages.adapter = eventAdapter
-        rvEventImages.layoutManager = GridLayoutManager(requireContext(), 1)
+        rvEventImages.layoutManager = GridLayoutManager(requireContext(), 2)
     }
 
     private fun checkAdminStatus() {
@@ -224,7 +227,7 @@ class GalleryFragment : Fragment() {
         startActivity(intent)
     }
 
-    // ✅ NEW: Delete image function
+    // Delete image function
     private fun deleteImage(image: GalleryImage) {
         val builder = androidx.appcompat.app.AlertDialog.Builder(requireContext())
         builder.setTitle("Delete Image")
@@ -238,15 +241,16 @@ class GalleryFragment : Fragment() {
                 .document(image.id)
                 .delete()
                 .addOnSuccessListener {
+                    progressBar.visibility = View.GONE
                     Toast.makeText(requireContext(), "✅ Image deleted!", Toast.LENGTH_SHORT).show()
 
-                    // Reload the gallery
-                    loadDeityImages()
-                    loadEventImages()
+                    // Real-time listener will automatically update the list
+                    Log.d("GalleryFragment", "Image ${image.title} deleted successfully")
                 }
                 .addOnFailureListener { e ->
                     progressBar.visibility = View.GONE
                     Toast.makeText(requireContext(), "❌ Delete failed: ${e.message}", Toast.LENGTH_LONG).show()
+                    Log.e("GalleryFragment", "Failed to delete image: ${e.message}")
                 }
 
             dialog.dismiss()
