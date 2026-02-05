@@ -7,13 +7,13 @@ import android.os.Bundle
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.cloudinary.android.MediaManager
 
-class MainActivity : BaseActivity() {
+class MainActivity : AppCompatActivity() {
 
     private var currentSelectedTab = R.id.nav_home_custom
 
@@ -43,26 +43,6 @@ class MainActivity : BaseActivity() {
         }
 
         setupCustomBottomNavigation()
-
-        // Handle back press with OnBackPressedDispatcher
-        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                // If there's a backstack (like from Gallery), pop it
-                if (supportFragmentManager.backStackEntryCount > 0) {
-                    supportFragmentManager.popBackStack()
-                }
-                // If not on home, go to home
-                else if (currentSelectedTab != R.id.nav_home_custom) {
-                    findViewById<LinearLayout>(R.id.nav_home_custom)?.performClick()
-                }
-                // If on home, exit app
-                else {
-                    // Disable this callback and call the dispatcher again to execute the default behavior
-                    isEnabled = false
-                    onBackPressedDispatcher.onBackPressed()
-                }
-            }
-        })
     }
 
     private fun initCloudinary() {
@@ -168,6 +148,21 @@ class MainActivity : BaseActivity() {
     private fun clearBackStack() {
         for (i in 0 until supportFragmentManager.backStackEntryCount) {
             supportFragmentManager.popBackStack()
+        }
+    }
+
+    override fun onBackPressed() {
+        // If there's a backstack (like from Gallery), pop it
+        if (supportFragmentManager.backStackEntryCount > 0) {
+            supportFragmentManager.popBackStack()
+        }
+        // If not on home, go to home
+        else if (currentSelectedTab != R.id.nav_home_custom) {
+            findViewById<LinearLayout>(R.id.nav_home_custom)?.performClick()
+        }
+        // If on home, exit app
+        else {
+            super.onBackPressed()
         }
     }
 }

@@ -105,6 +105,10 @@
             android:name=".AdminFestivalActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".JapaActivity"
+            android:screenOrientation="portrait" />
+
 
     </application>
 

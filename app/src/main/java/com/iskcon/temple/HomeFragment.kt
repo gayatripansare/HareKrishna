@@ -17,6 +17,8 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
 import java.util.*
+import android.content.Intent
+
 
 class HomeFragment : Fragment() {
 
@@ -94,8 +96,11 @@ class HomeFragment : Fragment() {
             navigateToGallery()
         }
 
-        view.findViewById<CardView>(R.id.card_more)?.setOnClickListener {
-            navigateToMore()
+        // UPDATED: Chanting card now opens JapaActivity instead of MoreFragment
+        val cardChanting = view.findViewById<CardView>(R.id.card_chanting)
+        cardChanting?.setOnClickListener {
+            val intent = Intent(requireContext(), JapaActivity::class.java)
+            startActivity(intent)
         }
     }
 

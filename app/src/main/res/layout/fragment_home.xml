@@ -231,9 +231,11 @@
 
                     </androidx.cardview.widget.CardView>
 
-                    <!-- More Options Card (Tall) -->
+                    <!-- CHANGED: Chanting Card (was More Options Card) -->
+
+                    <!-- Chanting Card (replacing More) -->
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/card_more"
+                        android:id="@+id/card_chanting"
                         android:layout_width="match_parent"
                         android:layout_height="120dp"
                         android:clickable="true"
@@ -253,15 +255,14 @@
                             <FrameLayout
                                 android:layout_width="55dp"
                                 android:layout_height="55dp"
-                                android:background="@drawable/circle_bg_golden"
+                                android:background="@drawable/circle_bg_purple"
                                 android:layout_marginBottom="8dp">
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
-                                    android:text="⋮"
-                                    android:textColor="@color/dark_text"
+                                    android:text="📿"
                                     android:textSize="28sp" />
                             </FrameLayout>
 
@@ -269,7 +270,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
-                                android:text="More"
+                                android:text="Chanting"
                                 android:textColor="@color/dark_text"
                                 android:textSize="13sp"
                                 android:textStyle="bold" />
