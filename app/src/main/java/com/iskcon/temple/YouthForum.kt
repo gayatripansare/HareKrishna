@@ -27,6 +27,10 @@ class YouthForum : BaseActivity() {
     private lateinit var cardQuickImage1: CardView
     private lateinit var cardQuickImage2: CardView
 
+    // ✅ NEW: Store loaded images for zoom
+    private var quickImage1: GalleryImage? = null
+    private var quickImage2: GalleryImage? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -52,6 +56,28 @@ class YouthForum : BaseActivity() {
         ivQuickImage2 = findViewById(R.id.iv_quick_youth_2)
         cardQuickImage1 = findViewById(R.id.card_quick_youth_1)
         cardQuickImage2 = findViewById(R.id.card_quick_youth_2)
+
+        // ✅ NEW: Setup click listeners for zoom
+        cardQuickImage1.setOnClickListener {
+            quickImage1?.let { image ->
+                openImageZoom(image.imageUrl, image.title)
+            }
+        }
+
+        cardQuickImage2.setOnClickListener {
+            quickImage2?.let { image ->
+                openImageZoom(image.imageUrl, image.title)
+            }
+        }
+    }
+
+    // ✅ NEW: Open zoom activity
+    private fun openImageZoom(imageUrl: String, title: String) {
+        val intent = Intent(this, ImageZoomActivity::class.java).apply {
+            putExtra("IMAGE_URL", imageUrl)
+            putExtra("IMAGE_TITLE", title)
+        }
+        startActivity(intent)
     }
 
     private fun loadRecentYouthImages() {
@@ -67,6 +93,7 @@ class YouthForum : BaseActivity() {
                 Log.d("YouthForum", "✅ Fetched ${images.size} images from Firestore")
 
                 if (images.isNotEmpty()) {
+                    quickImage1 = images[0]  // ✅ Store for zoom
                     Glide.with(this)
                         .load(images[0].imageUrl)
                         .placeholder(R.drawable.deity_krishna)
@@ -77,6 +104,7 @@ class YouthForum : BaseActivity() {
                 }
 
                 if (images.size > 1) {
+                    quickImage2 = images[1]  // ✅ Store for zoom
                     Glide.with(this)
                         .load(images[1].imageUrl)
                         .placeholder(R.drawable.deity_krishna)
@@ -99,35 +127,10 @@ class YouthForum : BaseActivity() {
             openRegistrationOptions()
         }
 
-        // Lectures Button - Navigate to Screen5
-//        findViewById<ImageButton>(R.id.lecturesButton)?.setOnClickListener {
-//            try {
-//                val intent = Intent(this, Screen5::class.java)
-//                startActivity(intent)
-//            } catch (e: Exception) {
-//                Toast.makeText(this, "Unable to open Lectures", Toast.LENGTH_SHORT).show()
-//            }
-//        }
-//
-//        // Images Button - Navigate to Youth Gallery (CHANGED)
-//        findViewById<ImageButton>(R.id.imagesButton)?.setOnClickListener {
-//            openYouthGallery()
-//        }
-
-        // See More Images Button (NEW)
+        // See More Images Button
         findViewById<Button>(R.id.btn_see_more_youth_images)?.setOnClickListener {
             openYouthGallery()
         }
-
-        // Camps Button - Navigate to Screen3
-//        findViewById<ImageButton>(R.id.campsButton)?.setOnClickListener {
-//            try {
-//                val intent = Intent(this, Screen3::class.java)
-//                startActivity(intent)
-//            } catch (e: Exception) {
-//                Toast.makeText(this, "Unable to open Camps", Toast.LENGTH_SHORT).show()
-//            }
-//        }
 
         // Info grid items
         findViewById<ImageButton>(R.id.imageButton)?.setOnClickListener {

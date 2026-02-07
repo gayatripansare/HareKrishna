@@ -69,7 +69,7 @@
                 android:lineSpacingExtra="4dp"
                 android:layout_marginBottom="16dp" />
 
-            <!-- Contact Info -->
+            <!-- ✅ FEATURE 2: Updated Contact Info with clickable phone -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -85,14 +85,32 @@
                     android:textSize="14sp"
                     android:textStyle="bold"
                     android:textColor="@color/dark_text"
-                    android:layout_marginBottom="4dp" />
+                    android:layout_marginBottom="8dp" />
+
+                <!-- ✅ CLICKABLE PHONE NUMBER -->
+                <TextView
+                    android:id="@+id/phone_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="+91 98765 43210"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/bhagwa_saffron"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:padding="8dp"
+                    android:drawableStart="@android:drawable/ic_menu_call"
+                    android:drawablePadding="8dp"
+                    android:drawableTint="@color/bhagwa_saffron" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="+91 98765 43210"
-                    android:textSize="13sp"
-                    android:textColor="@color/dark_text" />
+                    android:text="Tap to call"
+                    android:textSize="11sp"
+                    android:textColor="@color/gray_text"
+                    android:layout_marginTop="4dp" />
 
             </LinearLayout>
 

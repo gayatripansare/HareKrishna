@@ -56,25 +56,29 @@ class YouthGalleryActivity : BaseActivity() {
         youthAdapter = GalleryAdapter(
             imageList = youthImagesList,
             onImageClick = { image ->
-                handleImageClick(image)
+                // ✅ UPDATED: Normal click opens zoom for ALL users
+                openImageZoom(image)
+            },
+            onImageLongClick = { image ->
+                // ✅ Long click for admin delete
+                if (isAdmin) {
+                    showDeleteConfirmation(image)
+                } else {
+                    Toast.makeText(this, "Only admins can delete images", Toast.LENGTH_SHORT).show()
+                }
             }
         )
         rvYouthImages.adapter = youthAdapter
         rvYouthImages.layoutManager = GridLayoutManager(this, 2)
     }
 
-    private fun showAdminOptionsDialog(image: GalleryImage) {
-        val options = arrayOf("View", "Delete")
-
-        AlertDialog.Builder(this)
-            .setTitle(image.title)
-            .setItems(options) { _, which ->
-                when (which) {
-                    0 -> Toast.makeText(this, image.title, Toast.LENGTH_SHORT).show()
-                    1 -> showDeleteConfirmation(image)
-                }
-            }
-            .show()
+    // ✅ NEW: Open zoom activity (works for all users)
+    private fun openImageZoom(image: GalleryImage) {
+        val intent = Intent(this, ImageZoomActivity::class.java).apply {
+            putExtra("IMAGE_URL", image.imageUrl)
+            putExtra("IMAGE_TITLE", image.title)
+        }
+        startActivity(intent)
     }
 
     private fun showDeleteConfirmation(image: GalleryImage) {
@@ -157,16 +161,6 @@ class YouthGalleryActivity : BaseActivity() {
                 fabAddImage.visibility = View.GONE
                 isAdmin = false
             }
-    }
-
-    private fun handleImageClick(image: GalleryImage) {
-        if (isAdmin) {
-            // Admin: Show delete option
-            showAdminOptionsDialog(image)
-        } else {
-            // Not admin (or not logged in): Just show toast
-            Toast.makeText(this, image.title, Toast.LENGTH_SHORT).show()
-        }
     }
 
     private fun openUploadScreen() {

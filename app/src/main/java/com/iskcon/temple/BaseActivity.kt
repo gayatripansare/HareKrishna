@@ -75,15 +75,15 @@ open class BaseActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    // Method to hide donation FAB (for specific screens if needed)
-    protected fun hideDonationFab() {
+    // ✅ UPDATED: Method to hide donation FAB (public for fragments to access)
+    fun hideDonationFab() {
         if (::donationFab.isInitialized) {
             donationFab.hide()
         }
     }
 
-    // Method to show donation FAB
-    protected fun showDonationFab() {
+    // ✅ UPDATED: Method to show donation FAB (public for fragments to access)
+    fun showDonationFab() {
         if (::donationFab.isInitialized) {
             donationFab.show()
         }
