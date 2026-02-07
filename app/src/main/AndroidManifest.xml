@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-
     <!-- Permissions (all duplicates removed) -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -14,6 +13,7 @@
     <uses-permission
         android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="32" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".IskconApplication"
@@ -25,77 +25,63 @@
         android:roundIcon="@drawable/kopargaon_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.ISKCONTemple">
-
+        <activity
+            android:name=".ImageZoomActivity"
+            android:exported="false" />
         <!-- Main Launcher Activity (ONLY ONE) -->
         <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-        <!-- Base and Youth Activities -->
-        <activity
-            android:name=".BaseActivity"
-            android:exported="false" />
-
+        </activity> <!-- Base and Youth Activities -->
+        <!-- <activity -->
+        <!-- android:name=".BaseActivity" -->
+        <!-- android:exported="false" /> -->
         <activity
             android:name=".YouthGalleryActivity"
             android:exported="false" />
-
         <activity
             android:name=".YouthUploadActivity"
             android:exported="false" />
-
         <activity
             android:name=".YouthForum"
-            android:exported="false" />
-
-        <!-- Authentication Activities -->
+            android:exported="false" /> <!-- Authentication Activities -->
         <activity
             android:name=".ISKON_Sign_in"
-            android:exported="false" />
-
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ISKON_Sign_up"
-            android:exported="false" />
-
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".RegistrationActivity"
-            android:exported="false" />
-
-        <!-- Feature Activities -->
+            android:exported="false" /> <!-- Feature Activities -->
         <activity
             android:name=".DonateActivity"
             android:exported="false" />
-
         <activity
             android:name=".MainActivity2"
             android:exported="false"
-            android:label="Temple Finder" />
-
-        <!-- Screen Activities -->
+            android:label="Temple Finder" /> <!-- Screen Activities -->
         <activity
             android:name=".Screen3"
             android:exported="false" />
-
         <activity
             android:name=".Screen5"
             android:exported="false" />
-
         <activity
             android:name=".Screen6"
-            android:exported="false" />
-
-        <!-- Admin Activities -->
+            android:exported="false" /> <!-- Admin Activities -->
         <activity
             android:name=".AdminUploadActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
-
         <activity
             android:name=".AdminEventActivity"
             android:exported="false"
@@ -105,7 +91,6 @@
             android:name=".AdminFestivalActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
-
     </application>
 
 </manifest>

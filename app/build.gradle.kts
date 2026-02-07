@@ -81,5 +81,11 @@ dependencies {
 
         // Firebase
         implementation("com.google.firebase:firebase-firestore-ktx:24.10.0")
+
+    // Google Sign-In
+    implementation("com.google.android.gms:play-services-auth:21.0.0")
+
+    // Firebase Auth (you already have this, but make sure it's the latest)
+    implementation("com.google.firebase:firebase-auth:22.3.1")
     
 }

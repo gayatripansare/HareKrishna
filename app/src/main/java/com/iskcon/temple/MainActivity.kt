@@ -1,6 +1,7 @@
 package com.iskcon.temple
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
@@ -12,10 +13,16 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.cloudinary.android.MediaManager
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : BaseActivity() {
 
     private var currentSelectedTab = R.id.nav_home_custom
+    private lateinit var auth: FirebaseAuth
+    private lateinit var googleSignInClient: GoogleSignInClient
 
     // Notification permission launcher
     private val requestPermissionLauncher = registerForActivityResult(
@@ -29,8 +36,20 @@ class MainActivity : BaseActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        // Initialize Firebase Auth
+        auth = FirebaseAuth.getInstance()
+
+        // Configure Google Sign-In
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+
+        googleSignInClient = GoogleSignIn.getClient(this, gso)
 
         // Initialize Cloudinary
         initCloudinary()
@@ -57,12 +76,11 @@ class MainActivity : BaseActivity() {
                 }
                 // If on home, exit app
                 else {
-                    // Disable this callback and call the dispatcher again to execute the default behavior
-                    isEnabled = false
-                    onBackPressedDispatcher.onBackPressed()
+                    finish()
                 }
             }
         })
+
     }
 
     private fun initCloudinary() {
@@ -168,6 +186,23 @@ class MainActivity : BaseActivity() {
     private fun clearBackStack() {
         for (i in 0 until supportFragmentManager.backStackEntryCount) {
             supportFragmentManager.popBackStack()
+        }
+    }
+
+    // ✅ NEW METHOD: Called from MoreFragment to perform sign-out
+    fun performSignOut() {
+        // Sign out from Firebase
+        auth.signOut()
+
+        // Sign out from Google (clears account cache)
+        googleSignInClient.signOut().addOnCompleteListener(this) {
+            Toast.makeText(this, "Signed out successfully", Toast.LENGTH_SHORT).show()
+
+            // Navigate to Sign-In screen
+            val intent = Intent(this, ISKON_Sign_in::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            finish()
         }
     }
 }

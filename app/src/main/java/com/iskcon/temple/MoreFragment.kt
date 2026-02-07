@@ -172,10 +172,8 @@ class MoreFragment : Fragment() {
     }
 
     private fun signOutUser() {
-        auth.signOut()
-        Toast.makeText(context, "Signed out successfully", Toast.LENGTH_SHORT).show()
-        view?.let { updateSignInCard(it) }
-        checkAdminStatus() // Hide admin section after logout
+        // ✅ UPDATED: Call MainActivity's performSignOut which handles both Firebase and Google
+        (activity as? MainActivity)?.performSignOut()
     }
 
     private fun navigateToAboutUs() {
