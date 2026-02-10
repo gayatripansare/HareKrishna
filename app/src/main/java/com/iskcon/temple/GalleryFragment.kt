@@ -6,21 +6,24 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
+import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 
 class GalleryFragment : Fragment() {
 
     private lateinit var rvDeityImages: RecyclerView
     private lateinit var rvEventImages: RecyclerView
     private lateinit var fabAddImage: FloatingActionButton
-    private lateinit var progressBar: ProgressBar
+    private lateinit var progressBar: android.widget.ProgressBar
 
     private lateinit var deityAdapter: GalleryAdapter
     private lateinit var eventAdapter: GalleryAdapter
@@ -42,11 +45,29 @@ class GalleryFragment : Fragment() {
         setupRecyclerViews()
         checkAdminStatus()
 
+        // ✅ NEW: Setup zoom for static gallery images
+        setupStaticImageZoom(view)
+
         fabAddImage.setOnClickListener {
             openUploadScreen()
         }
 
+        // ✅ FEATURE 1: Hide donation FAB in Gallery Fragment
+        hideDonationFabInGallery()
+
         return view
+    }
+
+    // ✅ NEW: Hide donation FAB when in gallery fragment
+    private fun hideDonationFabInGallery() {
+        try {
+            // If activity is BaseActivity, hide the donation FAB
+            if (activity is BaseActivity) {
+                (activity as BaseActivity).hideDonationFab()
+            }
+        } catch (e: Exception) {
+            Log.e("GalleryFragment", "Error hiding donation FAB: ${e.message}")
+        }
     }
 
     override fun onResume() {
@@ -54,6 +75,65 @@ class GalleryFragment : Fragment() {
         Log.d("GalleryFragment", "onResume - Reloading gallery...")
         loadDeityImages()
         loadEventImages()
+
+        // Re-check admin status
+        checkAdminStatus()
+
+        // ✅ Hide donation FAB again when returning to fragment
+        hideDonationFabInGallery()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        // ✅ Show donation FAB when leaving gallery fragment
+        try {
+            if (activity is BaseActivity) {
+                (activity as BaseActivity).showDonationFab()
+            }
+        } catch (e: Exception) {
+            Log.e("GalleryFragment", "Error showing donation FAB: ${e.message}")
+        }
+    }
+
+    // ✅ NEW: Setup click listeners for all 4 static gallery images + 2 event images
+    private fun setupStaticImageZoom(view: View) {
+        // 4 static deity gallery images
+        view.findViewById<CardView>(R.id.card_image_1)?.setOnClickListener {
+            openImageZoom("deity_krishna3", "Radha Krishna")
+        }
+
+        view.findViewById<CardView>(R.id.card_image_2)?.setOnClickListener {
+            openImageZoom("deity_krishna4", "Sri Krishna")
+        }
+
+        view.findViewById<CardView>(R.id.card_image_3)?.setOnClickListener {
+            openImageZoom("deity_krishna5", "Sita Rama")
+        }
+
+        view.findViewById<CardView>(R.id.card_image_4)?.setOnClickListener {
+            openImageZoom("deity_krishna", "Temple View")
+        }
+
+        // 2 static event images
+        view.findViewById<CardView>(R.id.card_event_1)?.setOnClickListener {
+            openImageZoom("janmastamievent", "Janmashtami Celebration")
+        }
+
+        view.findViewById<CardView>(R.id.card_event_2)?.setOnClickListener {
+            openImageZoom("event2", "Krishna Jula")
+        }
+    }
+
+    // ✅ NEW: Open zoom for static drawable images
+    private fun openImageZoom(drawableName: String, title: String) {
+        val resourceId = resources.getIdentifier(drawableName, "drawable", requireContext().packageName)
+        val imageUri = "android.resource://${requireContext().packageName}/$resourceId"
+
+        val intent = Intent(requireContext(), ImageZoomActivity::class.java).apply {
+            putExtra("IMAGE_URL", imageUri)
+            putExtra("IMAGE_TITLE", title)
+        }
+        startActivity(intent)
     }
 
     private fun initViews(view: View) {
@@ -68,10 +148,11 @@ class GalleryFragment : Fragment() {
         deityAdapter = GalleryAdapter(
             imageList = deityImagesList,
             onImageClick = { image ->
-                Toast.makeText(requireContext(), "Clicked: ${image.title}", Toast.LENGTH_SHORT).show()
+                // ✅ UPDATED: Open zoom for dynamic images
+                openDynamicImageZoom(image)
             },
             onImageLongClick = { image ->
-                // ✅ Handle long press - check if admin
+                // Handle long press - check if admin
                 val currentUser = auth.currentUser
                 if (currentUser != null) {
                     firestore.collection("users")
@@ -97,10 +178,11 @@ class GalleryFragment : Fragment() {
         eventAdapter = GalleryAdapter(
             imageList = eventImagesList,
             onImageClick = { image ->
-                Toast.makeText(requireContext(), "Clicked: ${image.title}", Toast.LENGTH_SHORT).show()
+                // ✅ UPDATED: Open zoom for dynamic images
+                openDynamicImageZoom(image)
             },
             onImageLongClick = { image ->
-                // ✅ Handle long press - check if admin
+                // Handle long press - check if admin
                 val currentUser = auth.currentUser
                 if (currentUser != null) {
                     firestore.collection("users")
@@ -120,7 +202,16 @@ class GalleryFragment : Fragment() {
             }
         )
         rvEventImages.adapter = eventAdapter
-        rvEventImages.layoutManager = GridLayoutManager(requireContext(), 1)
+        rvEventImages.layoutManager = GridLayoutManager(requireContext(), 2)
+    }
+
+    // ✅ NEW: Open zoom for dynamic Firestore images
+    private fun openDynamicImageZoom(image: GalleryImage) {
+        val intent = Intent(requireContext(), ImageZoomActivity::class.java).apply {
+            putExtra("IMAGE_URL", image.imageUrl)
+            putExtra("IMAGE_TITLE", image.title)
+        }
+        startActivity(intent)
     }
 
     private fun checkAdminStatus() {
@@ -152,78 +243,67 @@ class GalleryFragment : Fragment() {
 
     private fun loadDeityImages() {
         progressBar.visibility = View.VISIBLE
-        Log.d("GalleryFragment", "Loading deity images...")
 
         firestore.collection("gallery_images")
             .whereEqualTo("category", "deity")
-            .get()
-            .addOnSuccessListener { documents ->
-                Log.d("GalleryFragment", "✅ Loaded ${documents.size()} deity images")
+            .orderBy("timestamp", Query.Direction.DESCENDING)
+            .addSnapshotListener { snapshots, error ->
+                progressBar.visibility = View.GONE
+
+                if (error != null) {
+                    Log.e("GalleryFragment", "❌ Error loading deity images: ${error.message}")
+                    if (deityImagesList.isEmpty()) {
+                        Toast.makeText(
+                            requireContext(),
+                            "Error loading deity images",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                    return@addSnapshotListener
+                }
 
                 deityImagesList.clear()
-
-                val sortedImages = documents.mapNotNull { doc ->
-                    try {
-                        val image = doc.toObject(GalleryImage::class.java)
-                        Log.d("GalleryFragment", "Deity image: ${image.title} - ${image.imageUrl}")
-                        image
-                    } catch (e: Exception) {
-                        Log.e("GalleryFragment", "Error parsing image: ${e.message}")
-                        null
+                if (snapshots != null && !snapshots.isEmpty) {
+                    for (document in snapshots.documents) {
+                        val image = document.toObject(GalleryImage::class.java)
+                        if (image != null) {
+                            deityImagesList.add(image)
+                        }
                     }
-                }.sortedByDescending { it.timestamp }
-
-                deityImagesList.addAll(sortedImages)
+                }
                 deityAdapter.updateImages(deityImagesList)
-                progressBar.visibility = View.GONE
-
-                Log.d("GalleryFragment", "Deity adapter updated with ${deityImagesList.size} images")
-            }
-            .addOnFailureListener { exception ->
-                Log.e("GalleryFragment", "❌ Error loading deity images: ${exception.message}")
-                Toast.makeText(
-                    requireContext(),
-                    "Error loading deity images: ${exception.message}",
-                    Toast.LENGTH_SHORT
-                ).show()
-                progressBar.visibility = View.GONE
+                Log.d("GalleryFragment", "✅ Loaded ${deityImagesList.size} deity images")
             }
     }
 
     private fun loadEventImages() {
-        Log.d("GalleryFragment", "Loading event images...")
-
         firestore.collection("gallery_images")
             .whereEqualTo("category", "events")
-            .get()
-            .addOnSuccessListener { documents ->
-                Log.d("GalleryFragment", "✅ Loaded ${documents.size()} event images")
+            .orderBy("timestamp", Query.Direction.DESCENDING)
+            .addSnapshotListener { snapshots, error ->
+                if (error != null) {
+                    Log.e("GalleryFragment", "❌ Error loading event images: ${error.message}")
+                    if (eventImagesList.isEmpty()) {
+                        Toast.makeText(
+                            requireContext(),
+                            "Error loading event images",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                    return@addSnapshotListener
+                }
 
                 eventImagesList.clear()
-
-                val sortedImages = documents.mapNotNull { doc ->
-                    try {
-                        val image = doc.toObject(GalleryImage::class.java)
-                        Log.d("GalleryFragment", "Event image: ${image.title} - ${image.imageUrl}")
-                        image
-                    } catch (e: Exception) {
-                        Log.e("GalleryFragment", "Error parsing image: ${e.message}")
-                        null
+                if (snapshots != null && !snapshots.isEmpty) {
+                    for (document in snapshots.documents) {
+                        val image = document.toObject(GalleryImage::class.java)
+                        if (image != null) {
+                            eventImagesList.add(image)
+                        }
                     }
-                }.sortedByDescending { it.timestamp }
-
-                eventImagesList.addAll(sortedImages)
+                }
                 eventAdapter.updateImages(eventImagesList)
-
-                Log.d("GalleryFragment", "Event adapter updated with ${eventImagesList.size} images")
-            }
-            .addOnFailureListener { exception ->
-                Log.e("GalleryFragment", "❌ Error loading event images: ${exception.message}")
-                Toast.makeText(
-                    requireContext(),
-                    "Error loading event images: ${exception.message}",
-                    Toast.LENGTH_SHORT
-                ).show()
+                Log.d("GalleryFragment", "✅ Loaded ${eventImagesList.size} event images")
             }
     }
 
@@ -232,9 +312,9 @@ class GalleryFragment : Fragment() {
         startActivity(intent)
     }
 
-    // ✅ NEW: Delete image function
+    // Delete image function
     private fun deleteImage(image: GalleryImage) {
-        val builder = androidx.appcompat.app.AlertDialog.Builder(requireContext())
+        val builder = AlertDialog.Builder(requireContext())
         builder.setTitle("Delete Image")
         builder.setMessage("Are you sure you want to delete '${image.title}'?")
 
@@ -246,15 +326,16 @@ class GalleryFragment : Fragment() {
                 .document(image.id)
                 .delete()
                 .addOnSuccessListener {
+                    progressBar.visibility = View.GONE
                     Toast.makeText(requireContext(), "✅ Image deleted!", Toast.LENGTH_SHORT).show()
 
-                    // Reload the gallery
-                    loadDeityImages()
-                    loadEventImages()
+                    // Real-time listener will automatically update the list
+                    Log.d("GalleryFragment", "Image ${image.title} deleted successfully")
                 }
                 .addOnFailureListener { e ->
                     progressBar.visibility = View.GONE
                     Toast.makeText(requireContext(), "❌ Delete failed: ${e.message}", Toast.LENGTH_LONG).show()
+                    Log.e("GalleryFragment", "Failed to delete image: ${e.message}")
                 }
 
             dialog.dismiss()

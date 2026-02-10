@@ -5,7 +5,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.view.MenuItem
 import android.view.View
 import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
@@ -18,13 +17,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class AdminUploadActivity : BaseActivity() {
+class YouthUploadActivity : BaseActivity() {
 
     private lateinit var ivImagePreview: ImageView
     private lateinit var tvPreviewPlaceholder: TextView
     private lateinit var btnChooseImage: CardView
     private lateinit var etImageTitle: TextInputEditText
-    private lateinit var spinnerCategory: Spinner
     private lateinit var btnUpload: CardView
     private lateinit var progressBar: ProgressBar
     private lateinit var tvProgress: TextView
@@ -47,18 +45,11 @@ class AdminUploadActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_admin_upload)
+        setContentView(R.layout.activity_youth_upload)
 
-        // Enable back button
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = "Upload Gallery Image"
-
-        // Hide donation FAB on upload screen
         hideDonationFab()
-
         cloudinaryHelper = CloudinaryHelper(this)
         initViews()
-        setupCategorySpinner()
         setupClickListeners()
     }
 
@@ -67,17 +58,9 @@ class AdminUploadActivity : BaseActivity() {
         tvPreviewPlaceholder = findViewById(R.id.tv_preview_placeholder)
         btnChooseImage = findViewById(R.id.btn_choose_image)
         etImageTitle = findViewById(R.id.et_image_title)
-        spinnerCategory = findViewById(R.id.spinner_category)
         btnUpload = findViewById(R.id.btn_upload)
         progressBar = findViewById(R.id.progress_bar)
         tvProgress = findViewById(R.id.tv_progress)
-    }
-
-    private fun setupCategorySpinner() {
-        val categories = arrayOf("Select Category", "deity", "events")
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, categories)
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinnerCategory.adapter = adapter
     }
 
     private fun setupClickListeners() {
@@ -93,7 +76,6 @@ class AdminUploadActivity : BaseActivity() {
 
     private fun validateAndUpload() {
         val title = etImageTitle.text.toString().trim()
-        val category = spinnerCategory.selectedItem.toString()
 
         when {
             selectedImageUri == null -> {
@@ -103,16 +85,13 @@ class AdminUploadActivity : BaseActivity() {
                 etImageTitle.error = "Please enter title"
                 etImageTitle.requestFocus()
             }
-            category == "Select Category" -> {
-                Toast.makeText(this, "Please select a category", Toast.LENGTH_SHORT).show()
-            }
             else -> {
-                uploadImage(title, category)
+                uploadImage(title)
             }
         }
     }
 
-    private fun uploadImage(title: String, category: String) {
+    private fun uploadImage(title: String) {
         showProgress(true)
 
         CoroutineScope(Dispatchers.Main).launch {
@@ -123,12 +102,12 @@ class AdminUploadActivity : BaseActivity() {
                 }
 
                 tvProgress.text = "Saving to database..."
-                saveToFirestore(imageUrl, title, category)
+                saveToFirestore(imageUrl, title)
 
             } catch (e: Exception) {
                 showProgress(false)
                 Toast.makeText(
-                    this@AdminUploadActivity,
+                    this@YouthUploadActivity,
                     "Upload failed: ${e.message}",
                     Toast.LENGTH_LONG
                 ).show()
@@ -136,21 +115,21 @@ class AdminUploadActivity : BaseActivity() {
         }
     }
 
-    private fun saveToFirestore(imageUrl: String, title: String, category: String) {
+    private fun saveToFirestore(imageUrl: String, title: String) {
         val imageData = hashMapOf(
             "imageUrl" to imageUrl,
             "title" to title,
-            "category" to category,
+            "category" to "youth_events",
             "timestamp" to System.currentTimeMillis()
         )
 
-        firestore.collection("gallery_images")
+        firestore.collection("youth_gallery_images")
             .add(imageData)
             .addOnSuccessListener { documentReference ->
                 documentReference.update("id", documentReference.id)
                     .addOnSuccessListener {
                         showProgress(false)
-                        Toast.makeText(this, "✅ Image uploaded successfully!", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "✅ Youth image uploaded successfully!", Toast.LENGTH_SHORT).show()
                         finish()
                     }
             }
@@ -165,15 +144,5 @@ class AdminUploadActivity : BaseActivity() {
         tvProgress.visibility = if (show) View.VISIBLE else View.GONE
         btnUpload.isEnabled = !show
         btnChooseImage.isEnabled = !show
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            android.R.id.home -> {
-                finish()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
     }
 }

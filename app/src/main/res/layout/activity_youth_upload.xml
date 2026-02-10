@@ -12,100 +12,41 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <!-- ✅ FEATURE 3: NEW ATTRACTIVE HEADER -->
-        <androidx.cardview.widget.CardView
+        <!-- Header -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="8dp">
+            android:orientation="vertical"
+            android:background="@drawable/sanatana_gradient"
+            android:padding="24dp"
+            android:gravity="center"
+            android:layout_marginBottom="24dp">
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="@drawable/gradient_card_blue"
-                android:padding="32dp"
-                android:gravity="center">
+                android:text="🌟"
+                android:textSize="48sp"
+                android:layout_marginBottom="8dp" />
 
-                <!-- Camera Icon with Circle Background -->
-                <androidx.cardview.widget.CardView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    app:cardCornerRadius="50dp"
-                    app:cardElevation="6dp"
-                    android:layout_marginBottom="16dp"
-                    android:backgroundTint="@color/white">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Upload Youth Image"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:fontFamily="sans-serif-medium" />
 
-                    <ImageView
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:layout_gravity="center"
-                        android:src="@android:drawable/ic_menu_camera"
-                        app:tint="@color/bhagwa_saffron"
-                        android:contentDescription="Camera Icon" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add to Youth Gallery"
+                android:textColor="@color/golden_yellow"
+                android:textSize="14sp"
+                android:layout_marginTop="4dp" />
 
-                </androidx.cardview.widget.CardView>
-
-                <!-- Title with Gradient Effect -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Upload Image"
-                    android:textColor="@color/white"
-                    android:textSize="28sp"
-                    android:textStyle="bold"
-                    android:fontFamily="sans-serif-medium"
-                    android:letterSpacing="0.05"
-                    android:shadowColor="#80000000"
-                    android:shadowDx="2"
-                    android:shadowDy="2"
-                    android:shadowRadius="4" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Add beautiful memories to Gallery"
-                    android:textColor="@color/golden_yellow"
-                    android:textSize="14sp"
-                    android:textStyle="italic"
-                    android:layout_marginTop="8dp"
-                    android:gravity="center" />
-
-                <!-- Decorative Dots -->
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="12dp"
-                    android:gravity="center">
-
-                    <View
-                        android:layout_width="8dp"
-                        android:layout_height="8dp"
-                        android:background="@drawable/ic_circle"
-                        android:backgroundTint="@color/golden_yellow"
-                        android:layout_margin="4dp" />
-
-                    <View
-                        android:layout_width="8dp"
-                        android:layout_height="8dp"
-                        android:background="@drawable/ic_circle"
-                        android:backgroundTint="@color/white"
-                        android:layout_margin="4dp" />
-
-                    <View
-                        android:layout_width="8dp"
-                        android:layout_height="8dp"
-                        android:background="@drawable/ic_circle"
-                        android:backgroundTint="@color/golden_yellow"
-                        android:layout_margin="4dp" />
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
+        </LinearLayout>
 
         <!-- Image Preview Card -->
         <androidx.cardview.widget.CardView
@@ -120,7 +61,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <!-- Image Preview -->
                 <ImageView
                     android:id="@+id/iv_image_preview"
                     android:layout_width="match_parent"
@@ -129,7 +69,6 @@
                     android:src="@drawable/deity_krishna"
                     android:contentDescription="Image Preview" />
 
-                <!-- Placeholder text when no image selected -->
                 <TextView
                     android:id="@+id/tv_preview_placeholder"
                     android:layout_width="wrap_content"
@@ -187,7 +126,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="24dp"
             android:hint="Image Title"
             app:boxBackgroundColor="@color/card_white"
             app:boxCornerRadiusTopStart="12dp"
@@ -207,33 +146,6 @@
                 android:textSize="16sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
-
-        <!-- Category Spinner -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Select Category"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="@color/bhagwa_saffron"
-            android:layout_marginBottom="8dp" />
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="2dp"
-            android:backgroundTint="@color/card_white">
-
-            <Spinner
-                android:id="@+id/spinner_category"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:spinnerMode="dropdown" />
-
-        </androidx.cardview.widget.CardView>
 
         <!-- Upload Button -->
         <androidx.cardview.widget.CardView
@@ -263,10 +175,9 @@
                     android:layout_marginEnd="12dp" />
 
                 <TextView
-                    android:id="@+id/tv_upload_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Upload to Gallery"
+                    android:text="Upload to Youth Gallery"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:textColor="@color/white" />

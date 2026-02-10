@@ -14,14 +14,17 @@ import android.graphics.Typeface
 import android.widget.ImageView
 import android.widget.ScrollView
 
+
+
 class MainActivity2: AppCompatActivity() {
 
     // Declare variables for UI elements
     private lateinit var mainLayout: ScrollView
     private lateinit var templeListLayout: LinearLayout
     private lateinit var templeDetailLayout: ScrollView
-    private lateinit var locationInput: EditText
-    private lateinit var findButton: Button
+    private lateinit var kopargaonButton: Button
+    private lateinit var shirdiButton: Button
+    private lateinit var nashikButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,33 +35,26 @@ class MainActivity2: AppCompatActivity() {
             mainLayout = findViewById(R.id.mainLayout)
             templeListLayout = findViewById(R.id.templeListLayout)
             templeDetailLayout = findViewById(R.id.templeDetailLayout)
-            locationInput = findViewById(R.id.locationInput)
-            findButton = findViewById(R.id.findButton)
+            kopargaonButton = findViewById(R.id.kopargaonButton)
+            shirdiButton = findViewById(R.id.shirdiButton)
+            nashikButton = findViewById(R.id.nashikButton)
 
             // Show main page first
             mainLayout.visibility = View.VISIBLE
             templeListLayout.visibility = View.GONE
             templeDetailLayout.visibility = View.GONE
 
-            // When Find Temples button is clicked
-            findButton.setOnClickListener {
-                val location = locationInput.text.toString().trim()
+            // Direct location buttons
+            kopargaonButton.setOnClickListener {
+                showTempleList("Kopargaon")
+            }
 
-                // Check if location is empty
-                if (location.isEmpty()) {
-                    // Show error message
-                    Toast.makeText(
-                        this,
-                        "Please enter a location to find temples",
-                        Toast.LENGTH_SHORT
-                    ).show()
+            shirdiButton.setOnClickListener {
+                showTempleList("Shirdi")
+            }
 
-                    // Optional: Highlight the input field
-                    locationInput.requestFocus()
-                } else {
-                    // Location is entered, proceed to show temple list
-                    showTempleList(location)
-                }
+            nashikButton.setOnClickListener {
+                showTempleList("Nashik")
             }
 
             // Back button from temple list
@@ -97,7 +93,7 @@ class MainActivity2: AppCompatActivity() {
         if (temples.isEmpty()) {
             // Show message if no temples found
             val noTempleText = TextView(this).apply {
-                text = "Sorry, we only have temple information for Kopargaon and Shirdi locations.\n\nPlease search for:\n• Kopargaon\n• Shirdi"
+                text = "Sorry, we only have temple information for Kopargaon, Shirdi and Nashik locations.\n\nPlease search for:\n• Kopargaon\n• Shirdi\n• Nashik"
                 textSize = 16f
                 setTextColor(0xFF666666.toInt())
                 gravity = android.view.Gravity.CENTER
@@ -119,26 +115,32 @@ class MainActivity2: AppCompatActivity() {
         return when {
             searchLocation.contains("kopargaon") -> {
                 listOf(
-                    Temple("🛕 ISKCON Kopargaon", "Station Road, Kopargaon", "In City", "4.7",
-                        "19.8826,74.4761", "+91 2423 222000", "5:30 AM - 9:00 PM",
+                    Temple("Iskcon Kopargaon", "Station Rd, Annapurna Nagar, Kopargaon, Maharashtra 423603", "In City", "4.7",
+                        "19.8993645,74.4901565", "+91 7204025975", "5:30 AM - 9:00 PM",
                         "Local ISKCON center in Kopargaon. Regular kirtans, bhajans and prasadam distribution. Peaceful atmosphere for devotion.",
-                        R.drawable.radha_2), // Change to your actual drawable name
-                    Temple("🛕 Radha Krishna Mandir", "Main Market, Kopargaon", "500m", "4.6",
-                        "19.8835,74.4755", "+91 2423 220500", "6:00 AM - 8:30 PM",
-                        "Beautiful local temple with daily aarti and festivals. Active community participation and spiritual programs.",
-                        R.drawable.radhe_1), // Change to your actual drawable name
-                    Temple("🛕 Hare Krishna Temple", "College Road, Kopargaon", "1.2 km", "4.5",
-                        "19.8840,74.4770", "+91 2423 221100", "5:00 AM - 9:00 PM",
-                        "Serene temple near college area. Perfect for morning and evening prayers with beautiful deity darshan.",
-                        R.drawable.radha_3) // Change to your actual drawable name
+                        R.drawable.radha_2),
+
                 )
             }
             searchLocation.contains("shirdi") -> {
                 listOf(
-                    Temple("🛕 ISKCON Shirdi", "Near Sai Baba Temple, Shirdi", "In City", "4.7",
-                        "19.7645,74.4779", "+91 2423 585000", "5:00 AM - 10:00 PM",
-                        "Located near the famous Sai Baba temple. Beautiful deities and peaceful atmosphere for devotion.",
-                        R.drawable.img) // Change to your actual drawable name
+                    Temple("Shri Sai Baba Samadhi Mandir", "Mauli Nagar, Shirdi, Maharashtra", "In City", "4.9",
+                        "19.766180,74.477039", "+91 2423 258777", "4:00 AM - 11:00 PM",
+                        "World famous Sai Baba temple. Millions of devotees visit yearly. Divine atmosphere and spiritual experience.",
+                        R.drawable.sai_b
+                    )
+                )
+            }
+            searchLocation.contains("nashik") -> {
+                listOf(
+                    Temple("ISKCON Sri Sri Radha Madan Gopal Mandir", "Poornima Stop, Vrindavan Colony, Hare Krishna Road Gen. Vaidya nagar, Dwarka, Nashik, Maharashtra 422011", "In City", "4.8",
+                        "19.9871188,73.7969705", "+91 93090 16553", "5:00 AM - 9:00 PM",
+                        "Beautiful ISKCON temple in Nashik. Grand architecture, daily darshan, aarti and prasadam. Spiritual oasis in the holy city.",
+                        R.drawable.radha_5),
+                    Temple("ISKCON Goshala", "Bhagyodaya Colony, Nashik, Maharashtra 422003", "3 km", "4.7",
+                        "20.023715,73.779408", "+91 253 2570483", "5:30 AM - 8:30 PM",
+                        "Sacred cow shelter and temple. Serve and protect cows while experiencing spiritual atmosphere and devotion.",
+                        R.drawable.goshala1)
                 )
             }
             else -> {
@@ -216,32 +218,24 @@ class MainActivity2: AppCompatActivity() {
         templeImage.setImageResource(temple.imageResource)
         templeImage.visibility = View.VISIBLE
 
-        // Open map button - Opens Google Maps
+        // Open map button - Opens Google Maps with proper URL
         findViewById<Button>(R.id.openMapButton).setOnClickListener {
             try {
-                val uri = Uri.parse("geo:${temple.mapLocation}?q=${temple.mapLocation}(${temple.name})")
-                val intent = Intent(Intent.ACTION_VIEW, uri)
-                intent.setPackage("com.google.android.apps.maps")
-                startActivity(intent)
+                // Try opening in Google Maps app first
+                val gmmIntentUri = Uri.parse("geo:0,0?q=${temple.mapLocation}(${Uri.encode(temple.name)})")
+                val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+                mapIntent.setPackage("com.google.android.apps.maps")
+                startActivity(mapIntent)
             } catch (e: Exception) {
-                val uri = Uri.parse("https://www.google.com/maps/search/?api=1&query=${temple.mapLocation}")
-                val intent = Intent(Intent.ACTION_VIEW, uri)
+                // Fallback to web browser
+                val coords = temple.mapLocation.split(",")
+                val webUri = Uri.parse("https://www.google.com/maps/search/?api=1&query=${coords[0]},${coords[1]}")
+                val intent = Intent(Intent.ACTION_VIEW, webUri)
                 startActivity(intent)
             }
         }
 
-        // Get Directions button
-        findViewById<Button>(R.id.directionsButton).setOnClickListener {
-            val uri = Uri.parse("google.navigation:q=${temple.mapLocation}&mode=d")
-            val intent = Intent(Intent.ACTION_VIEW, uri)
-            intent.setPackage("com.google.android.apps.maps")
-            try {
-                startActivity(intent)
-            } catch (e: Exception) {
-                val webUri = Uri.parse("https://www.google.com/maps/dir/?api=1&destination=${temple.mapLocation}")
-                startActivity(Intent(Intent.ACTION_VIEW, webUri))
-            }
-        }
+        // Get Directions button - FIXED API
 
         // Call button
         findViewById<Button>(R.id.callButton).setOnClickListener {
