@@ -65,6 +65,9 @@ class ISKON_Sign_in : AppCompatActivity() {
                 if (task.isSuccessful) {
                     Toast.makeText(this, "Login successful! Hare Krishna! 🙏", Toast.LENGTH_SHORT).show()
 
+                    // ✅ CHECK IF USER IS ADMIN
+                    checkIfAdminAndSetFlag(email)
+
                     // Navigate to MainActivity (which hosts HomeFragment)
                     val intent = Intent(this, MainActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
@@ -78,5 +81,21 @@ class ISKON_Sign_in : AppCompatActivity() {
                     ).show()
                 }
             }
+    }
+
+    // ✅ NEW FUNCTION: Check if user is admin
+    private fun checkIfAdminAndSetFlag(email: String) {
+        // Replace with YOUR actual admin email from Firebase Auth
+        val isAdmin = email.lowercase() == "sudamapr05@gmail.com"  // ← CHANGE THIS
+
+        val sharedPref = getSharedPreferences("AdminPrefs", MODE_PRIVATE)
+        sharedPref.edit().apply {
+            putBoolean("isAdminLoggedIn", isAdmin)
+            apply()
+        }
+
+        if (isAdmin) {
+            Toast.makeText(this, "🔑 Admin access granted", Toast.LENGTH_SHORT).show()
+        }
     }
 }

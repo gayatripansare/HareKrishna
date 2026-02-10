@@ -14,162 +14,20 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:layout_width="match_parent"
-            android:layout_height="230dp"
+            android:layout_height="350dp"
+            android:layout_margin="10dp"
             android:contentDescription="Radha Krishna"
             android:scaleType="centerCrop"
             android:src="@drawable/img_6"
-            android:layout_margin="10dp"
-            app:cornerSize="16dp" />
+            app:cornerSize="16dp"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.MediumComponent"
+            />
 
         <!-- Darshan Schedule Section -->
 
 
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="4dp"
-            android:backgroundTint="@color/card_white">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="20dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="16dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="⌛ "
-                        android:textSize="26sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Darshan Timings"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/bhagwa_saffron"
-                        android:fontFamily="sans-serif-medium" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:padding="12dp"
-                        android:background="@color/light_saffron">
-
-                        <TextView
-                            android:layout_width="110dp"
-                            android:layout_height="wrap_content"
-                            android:text="4 AM"
-                            android:textSize="15sp"
-                            android:textStyle="bold"
-                            android:textColor="@color/sacred_orange" />
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="Mangala Aarti"
-                            android:textSize="15sp"
-                            android:textColor="@color/dark_text" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:padding="12dp">
-
-                        <TextView
-                            android:layout_width="110dp"
-                            android:layout_height="wrap_content"
-                            android:text="7:30 AM"
-                            android:textSize="15sp"
-                            android:textStyle="bold"
-                            android:textColor="@color/sacred_orange" />
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="Morning Darshan"
-                            android:textSize="15sp"
-                            android:textColor="@color/dark_text" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:padding="12dp"
-                        android:background="@color/light_saffron">
-
-                        <TextView
-                            android:layout_width="110dp"
-                            android:layout_height="wrap_content"
-                            android:text="12:00 PM"
-                            android:textSize="15sp"
-                            android:textStyle="bold"
-                            android:textColor="@color/sacred_orange" />
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="Raj Bhog Darshan"
-                            android:textSize="15sp"
-                            android:textColor="@color/dark_text" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:padding="12dp">
-
-                        <TextView
-                            android:layout_width="110dp"
-                            android:layout_height="wrap_content"
-                            android:text="7:00 PM"
-                            android:textSize="15sp"
-                            android:textStyle="bold"
-                            android:textColor="@color/sacred_orange" />
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="Sandhya Aarti Darshan"
-                            android:textSize="15sp"
-                            android:textColor="@color/dark_text" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
 
         <!-- Deity Photos Section with Shlokas -->
         <TextView

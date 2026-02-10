@@ -28,18 +28,19 @@ class CloudinaryHelper(private val context: Context) {
         }
     }
 
+    // Original method for images
     suspend fun uploadImage(
         imageUri: Uri,
         folder: String = CloudinaryConfig.UPLOAD_FOLDER
     ): String = suspendCancellableCoroutine { continuation ->
 
-        Log.d("CloudinaryHelper", "Starting upload for URI: $imageUri")
+        Log.d("CloudinaryHelper", "Starting image upload for URI: $imageUri")
         Log.d("CloudinaryHelper", "Using preset: ${CloudinaryConfig.UPLOAD_PRESET}")
         Log.d("CloudinaryHelper", "Target folder: $folder")
 
         val requestId = MediaManager.get()
             .upload(imageUri)
-            .unsigned(CloudinaryConfig.UPLOAD_PRESET) // ✅ Using correct preset now
+            .unsigned(CloudinaryConfig.UPLOAD_PRESET)
             .option("folder", folder)
             .option("resource_type", "image")
             .callback(object : UploadCallback {
@@ -84,6 +85,67 @@ class CloudinaryHelper(private val context: Context) {
 
         continuation.invokeOnCancellation {
             Log.d("CloudinaryHelper", "❌ Upload cancelled")
+            MediaManager.get().cancelRequest(requestId)
+        }
+    }
+
+    // NEW method for audio files (MP3)
+    suspend fun uploadAudio(
+        audioUri: Uri,
+        folder: String = "vaishnava_songs"
+    ): String = suspendCancellableCoroutine { continuation ->
+
+        Log.d("CloudinaryHelper", "Starting audio upload for URI: $audioUri")
+        Log.d("CloudinaryHelper", "Using preset: ${CloudinaryConfig.UPLOAD_PRESET}")
+        Log.d("CloudinaryHelper", "Target folder: $folder")
+
+        val requestId = MediaManager.get()
+            .upload(audioUri)
+            .unsigned(CloudinaryConfig.UPLOAD_PRESET)
+            .option("folder", folder)
+            .option("resource_type", "video") // MP3 files are uploaded as 'video' type in Cloudinary
+            .callback(object : UploadCallback {
+                override fun onStart(requestId: String) {
+                    Log.d("CloudinaryHelper", "✅ Audio upload started: $requestId")
+                }
+
+                override fun onProgress(requestId: String, bytes: Long, totalBytes: Long) {
+                    val progress = (bytes.toDouble() / totalBytes.toDouble() * 100).toInt()
+                    Log.d("CloudinaryHelper", "📤 Audio upload progress: $progress% ($bytes / $totalBytes bytes)")
+                }
+
+                override fun onSuccess(requestId: String, resultData: Map<*, *>) {
+                    Log.d("CloudinaryHelper", "✅ Audio upload successful!")
+                    Log.d("CloudinaryHelper", "Result data: $resultData")
+
+                    val audioUrl = resultData["secure_url"] as? String
+                    if (audioUrl != null) {
+                        Log.d("CloudinaryHelper", "🎵 Audio URL: $audioUrl")
+                        continuation.resume(audioUrl)
+                    } else {
+                        Log.e("CloudinaryHelper", "❌ No secure_url in response")
+                        continuation.resumeWithException(
+                            Exception("Failed to get audio URL from response")
+                        )
+                    }
+                }
+
+                override fun onError(requestId: String, error: ErrorInfo) {
+                    Log.e("CloudinaryHelper", "❌ Audio upload error: ${error.description}")
+                    Log.e("CloudinaryHelper", "Error code: ${error.code}")
+                    continuation.resumeWithException(
+                        Exception("Audio upload failed: ${error.description}")
+                    )
+                }
+
+                override fun onReschedule(requestId: String, error: ErrorInfo) {
+                    Log.w("CloudinaryHelper", "⚠️ Audio upload rescheduled: ${error.description}")
+                }
+            })
+            .dispatch()
+
+        continuation.invokeOnCancellation {
+            Log.d("CloudinaryHelper", "❌ Audio upload cancelled")
             MediaManager.get().cancelRequest(requestId)
         }
     }

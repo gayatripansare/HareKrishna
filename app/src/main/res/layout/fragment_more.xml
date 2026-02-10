@@ -18,12 +18,14 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:layout_width="match_parent"
-            android:layout_height="230dp"
+            android:layout_height="350dp"
             android:contentDescription="Radha Krishna"
             android:scaleType="centerCrop"
             android:src="@drawable/img_5"
             android:layout_margin="10dp"
-            app:cornerSize="16dp" />
+            app:cornerSize="16dp"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.MediumComponent"
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
