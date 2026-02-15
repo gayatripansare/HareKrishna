@@ -1,434 +1,292 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/cream_bg">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/cream_bg">
 
-        <LinearLayout
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Header Section -->
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:layout_margin="10dp"
+            android:contentDescription="Radha Krishna"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img_6"
+            app:cornerSize="16dp"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.MediumComponent"
+            />
+
+        <!-- Darshan Schedule Section -->
+
+
+
+
+
+        <!-- Deity Photos Section with Shlokas -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Divine Deities"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="@color/bhagwa_saffron"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="sans-serif-medium" />
+
+        <!-- Deity Card 1 - Radha Krishna -->
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="20dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="6dp"
+            android:backgroundTint="@color/card_white">
 
-            <!-- Header Section -->
-
-            <com.google.android.material.imageview.ShapeableImageView
-                android:layout_width="match_parent"
-                android:layout_height="230dp"
-                android:contentDescription="Radha Krishna"
-                android:scaleType="centerCrop"
-                android:src="@drawable/img_6"
-                android:layout_margin="10dp"
-                app:cornerSize="16dp" />
-
-            <!-- Darshan Schedule Section -->
-
-
-
-            <androidx.cardview.widget.CardView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="4dp"
-                android:backgroundTint="@color/card_white">
+                android:orientation="vertical">
 
+                <!-- Deity Image -->
+                <ImageView
+                    android:id="@+id/iv_deity_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/deity_krishna1"
+                    android:contentDescription="Radha Krishna" />
+
+                <!-- Deity Info -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="20dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_marginBottom="16dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="⌛ "
-                            android:textSize="26sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Darshan Timings"
-                            android:textSize="20sp"
-                            android:textStyle="bold"
-                            android:textColor="@color/bhagwa_saffron"
-                            android:fontFamily="sans-serif-medium" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:padding="12dp"
-                            android:background="@color/light_saffron">
-
-                            <TextView
-                                android:layout_width="110dp"
-                                android:layout_height="wrap_content"
-                                android:text="4 AM"
-                                android:textSize="15sp"
-                                android:textStyle="bold"
-                                android:textColor="@color/sacred_orange" />
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="Mangala Aarti"
-                                android:textSize="15sp"
-                                android:textColor="@color/dark_text" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:padding="12dp">
-
-                            <TextView
-                                android:layout_width="110dp"
-                                android:layout_height="wrap_content"
-                                android:text="7:30 AM"
-                                android:textSize="15sp"
-                                android:textStyle="bold"
-                                android:textColor="@color/sacred_orange" />
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="Morning Darshan"
-                                android:textSize="15sp"
-                                android:textColor="@color/dark_text" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:padding="12dp"
-                            android:background="@color/light_saffron">
-
-                            <TextView
-                                android:layout_width="110dp"
-                                android:layout_height="wrap_content"
-                                android:text="12:00 PM"
-                                android:textSize="15sp"
-                                android:textStyle="bold"
-                                android:textColor="@color/sacred_orange" />
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="Raj Bhog Darshan"
-                                android:textSize="15sp"
-                                android:textColor="@color/dark_text" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:padding="12dp">
-
-                            <TextView
-                                android:layout_width="110dp"
-                                android:layout_height="wrap_content"
-                                android:text="7:00 PM"
-                                android:textSize="15sp"
-                                android:textStyle="bold"
-                                android:textColor="@color/sacred_orange" />
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="Sandhya Aarti Darshan"
-                                android:textSize="15sp"
-                                android:textColor="@color/dark_text" />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <!-- Deity Photos Section with Shlokas -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Divine Deities"
-                android:textSize="22sp"
-                android:textStyle="bold"
-                android:textColor="@color/bhagwa_saffron"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="16dp"
-                android:fontFamily="sans-serif-medium" />
-
-            <!-- Deity Card 1 - Radha Krishna -->
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="20dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="6dp"
-                android:backgroundTint="@color/card_white">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <!-- Deity Image -->
-                    <ImageView
-                        android:id="@+id/iv_deity_1"
-                        android:layout_width="match_parent"
-                        android:layout_height="300dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/deity_krishna1"
-                        android:contentDescription="Radha Krishna" />
-
-                    <!-- Deity Info -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="16dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Sri Sri Radha Krishna"
-                            android:textSize="20sp"
-                            android:textStyle="bold"
-                            android:textColor="@color/holy_red"
-                            android:layout_marginBottom="12dp" />
-
-                        <!-- Shloka in Sanskrit -->
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="मन्मना भव मद्भक्तो मद्याजी मां नमस्कुरु।\nमामेवैष्यसि युक्त्वैवमात्मानं मत्परायणः॥"
-                            android:textSize="16sp"
-                            android:textColor="@color/krishna_blue"
-                            android:textStyle="italic"
-                            android:lineSpacingExtra="4dp"
-                            android:fontFamily="serif"
-                            android:layout_marginBottom="8dp" />
-
-                        <!-- Translation -->
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="— Bhagavad Gita 9.34"
-                            android:textSize="13sp"
-                            android:textColor="@color/gray_text"
-                            android:textStyle="italic" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <!-- Deity Card 2 - Second Deity -->
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="20dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="6dp"
-                android:backgroundTint="@color/card_white">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <!-- Deity Image -->
-                    <ImageView
-                        android:id="@+id/iv_deity_2"
-                        android:layout_width="match_parent"
-                        android:layout_height="300dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/deity_krishna2"
-                        android:contentDescription="Deity 2" />
-
-                    <!-- Deity Info -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="16dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Sri Krishna"
-                            android:textSize="20sp"
-                            android:textStyle="bold"
-                            android:textColor="@color/holy_red"
-                            android:layout_marginBottom="12dp" />
-
-                        <!-- Shloka in Sanskrit -->
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="सर्वधर्मान्परित्यज्य मामेकं शरणं व्रज।\nअहं त्वां सर्वपापेभ्यो मोक्षयिष्यामि मा शुचः॥"
-                            android:textSize="16sp"
-                            android:textColor="@color/krishna_blue"
-                            android:textStyle="italic"
-                            android:lineSpacingExtra="4dp"
-                            android:fontFamily="serif"
-                            android:layout_marginBottom="8dp" />
-
-                        <!-- Translation -->
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="— Bhagavad Gita 18.66"
-                            android:textSize="13sp"
-                            android:textColor="@color/gray_text"
-                            android:textStyle="italic" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <!-- Deity Card 3 - Third Deity -->
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="20dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="6dp"
-                android:backgroundTint="@color/card_white">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <!-- Deity Image -->
-                    <ImageView
-                        android:id="@+id/iv_deity_3"
-                        android:layout_width="match_parent"
-                        android:layout_height="300dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/deity_radha_krishna"
-                        android:contentDescription="Deity 3" />
-
-                    <!-- Deity Info -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="16dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Lord Balaram"
-                            android:textSize="20sp"
-                            android:textStyle="bold"
-                            android:textColor="@color/holy_red"
-                            android:layout_marginBottom="12dp" />
-
-                        <!-- Shloka in Sanskrit -->
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="यो मां पश्यति सर्वत्र सर्वं च मयि पश्यति।\nतस्याहं न प्रणश्यामि स च मे न प्रणश्यति॥"
-                            android:textSize="16sp"
-                            android:textColor="@color/krishna_blue"
-                            android:textStyle="italic"
-                            android:lineSpacingExtra="4dp"
-                            android:fontFamily="serif"
-                            android:layout_marginBottom="8dp" />
-
-                        <!-- Translation -->
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="— Bhagavad Gita 6.30"
-                            android:textSize="13sp"
-                            android:textColor="@color/gray_text"
-                            android:textStyle="italic" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <!-- View Full Gallery Button -->
-            <androidx.cardview.widget.CardView
-                android:id="@+id/btn_view_gallery"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="24dp"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="4dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:backgroundTint="@color/sacred_green">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center"
                     android:padding="16dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="🌸🦚🌸"
-                        android:textSize="24sp"
-                        android:layout_marginEnd="12dp" />
+                        android:text="Sri Sri Radha Krishna"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/holy_red"
+                        android:layout_marginBottom="12dp" />
+
+                    <!-- Shloka in Sanskrit -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="मन्मना भव मद्भक्तो मद्याजी मां नमस्कुरु।\nमामेवैष्यसि युक्त्वैवमात्मानं मत्परायणः॥"
+                        android:textSize="16sp"
+                        android:textColor="@color/krishna_blue"
+                        android:textStyle="italic"
+                        android:lineSpacingExtra="4dp"
+                        android:fontFamily="serif"
+                        android:layout_marginBottom="8dp" />
+
+                    <!-- Translation -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="— Bhagavad Gita 9.34"
+                        android:textSize="13sp"
+                        android:textColor="@color/gray_text"
+                        android:textStyle="italic" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- Deity Card 2 - Second Deity -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="20dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="6dp"
+            android:backgroundTint="@color/card_white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- Deity Image -->
+                <ImageView
+                    android:id="@+id/iv_deity_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/deity_krishna2"
+                    android:contentDescription="Deity 2" />
+
+                <!-- Deity Info -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="View Full Gallery"
-                        android:textSize="18sp"
+                        android:text="Sri Krishna"
+                        android:textSize="20sp"
                         android:textStyle="bold"
-                        android:textColor="@color/white" />
+                        android:textColor="@color/holy_red"
+                        android:layout_marginBottom="12dp" />
+
+                    <!-- Shloka in Sanskrit -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="सर्वधर्मान्परित्यज्य मामेकं शरणं व्रज।\nअहं त्वां सर्वपापेभ्यो मोक्षयिष्यामि मा शुचः॥"
+                        android:textSize="16sp"
+                        android:textColor="@color/krishna_blue"
+                        android:textStyle="italic"
+                        android:lineSpacingExtra="4dp"
+                        android:fontFamily="serif"
+                        android:layout_marginBottom="8dp" />
+
+                    <!-- Translation -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="— Bhagavad Gita 18.66"
+                        android:textSize="13sp"
+                        android:textColor="@color/gray_text"
+                        android:textStyle="italic" />
 
                 </LinearLayout>
 
-            </androidx.cardview.widget.CardView>
+            </LinearLayout>
 
-        </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
-    </ScrollView>
+        <!-- Deity Card 3 - Third Deity -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="20dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="6dp"
+            android:backgroundTint="@color/card_white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- Deity Image -->
+                <ImageView
+                    android:id="@+id/iv_deity_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/deity_radha_krishna"
+                    android:contentDescription="Deity 3" />
+
+                <!-- Deity Info -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Lord Balaram"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/holy_red"
+                        android:layout_marginBottom="12dp" />
+
+                    <!-- Shloka in Sanskrit -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="यो मां पश्यति सर्वत्र सर्वं च मयि पश्यति।\nतस्याहं न प्रणश्यामि स च मे न प्रणश्यति॥"
+                        android:textSize="16sp"
+                        android:textColor="@color/krishna_blue"
+                        android:textStyle="italic"
+                        android:lineSpacingExtra="4dp"
+                        android:fontFamily="serif"
+                        android:layout_marginBottom="8dp" />
+
+                    <!-- Translation -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="— Bhagavad Gita 6.30"
+                        android:textSize="13sp"
+                        android:textColor="@color/gray_text"
+                        android:textStyle="italic" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- View Full Gallery Button -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/btn_view_gallery"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="24dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:backgroundTint="@color/sacred_green">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="🌸🦚🌸"
+                    android:textSize="24sp"
+                    android:layout_marginEnd="12dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="View Full Gallery"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+</ScrollView>

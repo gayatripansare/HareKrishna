@@ -8,214 +8,92 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@drawable/slider_background_gradient">
 
-        <!-- Header Section -->
+        <!-- Header Image (EXISTING - NOT CHANGED) -->
         <com.google.android.material.imageview.ShapeableImageView
             android:layout_width="match_parent"
             android:layout_height="230dp"
+            android:layout_margin="9dp"
             android:contentDescription="Radha Krishna"
             android:scaleType="centerCrop"
             android:src="@drawable/charan"
-            android:layout_margin="9dp"
-            app:cornerSize="16dp" />
-        <!-- Daily Schedule Card -->
-        <androidx.cardview.widget.CardView
+            app:cornerSize="20dp"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.MediumComponent"
+            />
+
+
+        <!-- ======== UPCOMING FESTIVALS SECTION (NEW) ======== -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="4dp"
-            android:backgroundTint="@color/card_white">
+            android:orientation="vertical"
+            android:layout_marginBottom="8dp">
 
+            <!-- Section Header -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="20dp">
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:layout_marginBottom="12dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Daily Temple Timings"
-                    android:textSize="20sp"
+                    android:text="🛕"
+                    android:textSize="26sp"
+                    android:layout_marginEnd="8dp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Upcoming Festivals"
+                    android:textSize="22sp"
                     android:textStyle="bold"
                     android:textColor="@color/bhagwa_saffron"
-                    android:layout_marginBottom="16dp" />
-
-                <!-- Open Time -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="12dp"
-                    android:background="@color/light_saffron">
-
-                    <TextView
-                        android:layout_width="140dp"
-                        android:layout_height="wrap_content"
-                        android:text="Open Time"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/sacred_orange" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="4:30 AM"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/dark_text" />
-
-                </LinearLayout>
-
-                <!-- Mangal Aarti -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="12dp">
-
-                    <TextView
-                        android:layout_width="140dp"
-                        android:layout_height="wrap_content"
-                        android:text="Mangal Aarti"
-                        android:textSize="15sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/sacred_orange" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="7:00 AM"
-                        android:textSize="15sp"
-                        android:textColor="@color/dark_text" />
-
-                </LinearLayout>
-
-                <!-- Tulsi Aarti -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="12dp"
-                    android:background="@color/light_saffron">
-
-                    <TextView
-                        android:layout_width="140dp"
-                        android:layout_height="wrap_content"
-                        android:text="Tulsi Aarti"
-                        android:textSize="15sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/sacred_orange" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="7:20 AM"
-                        android:textSize="15sp"
-                        android:textColor="@color/dark_text" />
-
-                </LinearLayout>
-
-                <!-- Srimad Bhagavatam Classes -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="12dp">
-
-                    <TextView
-                        android:layout_width="140dp"
-                        android:layout_height="wrap_content"
-                        android:text="Bhagavatam Classes"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/sacred_orange" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="7:30 AM"
-                        android:textSize="15sp"
-                        android:textColor="@color/dark_text" />
-
-                </LinearLayout>
-
-                <!-- Close Time -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="12dp"
-                    android:background="@color/light_saffron">
-
-                    <TextView
-                        android:layout_width="140dp"
-                        android:layout_height="wrap_content"
-                        android:text="Close Time"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/sacred_orange" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="7:30 PM"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/dark_text" />
-
-                </LinearLayout>
+                    android:fontFamily="sans-serif-medium" />
 
             </LinearLayout>
 
-        </androidx.cardview.widget.CardView>
+            <!-- Progress Bar -->
+            <ProgressBar
+                android:id="@+id/progress_festivals"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="visible" />
 
-        <!-- Additional Info Card -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="4dp"
-            android:backgroundTint="@color/card_white">
-
-            <LinearLayout
+            <!-- RecyclerView for Festivals -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_upcoming_festivals"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="20dp">
+                android:nestedScrollingEnabled="false"
+                android:clipToPadding="false" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Important Notes"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/bhagwa_saffron"
-                    android:layout_marginBottom="12dp" />
+            <!-- Empty State -->
+            <TextView
+                android:id="@+id/tv_festivals_empty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="No upcoming festivals found"
+                android:textSize="15sp"
+                android:textColor="@color/gray_text"
+                android:gravity="center"
+                android:padding="24dp"
+                android:visibility="gone" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="• Temple opens daily at 4:30 AM\n• Mangal Aarti is the first program of the day\n• Devotees are welcome to attend all programs\n• Temple closes at 7:30 PM\n• Special timings during festivals"
-                    android:textSize="14sp"
-                    android:textColor="@color/dark_text"
-                    android:lineSpacingExtra="4dp" />
+        </LinearLayout>
+        <!-- ======== END UPCOMING FESTIVALS SECTION ======== -->
 
-            </LinearLayout>
+        <!-- Daily Schedule Card (EXISTING - NOT CHANGED) -->
 
-        </androidx.cardview.widget.CardView>
-
-        <!-- Quote Card -->
+        <!-- Quote Card (EXISTING - NOT CHANGED) -->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

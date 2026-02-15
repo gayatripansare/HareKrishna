@@ -18,7 +18,9 @@
             android:scaleType="centerCrop"
             android:src="@drawable/img_4"
             android:layout_margin="10dp"
-            app:cornerSize="16dp" />
+            app:cornerSize="16dp"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.MediumComponent"
+            />
         <!-- Main Services Section -->
         <LinearLayout
             android:layout_width="match_parent"

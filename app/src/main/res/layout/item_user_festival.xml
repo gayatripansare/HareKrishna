@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginBottom="12dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="6dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:backgroundTint="@color/card_white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:gravity="center_vertical">
+
+        <!-- Left: Date Circle -->
+        <LinearLayout
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@drawable/circle_bg_golden"
+            android:layout_marginEnd="16dp">
+
+            <TextView
+                android:id="@+id/tv_festival_day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="26"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:gravity="center" />
+
+            <TextView
+                android:id="@+id/tv_festival_month"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="AUG"
+                android:textSize="10sp"
+                android:textColor="@color/white"
+                android:gravity="center" />
+
+        </LinearLayout>
+
+        <!-- Middle: Festival Info -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <!-- Festival Name -->
+            <TextView
+                android:id="@+id/tv_festival_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Janmashtami"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:textColor="@color/dark_text"
+                android:fontFamily="sans-serif-medium" />
+
+            <!-- Festival Description -->
+            <TextView
+                android:id="@+id/tv_festival_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Appearance day of Lord Krishna"
+                android:textSize="13sp"
+                android:textColor="@color/gray_text"
+                android:maxLines="2"
+                android:ellipsize="end" />
+
+            <!-- Fasting Info -->
+            <TextView
+                android:id="@+id/tv_festival_fasting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="🙏 Fasting: Till midnight"
+                android:textSize="12sp"
+                android:textColor="@color/bhagwa_saffron"
+                android:textStyle="italic"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+        <!-- Right: Badge (Today / Tomorrow) -->
+        <TextView
+            android:id="@+id/tv_festival_badge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Today"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:background="@drawable/badge_today"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

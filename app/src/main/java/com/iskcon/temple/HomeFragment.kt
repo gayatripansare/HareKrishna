@@ -24,6 +24,7 @@ class HomeFragment : Fragment() {
     private lateinit var imageSlider: ViewPager2
     private lateinit var sliderHandler: Handler
     private lateinit var sliderRunnable: Runnable
+    private var currentPage = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,48 +43,58 @@ class HomeFragment : Fragment() {
     private fun setupImageSlider(view: View) {
         imageSlider = view.findViewById(R.id.image_slider)
 
-        // Set up the images
         val images = listOf(
-            R.drawable.img_7,
-            R.drawable.img_8,
-            R.drawable.img_9,
-            R.drawable.img_10,
-            R.drawable.img_11
+            R.drawable.scroll1,
+            R.drawable.scroll2,
+            R.drawable.scroll3,
+            R.drawable.scroll4,
+            R.drawable.scroll5
         )
 
-        val adapter = ImageSliderAdapter(images)
-        imageSlider.adapter = adapter
+        // Create a very large list to simulate infinite scrolling
+        val largeImageList = mutableListOf<Int>()
+        for (i in 0 until 1000) {
+            largeImageList.addAll(images)
+        }
 
-        // Enable smooth scrolling
+        val adapter = ImageSliderAdapter(largeImageList)
+        imageSlider.adapter = adapter
         imageSlider.offscreenPageLimit = 1
 
-        // Set up auto-scroll
+        // Start in the middle to allow scrolling both ways
+        val startPosition = 500 * images.size
+        imageSlider.setCurrentItem(startPosition, false)
+        currentPage = startPosition
+
+        imageSlider.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                currentPage = position
+            }
+        })
+
+        // Auto-scroll with faster speed
         sliderHandler = Handler(Looper.getMainLooper())
         sliderRunnable = object : Runnable {
             override fun run() {
-                val currentItem = imageSlider.currentItem
-                val nextItem = if (currentItem == images.size - 1) 0 else currentItem + 1
-                imageSlider.setCurrentItem(nextItem, true)
-                sliderHandler.postDelayed(this, 3000) // Scroll every 3 seconds
+                imageSlider.setCurrentItem(currentPage + 1, true)
+                sliderHandler.postDelayed(this, 2500) // 2.5 seconds
             }
         }
     }
 
     override fun onResume() {
         super.onResume()
-        // Start auto-scrolling when fragment is visible
-        sliderHandler.postDelayed(sliderRunnable, 3000)
+        sliderHandler.postDelayed(sliderRunnable, 2500)
     }
 
     override fun onPause() {
         super.onPause()
-        // Stop auto-scrolling when fragment is not visible
         sliderHandler.removeCallbacks(sliderRunnable)
     }
 
     private fun setupQuickAccessCards(view: View) {
         view.findViewById<CardView>(R.id.card_schedule)?.setOnClickListener {
-            navigateToSchedule()
+            navigateToVaishnavaSongs()
         }
 
         view.findViewById<CardView>(R.id.card_services)?.setOnClickListener {
@@ -113,12 +124,6 @@ class HomeFragment : Fragment() {
             .whereEqualTo("date", today)
             .get()
             .addOnSuccessListener { festivalsSnapshot ->
-                // ✅ SAFETY CHECK: Exit if fragment is detached
-                if (!isAdded || context == null) {
-                    Log.w("HomeFragment", "Fragment detached, skipping festivals load")
-                    return@addOnSuccessListener
-                }
-
                 Log.d("HomeFragment", "✅ Found ${festivalsSnapshot.size()} festivals")
 
                 festivalsSnapshot.forEach { doc ->
@@ -133,12 +138,6 @@ class HomeFragment : Fragment() {
                 loadCustomEvents(today, allEvents, layoutEventsContainer)
             }
             .addOnFailureListener { e ->
-                // ✅ SAFETY CHECK: Exit if fragment is detached
-                if (!isAdded || context == null) {
-                    Log.w("HomeFragment", "Fragment detached, skipping error handling")
-                    return@addOnFailureListener
-                }
-
                 Log.e("HomeFragment", "Error: ${e.message}")
                 loadCustomEvents(today, allEvents, layoutEventsContainer)
             }
@@ -149,12 +148,6 @@ class HomeFragment : Fragment() {
             .whereEqualTo("date", today)
             .get()
             .addOnSuccessListener { eventsSnapshot ->
-                // ✅ SAFETY CHECK: Exit if fragment is detached
-                if (!isAdded || context == null) {
-                    Log.w("HomeFragment", "Fragment detached, skipping custom events load")
-                    return@addOnSuccessListener
-                }
-
                 Log.d("HomeFragment", "✅ Found ${eventsSnapshot.size()} custom events")
 
                 eventsSnapshot.forEach { doc ->
@@ -169,21 +162,14 @@ class HomeFragment : Fragment() {
                 displayEvents(allEvents, container)
             }
             .addOnFailureListener { e ->
-                // ✅ SAFETY CHECK: Exit if fragment is detached
-                if (!isAdded || context == null) {
-                    Log.w("HomeFragment", "Fragment detached, skipping error handling")
-                    return@addOnFailureListener
-                }
-
                 Log.e("HomeFragment", "Error: ${e.message}")
                 displayEvents(allEvents, container)
             }
     }
 
     private fun displayEvents(events: List<EventItem>, container: LinearLayout) {
-        // ✅ SAFETY CHECK: Exit if fragment is detached
         if (!isAdded || context == null) {
-            Log.w("HomeFragment", "Fragment detached, skipping displayEvents")
+            Log.d("HomeFragment", "Fragment not attached, skipping display")
             return
         }
 
@@ -196,11 +182,8 @@ class HomeFragment : Fragment() {
 
         Log.d("HomeFragment", "🎉 Displaying ${events.size} events")
 
-        // ✅ Get context once and reuse it
-        val ctx = requireContext()
-
         events.forEach { event ->
-            val eventLayout = LinearLayout(ctx).apply {
+            val eventLayout = LinearLayout(requireContext()).apply {
                 orientation = LinearLayout.VERTICAL
                 setPadding(32, 24, 32, 24)
                 setBackgroundColor(android.graphics.Color.parseColor("#FFD700"))
@@ -212,17 +195,17 @@ class HomeFragment : Fragment() {
                 }
             }
 
-            val titleLayout = LinearLayout(ctx).apply {
+            val titleLayout = LinearLayout(requireContext()).apply {
                 orientation = LinearLayout.HORIZONTAL
             }
 
-            val starIcon = TextView(ctx).apply {
+            val starIcon = TextView(requireContext()).apply {
                 text = "⭐ "
                 textSize = 20f
                 setTextColor(android.graphics.Color.parseColor("#FF6200"))
             }
 
-            val nameText = TextView(ctx).apply {
+            val nameText = TextView(requireContext()).apply {
                 text = event.name
                 textSize = 17f
                 setTypeface(null, android.graphics.Typeface.BOLD)
@@ -233,7 +216,7 @@ class HomeFragment : Fragment() {
             titleLayout.addView(nameText)
             eventLayout.addView(titleLayout)
 
-            val descText = TextView(ctx).apply {
+            val descText = TextView(requireContext()).apply {
                 text = event.description
                 textSize = 15f
                 setTextColor(android.graphics.Color.parseColor("#333333"))
@@ -242,7 +225,7 @@ class HomeFragment : Fragment() {
             eventLayout.addView(descText)
 
             if (event.fasting.isNotEmpty() && event.fasting != "—-") {
-                val fastingText = TextView(ctx).apply {
+                val fastingText = TextView(requireContext()).apply {
                     text = "Fasting: ${event.fasting}"
                     textSize = 13f
                     setTextColor(android.graphics.Color.parseColor("#FF6200"))
@@ -256,21 +239,15 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun navigateToSchedule() {
-        // ✅ SAFETY CHECK before navigation
-        if (!isAdded || activity == null) return
-
-        val scheduleFragment = ScheduleFragment()
+    private fun navigateToVaishnavaSongs() {
+        val vaishnavaSongsFragment = VaishnavaSongsFragment()
         requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, scheduleFragment)
+            .replace(R.id.fragment_container, vaishnavaSongsFragment)
             .addToBackStack("home")
             .commit()
     }
 
     private fun navigateToServices() {
-        // ✅ SAFETY CHECK before navigation
-        if (!isAdded || activity == null) return
-
         val servicesFragment = ServicesFragment()
         requireActivity().supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, servicesFragment)
@@ -279,9 +256,6 @@ class HomeFragment : Fragment() {
     }
 
     private fun navigateToGallery() {
-        // ✅ SAFETY CHECK before navigation
-        if (!isAdded || activity == null) return
-
         val galleryFragment = GalleryFragment()
         requireActivity().supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, galleryFragment)
@@ -290,9 +264,6 @@ class HomeFragment : Fragment() {
     }
 
     private fun navigateToMore() {
-        // ✅ SAFETY CHECK before navigation
-        if (!isAdded || activity == null) return
-
         val moreFragment = MoreFragment()
         requireActivity().supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, moreFragment)
@@ -306,7 +277,6 @@ class HomeFragment : Fragment() {
         val fasting: String
     )
 
-    // ViewPager2 Adapter for Image Slider
     inner class ImageSliderAdapter(private val images: List<Int>) :
         RecyclerView.Adapter<ImageSliderAdapter.ImageViewHolder>() {
 
