@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -39,18 +40,58 @@
                 android:src="@android:drawable/ic_popup_sync"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="Refresh"
-                android:layout_marginEnd="8dp"
                 android:tint="#6B4C9A" />
-
-
 
         </LinearLayout>
 
-        <!-- Mantra Card with Word-by-Word Display -->
+        <!-- Mode Selection Buttons -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/btnModeAudio"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="4dp"
+                android:text="🔊 Audio"
+                android:textSize="12sp"
+                android:backgroundTint="#6B4C9A"
+                android:textColor="@android:color/white" />
+
+            <Button
+                android:id="@+id/btnModeVoice"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginHorizontal="4dp"
+                android:text="🎤 Voice"
+                android:textSize="12sp"
+                android:backgroundTint="#E0E0E0"
+                android:textColor="#757575" />
+
+            <Button
+                android:id="@+id/btnModeManual"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="4dp"
+                android:text="👆 Manual"
+                android:textSize="12sp"
+                android:backgroundTint="#E0E0E0"
+                android:textColor="#757575" />
+
+        </LinearLayout>
+
+        <!-- Mantra Card -->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             app:cardBackgroundColor="#6B4C9A"
             app:cardCornerRadius="16dp"
             app:cardElevation="4dp">
@@ -61,7 +102,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:padding="32dp"
-                android:text="हरे कृष्ण हरे कृष्ण कृष्ण कृष्ण हरे हरे\nहरे राम हरे राम"
+                android:text="हरे कृष्ण हरे कृष्ण कृष्ण कृष्ण हरे हरे\nहरे राम हरे राम राम राम हरे हरे"
                 android:textColor="@android:color/white"
                 android:textSize="24sp"
                 android:textStyle="bold"
@@ -69,7 +110,7 @@
                 android:minHeight="120dp" />
         </androidx.cardview.widget.CardView>
 
-        <!-- Status Badges -->
+        <!-- Status Badge -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -85,7 +126,7 @@
                 android:background="#4CAF50"
                 android:paddingHorizontal="24dp"
                 android:paddingVertical="8dp"
-                android:text="Japa Counting"
+                android:text="Audio Mode"
                 android:textColor="@android:color/white"
                 android:textSize="14sp"
                 android:textStyle="bold" />
@@ -94,14 +135,16 @@
 
         <!-- Volume, Counter Circle, and Speed Section -->
         <LinearLayout
+            android:id="@+id/layoutControls"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:orientation="horizontal"
             android:gravity="center_vertical">
 
-            <!-- Volume Control (Left Side) -->
+            <!-- Volume Control -->
             <LinearLayout
+                android:id="@+id/layoutVolume"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -136,7 +179,7 @@
                     android:layout_marginTop="8dp" />
             </LinearLayout>
 
-            <!-- Counter Circle (Center) -->
+            <!-- Counter Circle -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/counterCircle"
                 android:layout_width="0dp"
@@ -170,8 +213,9 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Speed Control (Right Side) -->
+            <!-- Speed Control -->
             <LinearLayout
+                android:id="@+id/layoutSpeed"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
