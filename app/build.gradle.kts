@@ -61,7 +61,10 @@ dependencies {
     implementation("androidx.recyclerview:recyclerview:1.3.0")
     implementation("androidx.viewpager2:viewpager2:1.0.0")
 
+<<<<<<< HEAD
     // Firebase
+=======
+>>>>>>> feaed21b2f95b309c6316a7b68c8ba77fcb39d4d
     implementation(libs.firebase.auth.ktx)
     implementation(libs.firebase.firestore.ktx)
     implementation("com.google.firebase:firebase-messaging:23.4.0")
@@ -85,4 +88,33 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+<<<<<<< HEAD
 }
+=======
+
+    implementation("androidx.work:work-runtime-ktx:2.9.0")
+    implementation("com.google.firebase:firebase-messaging:23.4.0")
+    implementation("com.google.firebase:firebase-firestore-ktx:24.10.0")
+
+    // Cloudinary
+    implementation("com.cloudinary:cloudinary-android:2.5.0")
+
+    // Glide for image loading
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+
+    // Coroutines
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.7.3")
+
+    // Hindu calendar
+    implementation("com.ibm.icu:icu4j:74.1")
+
+//    implementation("de.hdodenhof:circleimageview:3.1.0")
+
+    // UI Components
+    implementation("androidx.viewpager2:viewpager2:1.0.0")
+    implementation("androidx.recyclerview:recyclerview:1.3.0")
+    implementation("androidx.media:media:1.7.0")
+}
+>>>>>>> feaed21b2f95b309c6316a7b68c8ba77fcb39d4d

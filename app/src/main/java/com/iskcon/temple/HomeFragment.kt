@@ -26,6 +26,7 @@ class HomeFragment : Fragment() {
     private lateinit var imageSlider: ViewPager2
     private lateinit var sliderHandler: Handler
     private lateinit var sliderRunnable: Runnable
+    private var currentPage = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,48 +45,58 @@ class HomeFragment : Fragment() {
     private fun setupImageSlider(view: View) {
         imageSlider = view.findViewById(R.id.image_slider)
 
-        // Set up the images
         val images = listOf(
-            R.drawable.img_7,
-            R.drawable.img_8,
-            R.drawable.img_9,
-            R.drawable.img_10,
-            R.drawable.img_11
+            R.drawable.scroll1,
+            R.drawable.scroll2,
+            R.drawable.scroll3,
+            R.drawable.scroll4,
+            R.drawable.scroll5
         )
 
-        val adapter = ImageSliderAdapter(images)
-        imageSlider.adapter = adapter
+        // Create a very large list to simulate infinite scrolling
+        val largeImageList = mutableListOf<Int>()
+        for (i in 0 until 1000) {
+            largeImageList.addAll(images)
+        }
 
-        // Enable smooth scrolling
+        val adapter = ImageSliderAdapter(largeImageList)
+        imageSlider.adapter = adapter
         imageSlider.offscreenPageLimit = 1
 
-        // Set up auto-scroll
+        // Start in the middle to allow scrolling both ways
+        val startPosition = 500 * images.size
+        imageSlider.setCurrentItem(startPosition, false)
+        currentPage = startPosition
+
+        imageSlider.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                currentPage = position
+            }
+        })
+
+        // Auto-scroll with faster speed
         sliderHandler = Handler(Looper.getMainLooper())
         sliderRunnable = object : Runnable {
             override fun run() {
-                val currentItem = imageSlider.currentItem
-                val nextItem = if (currentItem == images.size - 1) 0 else currentItem + 1
-                imageSlider.setCurrentItem(nextItem, true)
-                sliderHandler.postDelayed(this, 3000) // Scroll every 3 seconds
+                imageSlider.setCurrentItem(currentPage + 1, true)
+                sliderHandler.postDelayed(this, 2500) // 2.5 seconds
             }
         }
     }
 
     override fun onResume() {
         super.onResume()
-        // Start auto-scrolling when fragment is visible
-        sliderHandler.postDelayed(sliderRunnable, 3000)
+        sliderHandler.postDelayed(sliderRunnable, 2500)
     }
 
     override fun onPause() {
         super.onPause()
-        // Stop auto-scrolling when fragment is not visible
         sliderHandler.removeCallbacks(sliderRunnable)
     }
 
     private fun setupQuickAccessCards(view: View) {
         view.findViewById<CardView>(R.id.card_schedule)?.setOnClickListener {
-            navigateToSchedule()
+            navigateToVaishnavaSongs()
         }
 
         view.findViewById<CardView>(R.id.card_services)?.setOnClickListener {
@@ -162,6 +173,11 @@ class HomeFragment : Fragment() {
     }
 
     private fun displayEvents(events: List<EventItem>, container: LinearLayout) {
+        if (!isAdded || context == null) {
+            Log.d("HomeFragment", "Fragment not attached, skipping display")
+            return
+        }
+
         container.removeAllViews()
 
         if (events.isEmpty()) {
@@ -228,10 +244,10 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun navigateToSchedule() {
-        val scheduleFragment = ScheduleFragment()
+    private fun navigateToVaishnavaSongs() {
+        val vaishnavaSongsFragment = VaishnavaSongsFragment()
         requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, scheduleFragment)
+            .replace(R.id.fragment_container, vaishnavaSongsFragment)
             .addToBackStack("home")
             .commit()
     }
@@ -266,7 +282,6 @@ class HomeFragment : Fragment() {
         val fasting: String
     )
 
-    // ViewPager2 Adapter for Image Slider
     inner class ImageSliderAdapter(private val images: List<Int>) :
         RecyclerView.Adapter<ImageSliderAdapter.ImageViewHolder>() {
 

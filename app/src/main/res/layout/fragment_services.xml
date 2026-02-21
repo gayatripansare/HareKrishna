@@ -18,7 +18,9 @@
             android:scaleType="centerCrop"
             android:src="@drawable/img_4"
             android:layout_margin="10dp"
-            app:cornerSize="16dp" />
+            app:cornerSize="16dp"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.MediumComponent"
+            />
         <!-- Main Services Section -->
         <LinearLayout
             android:layout_width="match_parent"
@@ -404,8 +406,8 @@
                             android:contentDescription="Donation Service"
                             android:scaleType="fitCenter"
                             android:padding="16dp"
-                            android:src="@android:drawable/ic_dialog_info"
-                            android:tint="@color/white" />
+                            android:src="@drawable/ic_donate_icon"
+                            app:tint="@color/white" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -452,8 +454,8 @@
                             android:contentDescription="Youth Forum"
                             android:scaleType="fitCenter"
                             android:padding="16dp"
-                            android:src="@android:drawable/ic_menu_my_calendar"
-                            android:tint="@color/white" />
+                            android:src="@drawable/groups_24dp_ffffff"
+                            app:tint="@color/white" />
 
                         <TextView
                             android:layout_width="wrap_content"

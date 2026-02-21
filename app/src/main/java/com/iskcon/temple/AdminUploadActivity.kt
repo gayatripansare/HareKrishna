@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.view.MenuItem
 import android.view.View
 import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
@@ -16,7 +17,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import com.bumptech.glide.Glide
 
 class AdminUploadActivity : BaseActivity() {
 
@@ -49,7 +49,13 @@ class AdminUploadActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_upload)
 
+        // Enable back button
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = "Upload Gallery Image"
+
+        // Hide donation FAB on upload screen
         hideDonationFab()
+
         cloudinaryHelper = CloudinaryHelper(this)
         initViews()
         setupCategorySpinner()
@@ -87,8 +93,7 @@ class AdminUploadActivity : BaseActivity() {
 
     private fun validateAndUpload() {
         val title = etImageTitle.text.toString().trim()
-        val categoryPosition = spinnerCategory.selectedItemPosition
-        val category = if (categoryPosition > 0) spinnerCategory.selectedItem.toString() else ""
+        val category = spinnerCategory.selectedItem.toString()
 
         when {
             selectedImageUri == null -> {
@@ -98,8 +103,8 @@ class AdminUploadActivity : BaseActivity() {
                 etImageTitle.error = "Please enter title"
                 etImageTitle.requestFocus()
             }
-            category.isEmpty() -> {
-                Toast.makeText(this, "Please select category", Toast.LENGTH_SHORT).show()
+            category == "Select Category" -> {
+                Toast.makeText(this, "Please select a category", Toast.LENGTH_SHORT).show()
             }
             else -> {
                 uploadImage(title, category)
@@ -145,14 +150,7 @@ class AdminUploadActivity : BaseActivity() {
                 documentReference.update("id", documentReference.id)
                     .addOnSuccessListener {
                         showProgress(false)
-
-                        // ✅ Clear Glide cache so gallery shows fresh images
-                        Glide.get(this).clearMemory()
-                        Thread {
-                            Glide.get(this).clearDiskCache()
-                        }.start()
-
-                        Toast.makeText(this, "✅ Upload successful!", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "✅ Image uploaded successfully!", Toast.LENGTH_SHORT).show()
                         finish()
                     }
             }
@@ -167,5 +165,15 @@ class AdminUploadActivity : BaseActivity() {
         tvProgress.visibility = if (show) View.VISIBLE else View.GONE
         btnUpload.isEnabled = !show
         btnChooseImage.isEnabled = !show
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                finish()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }

@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -94,6 +95,9 @@ class ServicesFragment : Fragment() {
         val descView = dialog.findViewById<TextView>(R.id.service_description)
         val closeButton = dialog.findViewById<ImageView>(R.id.btn_close)
 
+        // ✅ FEATURE 2: Make phone number clickable
+        val phoneTextView = dialog.findViewById<TextView>(R.id.phone_number)
+
         imageView.setImageResource(imageResId)
         titleView.text = title
         descView.text = description
@@ -102,6 +106,27 @@ class ServicesFragment : Fragment() {
             dialog.dismiss()
         }
 
+        // ✅ FEATURE 2: Add click listener to phone number
+        phoneTextView?.setOnClickListener {
+            makePhoneCall("+919876543210")
+        }
+
         dialog.show()
+    }
+
+    // ✅ FEATURE 2: Function to make phone call
+    private fun makePhoneCall(phoneNumber: String) {
+        try {
+            val intent = Intent(Intent.ACTION_DIAL).apply {
+                data = Uri.parse("tel:$phoneNumber")
+            }
+            startActivity(intent)
+        } catch (e: Exception) {
+            Toast.makeText(
+                requireContext(),
+                "Unable to open dialer: ${e.message}",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
     }
 }
