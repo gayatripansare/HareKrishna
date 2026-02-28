@@ -45,6 +45,9 @@
         <activity
             android:name=".ISKON_Sign_in"
             android:exported="false" />
+        <activity android:name=".YouthGalleryActivity" android:exported="false" />
+        <activity android:name=".YouthUploadActivity" android:exported="false" />
+        <activity android:name=".ImageZoomActivity" android:exported="false" />
         <activity
             android:name=".RegistrationActivity"
             android:exported="false" />
@@ -78,6 +81,7 @@
             android:name=".MainActivity2"
             android:exported="false"
             android:label="Temple Finder" />
+        <activity android:name=".JapaActivity" android:exported="false" />
 
         <activity
             android:name=".EditProfileActivity"
