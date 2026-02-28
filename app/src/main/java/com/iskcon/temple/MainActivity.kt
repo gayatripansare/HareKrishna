@@ -31,9 +31,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var profileImage: ImageView
     private lateinit var notificationContainer: FrameLayout
     private lateinit var accountContainer: FrameLayout
-    private lateinit var appBarLayout: AppBarLayout // Add this
+    private lateinit var appBarLayout: AppBarLayout
 
-    // Notification permission launcher
     private val requestPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) { isGranted: Boolean ->
@@ -48,40 +47,26 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Initialize Firebase
         auth = FirebaseAuth.getInstance()
         firestore = FirebaseFirestore.getInstance()
 
-        // Initialize Views
         initializeToolbarViews()
-
-        // Initialize Cloudinary
         initCloudinary()
-
-        // Request notification permission
         requestNotificationPermission()
-
-        // Load user profile
         loadUserProfile()
-
-        // Setup click listeners
         setupToolbarClicks()
-
-        // Load notification count
         loadNotificationCount()
 
         if (savedInstanceState == null) {
             loadFragment(HomeFragment())
-            showToolbar(true) // Show toolbar for home
+            showToolbar(true)
         }
 
         setupCustomBottomNavigation()
-<<<<<<< HEAD
-=======
     }
 
     private fun initializeToolbarViews() {
-        appBarLayout = findViewById(R.id.app_bar_layout) // Add this
+        appBarLayout = findViewById(R.id.app_bar_layout)
         notificationBadge = findViewById(R.id.notification_badge)
         profileImage = findViewById(R.id.toolbar_profile_image)
         notificationContainer = findViewById(R.id.notification_icon_container)
@@ -89,14 +74,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupToolbarClicks() {
-        // Notification Click
         notificationContainer.setOnClickListener {
             val intent = Intent(this, NotificationActivity::class.java)
             startActivity(intent)
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         }
 
-        // Account Click
         accountContainer.setOnClickListener {
             val intent = Intent(this, AccountActivity::class.java)
             startActivity(intent)
@@ -107,7 +90,6 @@ class MainActivity : AppCompatActivity() {
     private fun loadUserProfile() {
         val currentUser = auth.currentUser
         if (currentUser != null) {
-            // Load profile picture from Firebase or use default
             val photoUrl = currentUser.photoUrl
             if (photoUrl != null) {
                 Glide.with(this)
@@ -137,10 +119,8 @@ class MainActivity : AppCompatActivity() {
             }
     }
 
-    // Add this new method to show/hide toolbar
     private fun showToolbar(show: Boolean) {
         appBarLayout.visibility = if (show) View.VISIBLE else View.GONE
->>>>>>> feaed21b2f95b309c6316a7b68c8ba77fcb39d4d
     }
 
     private fun initCloudinary() {
@@ -177,35 +157,35 @@ class MainActivity : AppCompatActivity() {
             selectTab(R.id.nav_home_custom)
             clearBackStack()
             loadFragment(HomeFragment())
-            showToolbar(true) // Show toolbar
+            showToolbar(true)
         }
 
         navDarshan.setOnClickListener {
             selectTab(R.id.nav_darshan_custom)
             clearBackStack()
             loadFragment(DarshanFragment())
-            showToolbar(false) // Hide toolbar
+            showToolbar(false)
         }
 
         navSchedule.setOnClickListener {
             selectTab(R.id.nav_schedule_custom)
             clearBackStack()
             loadFragment(ScheduleFragment())
-            showToolbar(false) // Hide toolbar
+            showToolbar(false)
         }
 
         navServices.setOnClickListener {
             selectTab(R.id.nav_services_custom)
             clearBackStack()
             loadFragment(ServicesFragment())
-            showToolbar(false) // Hide toolbar
+            showToolbar(false)
         }
 
         navMore.setOnClickListener {
             selectTab(R.id.nav_more_custom)
             clearBackStack()
             loadFragment(MoreFragment())
-            showToolbar(false) // Hide toolbar
+            showToolbar(false)
         }
 
         selectTab(R.id.nav_home_custom)
@@ -223,7 +203,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateTabColor(tabId: Int, isSelected: Boolean) {
-        val tab = findViewById<LinearLayout>(tabId)
         val textView = when (tabId) {
             R.id.nav_home_custom -> findViewById<TextView>(R.id.text_home)
             R.id.nav_darshan_custom -> findViewById<TextView>(R.id.text_darshan)
@@ -255,24 +234,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-<<<<<<< HEAD
-        // If there's a backstack (like from Gallery), pop it
         if (supportFragmentManager.backStackEntryCount > 0) {
             supportFragmentManager.popBackStack()
-        }
-        // If not on home, go to home
-        else if (currentSelectedTab != R.id.nav_home_custom) {
-            findViewById<LinearLayout>(R.id.nav_home_custom)?.performClick()
-        }
-        // If on home, exit app
-        else {
-            super.onBackPressed()
-        }
-    }
-=======
-        if (supportFragmentManager.backStackEntryCount > 0) {
-            supportFragmentManager.popBackStack()
-            // Check which fragment is showing after popping
             val currentFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
             showToolbar(currentFragment is HomeFragment)
         } else if (currentSelectedTab != R.id.nav_home_custom) {
@@ -284,8 +247,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        loadNotificationCount() // Refresh notification count when returning to activity
-        loadUserProfile() // Refresh profile picture
+        loadNotificationCount()
+        loadUserProfile()
     }
->>>>>>> feaed21b2f95b309c6316a7b68c8ba77fcb39d4d
 }
