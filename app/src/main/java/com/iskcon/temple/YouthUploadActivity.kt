@@ -8,7 +8,6 @@ import android.provider.MediaStore
 import android.view.View
 import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.firestore.FirebaseFirestore
@@ -119,17 +118,17 @@ class YouthUploadActivity : BaseActivity() {
         val imageData = hashMapOf(
             "imageUrl" to imageUrl,
             "title" to title,
-            "category" to "youth_events",
+            "category" to "youth",
             "timestamp" to System.currentTimeMillis()
         )
 
-        firestore.collection("youth_gallery_images")
+        firestore.collection("gallery_images")
             .add(imageData)
             .addOnSuccessListener { documentReference ->
                 documentReference.update("id", documentReference.id)
                     .addOnSuccessListener {
                         showProgress(false)
-                        Toast.makeText(this, "✅ Youth image uploaded successfully!", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Image uploaded successfully!", Toast.LENGTH_SHORT).show()
                         finish()
                     }
             }

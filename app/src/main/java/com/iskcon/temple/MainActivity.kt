@@ -236,6 +236,7 @@ class MainActivity : AppCompatActivity() {
     override fun onBackPressed() {
         if (supportFragmentManager.backStackEntryCount > 0) {
             supportFragmentManager.popBackStack()
+            // Check which fragment is showing after popping
             val currentFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
             showToolbar(currentFragment is HomeFragment)
         } else if (currentSelectedTab != R.id.nav_home_custom) {

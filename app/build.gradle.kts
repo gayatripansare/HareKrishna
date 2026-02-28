@@ -62,7 +62,6 @@ dependencies {
     implementation("androidx.viewpager2:viewpager2:1.0.0")
     implementation("androidx.media:media:1.7.0")
 
-    // Firebase
     implementation(libs.firebase.auth.ktx)
     implementation(libs.firebase.firestore.ktx)
     implementation("com.google.firebase:firebase-messaging:23.4.0")
@@ -87,7 +86,9 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
+    // Media
+    implementation("androidx.media:media:1.7.0")
+
     implementation("com.google.android.gms:play-services-auth:21.0.0")
     implementation("com.google.firebase:firebase-auth:23.0.0")
-    implementation("com.google.firebase:firebase-bom:33.0.0")
 }

@@ -28,6 +28,7 @@ class ISKON_Sign_in : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
 
+    // ✅ Modern way to handle Activity Results
     private val googleSignInLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
@@ -61,9 +62,9 @@ class ISKON_Sign_in : AppCompatActivity() {
         // Initialize Firebase Auth
         auth = FirebaseAuth.getInstance()
 
-        // Configure Google Sign-In
+        // ✅ Configure Google Sign-In
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestIdToken(getString(R.string.default_web_client_id)) // From google-services.json
             .requestEmail()
             .build()
         googleSignInClient = GoogleSignIn.getClient(this, gso)
@@ -85,15 +86,17 @@ class ISKON_Sign_in : AppCompatActivity() {
             startActivity(Intent(this, ISKON_Sign_up::class.java))
         }
 
-        // Google Sign-In Button
+        // ✅ Google Sign-In Button Click
         btnGoogleSignIn.setOnClickListener {
             signInWithGoogle()
         }
     }
 
     private fun signInWithGoogle() {
+        // Sign out first to allow account chooser to show every time
         googleSignInClient.signOut().addOnCompleteListener {
-            googleSignInLauncher.launch(googleSignInClient.signInIntent)
+            val signInIntent = googleSignInClient.signInIntent
+            googleSignInLauncher.launch(signInIntent)
         }
     }
 

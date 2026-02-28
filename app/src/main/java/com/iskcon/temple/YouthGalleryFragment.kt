@@ -44,7 +44,43 @@ class YouthGalleryFragment : Fragment() {
             openUploadScreen()
         }
 
+        // ✅ SOLUTION: Hide donation FAB in youth gallery
+        hideDonationFabInYouthGallery()
+
         return view
+    }
+
+    // ✅ NEW: Hide donation FAB when youth gallery opens
+    private fun hideDonationFabInYouthGallery() {
+        try {
+            if (activity is BaseActivity) {
+                (activity as BaseActivity).hideDonationFab()
+            }
+        } catch (e: Exception) {
+            Log.e("YouthGalleryFragment", "Error hiding donation FAB: ${e.message}")
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        loadYouthImages()
+        Log.d("YouthGallery", "onResume - Reloading youth gallery...")
+
+        // ✅ Hide donation FAB again when returning to youth gallery
+        hideDonationFabInYouthGallery()
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        // ✅ Show donation FAB when leaving youth gallery
+        try {
+            if (activity is BaseActivity) {
+                (activity as BaseActivity).showDonationFab()
+            }
+        } catch (e: Exception) {
+            Log.e("YouthGalleryFragment", "Error showing donation FAB: ${e.message}")
+        }
     }
 
     private fun initViews(view: View) {
@@ -113,11 +149,5 @@ class YouthGalleryFragment : Fragment() {
     private fun openUploadScreen() {
         val intent = Intent(requireContext(), YouthUploadActivity::class.java)
         startActivity(intent)
-    }
-
-    override fun onResume() {
-        super.onResume()
-        loadYouthImages()
-        Log.d("YouthGallery", "onResume - Reloading youth gallery...")
     }
 }
