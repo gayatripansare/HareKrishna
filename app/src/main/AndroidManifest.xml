@@ -27,14 +27,9 @@
         android:roundIcon="@drawable/kopargaon_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.ISKCONTemple"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        android:forceDarkAllowed="false">
 
-<!--        <activity-->
-<!--            android:name=".PaymentSuccessActivity"-->
-<!--            android:exported="false" />-->
-<!--        <activity-->
-<!--            android:name=".PaymentActivity"-->
-<!--            android:exported="false" />-->
         <activity
             android:name=".DonateActivity"
             android:exported="false" />
@@ -119,6 +114,17 @@
             android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
+
+        <!-- ✅ NEW: Admin User Management Activities -->
+        <activity
+            android:name=".AdminUserListActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".AdminUserDetailActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".AssignSevaActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
         <service
             android:name=".MusicPlayerService"

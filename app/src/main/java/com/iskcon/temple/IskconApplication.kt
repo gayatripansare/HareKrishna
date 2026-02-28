@@ -2,6 +2,7 @@ package com.iskcon.temple
 
 import android.app.Application
 import android.util.Log
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.work.*
 import com.google.firebase.firestore.FirebaseFirestore
 import java.util.concurrent.TimeUnit
@@ -10,6 +11,9 @@ class IskconApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+
+        // ✅ PERMANENT FIX: Force Light Mode — prevents blurry/dimmed icons and images throughout app
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
         Log.d("IskconApplication", "🚀 App starting...")
 
@@ -23,13 +27,11 @@ class IskconApplication : Application() {
     private fun initializeFestivalsInFirestore() {
         val firestore = FirebaseFirestore.getInstance()
 
-        // ✅ FIX: Check if festivals already exist first
         firestore.collection("festivals")
             .limit(1)
             .get()
             .addOnSuccessListener { documents ->
                 if (documents.isEmpty) {
-                    // No festivals exist, initialize them
                     Log.d("IskconApplication", "📅 No festivals found, initializing...")
                     uploadFestivalsToFirestore()
                 } else {
@@ -43,7 +45,7 @@ class IskconApplication : Application() {
 
     private fun uploadFestivalsToFirestore() {
         val firestore = FirebaseFirestore.getInstance()
-        val festivals = getVaishnavaCalendar2025_2026() // Get all festivals
+        val festivals = getVaishnavaCalendar2025_2026()
 
         var uploadedCount = 0
 
@@ -86,7 +88,6 @@ class IskconApplication : Application() {
         Log.d("IskconApplication", "✅ Festival notification worker scheduled!")
     }
 
-    // ✅ ADD THIS: Festival calendar data
     private fun getVaishnavaCalendar2025_2026(): List<Festival> {
         return listOf(
             // March 2025

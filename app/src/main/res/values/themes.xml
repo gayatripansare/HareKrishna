@@ -1,9 +1,16 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.ISKCONTemple" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    <!-- ✅ FIXED: Force Light theme always — prevents DayNight from dimming images and icons -->
+    <style name="Base.Theme.ISKCONTemple" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">@color/bhagwa_saffron</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/cream_bg</item>
+        <!-- ✅ Force cream background on all windows -->
+        <item name="android:colorBackground">@color/cream_bg</item>
+        <!-- ✅ Prevent any automatic dark mode tinting on all views -->
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
     </style>
 
     <style name="Theme.ISKCONTemple" parent="Base.Theme.ISKCONTemple" />
+
 </resources>

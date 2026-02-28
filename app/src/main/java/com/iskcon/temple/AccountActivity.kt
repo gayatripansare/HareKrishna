@@ -45,7 +45,7 @@ class AccountActivity : AppCompatActivity() {
         setupToolbar()
         loadUserData()
         setupClickListeners()
-        checkAdminAndShowButton()
+        checkLoginAndAdminStatus()  // ✅ FIXED: single method handles both login check + admin check
         loadTodayChanting()
     }
 
@@ -67,6 +67,32 @@ class AccountActivity : AppCompatActivity() {
         findViewById<ImageView>(R.id.back_button).setOnClickListener { finish() }
     }
 
+    // ✅ FIXED: Check login status first, then check admin
+    private fun checkLoginAndAdminStatus() {
+        val currentUser = auth.currentUser
+
+        if (currentUser == null) {
+            // User is NOT logged in — hide chanting card and admin card
+            chantingCard.visibility = View.GONE
+            adminUsersCard.visibility = View.GONE
+            return
+        }
+
+        // User IS logged in — now check if admin or regular user
+        val sharedPref = getSharedPreferences("AdminPrefs", MODE_PRIVATE)
+        val isAdmin = sharedPref.getBoolean("isAdminLoggedIn", false)
+
+        if (isAdmin) {
+            // Admin — show admin users card, hide chanting card
+            adminUsersCard.visibility = View.VISIBLE
+            chantingCard.visibility = View.GONE
+        } else {
+            // Regular logged-in user — show chanting card, hide admin card
+            chantingCard.visibility = View.VISIBLE
+            adminUsersCard.visibility = View.GONE
+        }
+    }
+
     private fun loadUserData() {
         val currentUser = auth.currentUser ?: return
 
@@ -83,13 +109,11 @@ class AccountActivity : AppCompatActivity() {
             memberSince.text = "Member since ${dateFormat.format(Date(creationTime))}"
         }
 
-        // Try Firestore, fallback silently — never show error
         firestore.collection("users").document(currentUser.uid).get()
             .addOnSuccessListener { doc ->
                 if (doc.exists()) {
                     userName.text = doc.getString("name") ?: currentUser.displayName ?: "Devotee"
                 } else {
-                    // Auto-create missing document for old users
                     userName.text = currentUser.displayName ?: "Devotee"
                     val userData = hashMapOf(
                         "uid" to currentUser.uid,
@@ -103,16 +127,8 @@ class AccountActivity : AppCompatActivity() {
                 }
             }
             .addOnFailureListener {
-                userName.text = currentUser.displayName ?: "Devotee" // Silently fallback
+                userName.text = currentUser.displayName ?: "Devotee"
             }
-    }
-
-    private fun checkAdminAndShowButton() {
-        val sharedPref = getSharedPreferences("AdminPrefs", MODE_PRIVATE)
-        val isAdmin = sharedPref.getBoolean("isAdminLoggedIn", false)
-        adminUsersCard.visibility = if (isAdmin) View.VISIBLE else View.GONE
-        // Hide chanting card for admin — admin doesn't need to log chanting
-        chantingCard.visibility = if (isAdmin) View.GONE else View.VISIBLE
     }
 
     private fun loadTodayChanting() {
@@ -143,10 +159,8 @@ class AccountActivity : AppCompatActivity() {
 
         signOutButton.setOnClickListener { showSignOutDialog() }
 
-        // Chanting card — user logs their rounds
         chantingCard.setOnClickListener { showChantingDialog() }
 
-        // Admin Users button
         adminUsersCard.setOnClickListener {
             startActivity(Intent(this, AdminUserListActivity::class.java))
         }
