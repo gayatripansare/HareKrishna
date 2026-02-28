@@ -2,29 +2,92 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Permissions (all duplicates removed) -->
+    <!-- Existing permissions -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <!-- Festival notification permissions -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
-    <uses-permission
-        android:name="android.permission.READ_EXTERNAL_STORAGE"
-        android:maxSdkVersion="32" />
+
+    <!-- NEW: Music Player Permissions -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK"/>
 
     <application
         android:name=".IskconApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@drawable/kopargaon_logo"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/kopargaon_logo"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.ISKCONTemple">
+        android:theme="@style/Theme.ISKCONTemple"
+        android:usesCleartextTraffic="true">
 
-        <!-- Main Launcher Activity (ONLY ONE) -->
+        <!-- Existing Activities -->
+        <activity
+            android:name=".PaymentSuccessActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PaymentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DonateActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ISKON_Sign_up"
+            android:exported="false" />
+        <activity
+            android:name=".ISKON_Sign_in"
+            android:exported="false" />
+        <activity
+            android:name=".RegistrationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".YouthForum"
+            android:exported="false" />
+        <activity
+            android:name=".Screen6"
+            android:exported="false" />
+        <activity
+            android:name=".Screen5"
+            android:exported="false" />
+        <activity
+            android:name=".Screen3"
+            android:exported="false" />
+        <activity
+            android:name=".AdminUploadActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".NotificationActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
+        <activity
+            android:name=".AccountActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
+        <!-- Friend's Temple Finder Activity -->
+        <activity
+            android:name=".MainActivity2"
+            android:exported="false"
+            android:label="Temple Finder" />
+
+        <activity
+            android:name=".EditProfileActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
+        <activity
+            android:name=".NotificationSettingsActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
+        <!-- YOUR MAIN APP (LAUNCHER) -->
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -34,80 +97,40 @@
             </intent-filter>
         </activity>
 
-        <!-- Base and Youth Activities -->
-        <activity
-            android:name=".BaseActivity"
-            android:exported="false" />
-
-        <activity
-            android:name=".YouthGalleryActivity"
-            android:exported="false" />
-
-        <activity
-            android:name=".YouthUploadActivity"
-            android:exported="false" />
-
-        <activity
-            android:name=".YouthForum"
-            android:exported="false" />
-
-        <!-- Authentication Activities -->
-        <activity
-            android:name=".ISKON_Sign_in"
-            android:exported="false" />
-
-        <activity
-            android:name=".ISKON_Sign_up"
-            android:exported="false" />
-
-        <activity
-            android:name=".RegistrationActivity"
-            android:exported="false" />
-
-        <!-- Feature Activities -->
-        <activity
-            android:name=".DonateActivity"
-            android:exported="false" />
-
-        <activity
-            android:name=".HistoryActivity"
-            android:exported="false"
-            android:label="Donation History" />
-
-        <activity
-            android:name=".MainActivity2"
-            android:exported="false"
-            android:label="Temple Finder" />
-
-        <!-- Screen Activities -->
-        <activity
-            android:name=".Screen3"
-            android:exported="false" />
-
-        <activity
-            android:name=".Screen5"
-            android:exported="false" />
-
-        <activity
-            android:name=".Screen6"
-            android:exported="false" />
-
-        <!-- Admin Activities -->
-        <activity
-            android:name=".AdminUploadActivity"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize" />
-
         <activity
             android:name=".AdminEventActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".AdminUserListActivity" />
+        <activity android:name=".AdminUserDetailActivity" />
+        <activity android:name=".AssignSevaActivity" />
+
         <activity
             android:name=".AdminFestivalActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
+
+        <!-- NEW: Music Player Activity -->
+        <activity
+            android:name=".MusicPlayerActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+
+<!--            android:theme="@style/Theme.ISKCONTemple.NoActionBar" />-->
+
+        <activity
+            android:name=".AdminSongsActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- NEW: Music Player Service -->
+        <service
+            android:name=".MusicPlayerService"
+            android:enabled="true"
+            android:exported="false"
+            android:foregroundServiceType="mediaPlayback" />
 
     </application>
 
