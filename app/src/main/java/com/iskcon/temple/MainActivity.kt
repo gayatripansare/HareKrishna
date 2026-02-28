@@ -76,8 +76,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         setupCustomBottomNavigation()
-<<<<<<< HEAD
-=======
     }
 
     private fun initializeToolbarViews() {
@@ -140,7 +138,6 @@ class MainActivity : AppCompatActivity() {
     // Add this new method to show/hide toolbar
     private fun showToolbar(show: Boolean) {
         appBarLayout.visibility = if (show) View.VISIBLE else View.GONE
->>>>>>> feaed21b2f95b309c6316a7b68c8ba77fcb39d4d
     }
 
     private fun initCloudinary() {
@@ -255,21 +252,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-<<<<<<< HEAD
-        // If there's a backstack (like from Gallery), pop it
-        if (supportFragmentManager.backStackEntryCount > 0) {
-            supportFragmentManager.popBackStack()
-        }
-        // If not on home, go to home
-        else if (currentSelectedTab != R.id.nav_home_custom) {
-            findViewById<LinearLayout>(R.id.nav_home_custom)?.performClick()
-        }
-        // If on home, exit app
-        else {
-            super.onBackPressed()
-        }
-    }
-=======
         if (supportFragmentManager.backStackEntryCount > 0) {
             supportFragmentManager.popBackStack()
             // Check which fragment is showing after popping
@@ -287,5 +269,4 @@ class MainActivity : AppCompatActivity() {
         loadNotificationCount() // Refresh notification count when returning to activity
         loadUserProfile() // Refresh profile picture
     }
->>>>>>> feaed21b2f95b309c6316a7b68c8ba77fcb39d4d
 }

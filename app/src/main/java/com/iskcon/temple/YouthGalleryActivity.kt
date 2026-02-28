@@ -8,7 +8,6 @@ import android.view.View
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -36,6 +35,8 @@ class YouthGalleryActivity : BaseActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = "Youth Gallery"
 
+        hideDonationFab()
+
         initViews()
         setupRecyclerView()
         checkAdminStatus()
@@ -44,6 +45,13 @@ class YouthGalleryActivity : BaseActivity() {
         fabAddImage.setOnClickListener {
             openUploadScreen()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        loadYouthImages()
+        hideDonationFab()
+        Log.d("YouthGallery", "onResume - Reloading youth gallery...")
     }
 
     private fun initViews() {
@@ -56,11 +64,9 @@ class YouthGalleryActivity : BaseActivity() {
         youthAdapter = GalleryAdapter(
             imageList = youthImagesList,
             onImageClick = { image ->
-                // ✅ UPDATED: Normal click opens zoom for ALL users
                 openImageZoom(image)
             },
             onImageLongClick = { image ->
-                // ✅ Long click for admin delete
                 if (isAdmin) {
                     showDeleteConfirmation(image)
                 } else {
@@ -72,7 +78,6 @@ class YouthGalleryActivity : BaseActivity() {
         rvYouthImages.layoutManager = GridLayoutManager(this, 2)
     }
 
-    // ✅ NEW: Open zoom activity (works for all users)
     private fun openImageZoom(image: GalleryImage) {
         val intent = Intent(this, ImageZoomActivity::class.java).apply {
             putExtra("IMAGE_URL", image.imageUrl)
@@ -95,17 +100,17 @@ class YouthGalleryActivity : BaseActivity() {
     private fun deleteImage(image: GalleryImage) {
         progressBar.visibility = View.VISIBLE
 
-        firestore.collection("youth_gallery_images")
+        firestore.collection("gallery_images")
             .document(image.id)
             .delete()
             .addOnSuccessListener {
                 progressBar.visibility = View.GONE
-                Toast.makeText(this, "✅ Image deleted successfully", Toast.LENGTH_SHORT).show()
-                loadYouthImages() // Reload the gallery
+                Toast.makeText(this, "Image deleted successfully", Toast.LENGTH_SHORT).show()
+                loadYouthImages()
             }
             .addOnFailureListener { e ->
                 progressBar.visibility = View.GONE
-                Toast.makeText(this, "❌ Failed to delete: ${e.message}", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Failed to delete: ${e.message}", Toast.LENGTH_LONG).show()
                 Log.e("YouthGallery", "Delete failed: ${e.message}")
             }
     }
@@ -113,8 +118,8 @@ class YouthGalleryActivity : BaseActivity() {
     private fun loadYouthImages() {
         progressBar.visibility = View.VISIBLE
 
-        // No authentication check needed - public read allowed
-        firestore.collection("youth_gallery_images")
+        firestore.collection("gallery_images")
+            .whereEqualTo("category", "youth")
             .get()
             .addOnSuccessListener { documents ->
                 youthImagesList.clear()
@@ -125,24 +130,22 @@ class YouthGalleryActivity : BaseActivity() {
                 youthImagesList.sortByDescending { it.timestamp }
                 youthAdapter.updateImages(youthImagesList)
                 progressBar.visibility = View.GONE
-                Log.d("YouthGallery", "✅ Loaded ${youthImagesList.size} youth images")
+                Log.d("YouthGallery", "Loaded ${youthImagesList.size} youth images")
             }
             .addOnFailureListener { exception ->
                 progressBar.visibility = View.GONE
-                Log.e("YouthGallery", "❌ Error loading youth images: ${exception.message}")
+                Log.e("YouthGallery", "Error loading youth images: ${exception.message}")
             }
     }
 
     private fun checkAdminStatus() {
         val currentUser = auth.currentUser
         if (currentUser == null) {
-            // Not logged in - hide FAB, set isAdmin = false
             fabAddImage.visibility = View.GONE
             isAdmin = false
             return
         }
 
-        // Logged in - check if admin
         firestore.collection("users")
             .document(currentUser.uid)
             .get()
@@ -166,12 +169,6 @@ class YouthGalleryActivity : BaseActivity() {
     private fun openUploadScreen() {
         val intent = Intent(this, YouthUploadActivity::class.java)
         startActivity(intent)
-    }
-
-    override fun onResume() {
-        super.onResume()
-        loadYouthImages()
-        Log.d("YouthGallery", "onResume - Reloading youth gallery...")
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

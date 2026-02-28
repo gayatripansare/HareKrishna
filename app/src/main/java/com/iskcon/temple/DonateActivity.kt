@@ -78,8 +78,8 @@ class DonateActivity : AppCompatActivity() {
                 toast("Enter a valid number")
                 false
             }
-            value < 30 -> {
-                toast("Minimum donation is ₹30")
+            value < 0 -> {
+                toast("Minimum donation is ₹1")
                 false
             }
             else -> true

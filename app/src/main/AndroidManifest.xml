@@ -2,47 +2,38 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Existing permissions -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
-    <!-- Festival notification permissions -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
-<<<<<<< HEAD
     <uses-permission
         android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="32" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
-=======
-
-    <!-- NEW: Music Player Permissions -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK"/>
->>>>>>> feaed21b2f95b309c6316a7b68c8ba77fcb39d4d
 
     <application
         android:name=".IskconApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/kopargaon_logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/kopargaon_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.ISKCONTemple"
         android:usesCleartextTraffic="true">
 
-        <!-- Existing Activities -->
-        <activity
-            android:name=".PaymentSuccessActivity"
-            android:exported="false" />
-        <activity
-            android:name=".PaymentActivity"
-            android:exported="false" />
+<!--        <activity-->
+<!--            android:name=".PaymentSuccessActivity"-->
+<!--            android:exported="false" />-->
+<!--        <activity-->
+<!--            android:name=".PaymentActivity"-->
+<!--            android:exported="false" />-->
         <activity
             android:name=".DonateActivity"
             android:exported="false" />
@@ -59,6 +50,15 @@
             android:name=".YouthForum"
             android:exported="false" />
         <activity
+            android:name=".YouthGalleryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".YouthUploadActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ImageZoomActivity"
+            android:exported="false" />
+        <activity
             android:name=".Screen6"
             android:exported="false" />
         <activity
@@ -71,30 +71,22 @@
             android:name=".AdminUploadActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
-
         <activity
             android:name=".NotificationActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-
         <activity
             android:name=".AccountActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-
-        <!-- Friend's Temple Finder Activity -->
         <activity
             android:name=".MainActivity2"
             android:exported="false"
             android:label="Temple Finder" />
-
         <activity
             android:name=".EditProfileActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-
         <activity
             android:name=".NotificationSettingsActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-
-        <!-- YOUR MAIN APP (LAUNCHER) -->
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -103,13 +95,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".AdminEventActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
-
         <activity
             android:name=".AdminFestivalActivity"
             android:exported="false"
@@ -117,23 +107,16 @@
         <activity
             android:name=".JapaActivity"
             android:screenOrientation="portrait" />
-
-
-        <!-- NEW: Music Player Activity -->
         <activity
             android:name=".MusicPlayerActivity"
             android:exported="false"
             android:screenOrientation="portrait"/>
-
-<!--            android:theme="@style/Theme.ISKCONTemple.NoActionBar" />-->
-
         <activity
             android:name=".AdminSongsActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
 
-        <!-- NEW: Music Player Service -->
         <service
             android:name=".MusicPlayerService"
             android:enabled="true"

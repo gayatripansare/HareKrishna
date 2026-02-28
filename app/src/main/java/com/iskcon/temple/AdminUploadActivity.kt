@@ -33,6 +33,9 @@ class AdminUploadActivity : BaseActivity() {
     private lateinit var cloudinaryHelper: CloudinaryHelper
     private val firestore = FirebaseFirestore.getInstance()
 
+    // ✅ Track pre-selected category passed from DarshanFragment
+    private var preSelectedCategory: String? = null
+
     private val imagePickerLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
@@ -49,12 +52,13 @@ class AdminUploadActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_upload)
 
-        // Enable back button
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = "Upload Gallery Image"
 
-        // Hide donation FAB on upload screen
         hideDonationFab()
+
+        // ✅ Get pre-selected category if passed from DarshanFragment
+        preSelectedCategory = intent.getStringExtra("CATEGORY")
 
         cloudinaryHelper = CloudinaryHelper(this)
         initViews()
@@ -74,10 +78,20 @@ class AdminUploadActivity : BaseActivity() {
     }
 
     private fun setupCategorySpinner() {
-        val categories = arrayOf("Select Category", "deity", "events")
+        // ✅ Added "darshan" as a category option
+        val categories = arrayOf("Select Category", "deity", "events", "darshan")
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, categories)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerCategory.adapter = adapter
+
+        // ✅ Auto-select category if passed via Intent (e.g., from DarshanFragment)
+        if (preSelectedCategory != null) {
+            val index = categories.indexOf(preSelectedCategory)
+            if (index >= 0) {
+                spinnerCategory.setSelection(index)
+                spinnerCategory.isEnabled = false  // Lock selection so admin doesn't accidentally change it
+            }
+        }
     }
 
     private fun setupClickListeners() {
