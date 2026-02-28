@@ -2,6 +2,7 @@
 <androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
@@ -20,36 +21,25 @@
             android:background="#FFFFFF"
             android:padding="16dp">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:textSize="22sp"
-                android:textStyle="bold"
-                android:textColor="#000000"
-                android:gravity="center"
-                android:paddingBottom="8dp" />
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text=" IT'S TIME TO CONTRIBUTE" android:textSize="28sp" android:textStyle="bold" android:textColor="#F6F3F3" android:background="#D8F46538" android:gravity="center" android:paddingBottom="12dp" />
 
-            <TextView
-                android:layout_width="match_parent"
+            <Button
+                android:id="@+id/btnHistory"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" IT'S TIME TO CONTRIBUTE"
-                android:textSize="28sp"
+                android:text="View Donation History"
+                android:textAllCaps="false"
+                android:textSize="14sp"
                 android:textStyle="bold"
-                android:textColor="#F6F3F3"
-                android:background="#D8F46538"
-                android:gravity="center"
-                android:paddingBottom="12dp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:textSize="22sp"
-                android:textStyle="bold"
-                android:textColor="#000000"
-                android:gravity="center"
-                android:paddingBottom="8dp" />
+                android:textColor="#0B0A0A"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="16dp"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:backgroundTint="#ABE469"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -117,22 +107,6 @@
                         android:gravity="center"
                         android:paddingBottom="16dp"
                         android:lineSpacingExtra="2dp" />
-
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Enter Amount (₹)"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/etAnnadaanAmount"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="numberDecimal"
-                            android:maxLines="1" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
 
                     <Button
                         android:id="@+id/btnDonateAnnadaan"
@@ -211,21 +185,6 @@
                         android:textColor="#666666"
                         android:textSize="14sp" />
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Enter Amount (₹)">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/etGitadaanAmount"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="numberDecimal"
-                            android:maxLines="1" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
                     <Button
                         android:id="@+id/btnDonateGitadaan"
                         android:layout_width="match_parent"
@@ -290,21 +249,6 @@
                         android:paddingBottom="16dp"
                         android:lineSpacingExtra="2dp" />
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Enter Amount (₹)"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/etJanmashtamiAmount"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="numberDecimal"
-                            android:maxLines="1" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
                     <Button
                         android:id="@+id/btnDonateJanmashtami"
                         android:layout_width="match_parent"
@@ -321,11 +265,6 @@
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
-
-        <!-- Bottom Spacing -->
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="16dp" />
 
     </LinearLayout>
 
