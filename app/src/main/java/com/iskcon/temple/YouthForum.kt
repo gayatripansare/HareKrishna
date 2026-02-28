@@ -12,7 +12,6 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -27,7 +26,6 @@ class YouthForum : BaseActivity() {
     private lateinit var cardQuickImage1: CardView
     private lateinit var cardQuickImage2: CardView
 
-    // ✅ NEW: Store loaded images for zoom
     private var quickImage1: GalleryImage? = null
     private var quickImage2: GalleryImage? = null
 
@@ -36,7 +34,6 @@ class YouthForum : BaseActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_youth_forum)
 
-        // Enable back button in action bar
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = "Youth Forum"
 
@@ -57,7 +54,6 @@ class YouthForum : BaseActivity() {
         cardQuickImage1 = findViewById(R.id.card_quick_youth_1)
         cardQuickImage2 = findViewById(R.id.card_quick_youth_2)
 
-        // ✅ NEW: Setup click listeners for zoom
         cardQuickImage1.setOnClickListener {
             quickImage1?.let { image ->
                 openImageZoom(image.imageUrl, image.title)
@@ -71,7 +67,6 @@ class YouthForum : BaseActivity() {
         }
     }
 
-    // ✅ NEW: Open zoom activity
     private fun openImageZoom(imageUrl: String, title: String) {
         val intent = Intent(this, ImageZoomActivity::class.java).apply {
             putExtra("IMAGE_URL", imageUrl)
@@ -81,19 +76,18 @@ class YouthForum : BaseActivity() {
     }
 
     private fun loadRecentYouthImages() {
-        // No authentication check needed - public read allowed
-
-        firestore.collection("youth_gallery_images")
+        firestore.collection("gallery_images")
+            .whereEqualTo("category", "youth")
             .limit(2)
             .get()
             .addOnSuccessListener { documents ->
                 val images = documents.mapNotNull { it.toObject(GalleryImage::class.java) }
                     .sortedByDescending { it.timestamp }
 
-                Log.d("YouthForum", "✅ Fetched ${images.size} images from Firestore")
+                Log.d("YouthForum", "Fetched ${images.size} images from Firestore")
 
                 if (images.isNotEmpty()) {
-                    quickImage1 = images[0]  // ✅ Store for zoom
+                    quickImage1 = images[0]
                     Glide.with(this)
                         .load(images[0].imageUrl)
                         .placeholder(R.drawable.deity_krishna)
@@ -104,7 +98,7 @@ class YouthForum : BaseActivity() {
                 }
 
                 if (images.size > 1) {
-                    quickImage2 = images[1]  // ✅ Store for zoom
+                    quickImage2 = images[1]
                     Glide.with(this)
                         .load(images[1].imageUrl)
                         .placeholder(R.drawable.deity_krishna)
@@ -114,39 +108,36 @@ class YouthForum : BaseActivity() {
                     cardQuickImage2.visibility = View.VISIBLE
                 }
 
-                Log.d("YouthForum", "✅ Loaded ${images.size} quick access images")
+                Log.d("YouthForum", "Loaded ${images.size} quick access images")
             }
             .addOnFailureListener { exception ->
-                Log.e("YouthForum", "❌ Error loading quick images: ${exception.message}")
+                Log.e("YouthForum", "Error loading quick images: ${exception.message}")
             }
     }
 
     private fun setupClickListeners() {
-        // Register Button
         findViewById<Button>(R.id.registerButton)?.setOnClickListener {
             openRegistrationOptions()
         }
 
-        // See More Images Button
         findViewById<Button>(R.id.btn_see_more_youth_images)?.setOnClickListener {
             openYouthGallery()
         }
 
-        // Info grid items
         findViewById<ImageButton>(R.id.imageButton)?.setOnClickListener {
-            Toast.makeText(this, "Communication Skills Development 🗣️", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Communication Skills Development", Toast.LENGTH_SHORT).show()
         }
 
         findViewById<ImageButton>(R.id.imageButton2)?.setOnClickListener {
-            Toast.makeText(this, "Concentration & Focus Training 🧘", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Concentration & Focus Training", Toast.LENGTH_SHORT).show()
         }
 
         findViewById<ImageButton>(R.id.imageButton3)?.setOnClickListener {
-            Toast.makeText(this, "Spiritual Prasadam 🍽️", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Spiritual Prasadam", Toast.LENGTH_SHORT).show()
         }
 
         findViewById<ImageButton>(R.id.imageButton4)?.setOnClickListener {
-            Toast.makeText(this, "Chanting & Meditation 📿", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Chanting & Meditation", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -204,7 +195,7 @@ class YouthForum : BaseActivity() {
 
     override fun onResume() {
         super.onResume()
-        loadRecentYouthImages() // Reload images when returning to this screen
+        loadRecentYouthImages()
     }
 
     @SuppressLint("GestureBackNavigation")

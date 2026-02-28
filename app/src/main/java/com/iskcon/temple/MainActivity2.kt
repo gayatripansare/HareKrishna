@@ -14,8 +14,8 @@ import android.graphics.Typeface
 import android.widget.ImageView
 import android.widget.ScrollView
 
-
-
+// ✅ SOLUTION: MainActivity2 does NOT extend BaseActivity
+// This means NO donation FAB will appear on home screen
 class MainActivity2: AppCompatActivity() {
 
     // Declare variables for UI elements
@@ -120,7 +120,7 @@ class MainActivity2: AppCompatActivity() {
                         "Local ISKCON center in Kopargaon. Regular kirtans, bhajans and prasadam distribution. Peaceful atmosphere for devotion.",
                         R.drawable.radha_2),
 
-                )
+                    )
             }
             searchLocation.contains("shirdi") -> {
                 listOf(
@@ -234,8 +234,6 @@ class MainActivity2: AppCompatActivity() {
                 startActivity(intent)
             }
         }
-
-        // Get Directions button - FIXED API
 
         // Call button
         findViewById<Button>(R.id.callButton).setOnClickListener {

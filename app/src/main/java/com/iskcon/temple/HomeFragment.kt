@@ -17,6 +17,8 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
 import java.util.*
+import android.content.Intent
+
 
 class HomeFragment : Fragment() {
 
@@ -37,7 +39,23 @@ class HomeFragment : Fragment() {
         setupQuickAccessCards(view)
         loadTodaysEvents(view)
 
+        // ✅ SOLUTION: Hide donation FAB on home screen
+        hideDonationFabOnHome()
+
         return view
+    }
+
+    // ✅ NEW: Hide donation FAB when home screen is shown
+    private fun hideDonationFabOnHome() {
+        try {
+            // MainActivity2 doesn't extend BaseActivity, so this won't work
+            // But if parent activity extends BaseActivity, hide it
+            if (activity is BaseActivity) {
+                (activity as BaseActivity).hideDonationFab()
+            }
+        } catch (e: Exception) {
+            Log.e("HomeFragment", "Error hiding FAB: ${e.message}")
+        }
     }
 
     private fun setupImageSlider(view: View) {
@@ -85,11 +103,23 @@ class HomeFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         sliderHandler.postDelayed(sliderRunnable, 2500)
+
+        // ✅ Hide FAB again when returning to home
+        hideDonationFabOnHome()
     }
 
     override fun onPause() {
         super.onPause()
         sliderHandler.removeCallbacks(sliderRunnable)
+
+        // ✅ Show FAB when leaving home screen
+        try {
+            if (activity is BaseActivity) {
+                (activity as BaseActivity).showDonationFab()
+            }
+        } catch (e: Exception) {
+            Log.e("HomeFragment", "Error showing FAB: ${e.message}")
+        }
     }
 
     private fun setupQuickAccessCards(view: View) {
@@ -97,16 +127,19 @@ class HomeFragment : Fragment() {
             navigateToVaishnavaSongs()
         }
 
-        view.findViewById<CardView>(R.id.card_services)?.setOnClickListener {
-            navigateToServices()
+        // ✅ FIXED: Navigate to DonateActivity instead of DonationFragment
+        view.findViewById<CardView>(R.id.card_donation)?.setOnClickListener {
+            navigateToDonation()
         }
 
         view.findViewById<CardView>(R.id.card_gallery)?.setOnClickListener {
             navigateToGallery()
         }
 
-        view.findViewById<CardView>(R.id.card_more)?.setOnClickListener {
-            navigateToMore()
+        val cardChanting = view.findViewById<CardView>(R.id.card_chanting)
+        cardChanting?.setOnClickListener {
+            val intent = Intent(requireContext(), JapaActivity::class.java)
+            startActivity(intent)
         }
     }
 
@@ -247,12 +280,9 @@ class HomeFragment : Fragment() {
             .commit()
     }
 
-    private fun navigateToServices() {
-        val servicesFragment = ServicesFragment()
-        requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, servicesFragment)
-            .addToBackStack("home")
-            .commit()
+    private fun navigateToDonation() {
+        val intent = Intent(requireContext(), DonateActivity::class.java)
+        startActivity(intent)
     }
 
     private fun navigateToGallery() {

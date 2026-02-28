@@ -33,7 +33,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var accountContainer: FrameLayout
     private lateinit var appBarLayout: AppBarLayout
 
-    // Notification permission launcher
     private val requestPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) { isGranted: Boolean ->
@@ -48,26 +47,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Initialize Firebase
         auth = FirebaseAuth.getInstance()
         firestore = FirebaseFirestore.getInstance()
 
-        // Initialize Views
         initializeToolbarViews()
-
-        // Initialize Cloudinary
         initCloudinary()
-
-        // Request notification permission
         requestNotificationPermission()
-
-        // Load user profile
         loadUserProfile()
-
-        // Setup click listeners
         setupToolbarClicks()
-
-        // Load notification count
         loadNotificationCount()
 
         if (savedInstanceState == null) {
@@ -87,14 +74,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupToolbarClicks() {
-        // Notification Click
         notificationContainer.setOnClickListener {
             val intent = Intent(this, NotificationActivity::class.java)
             startActivity(intent)
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         }
 
-        // Account Click
         accountContainer.setOnClickListener {
             val intent = Intent(this, AccountActivity::class.java)
             startActivity(intent)

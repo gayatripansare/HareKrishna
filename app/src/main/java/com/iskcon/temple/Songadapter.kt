@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 
+
 class SongAdapter(
     private val songs: List<Song>,
     private val isAdmin: Boolean = false,
