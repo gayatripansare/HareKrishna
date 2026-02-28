@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var profileImage: ImageView
     private lateinit var notificationContainer: FrameLayout
     private lateinit var accountContainer: FrameLayout
-    private lateinit var appBarLayout: AppBarLayout // Add this
+    private lateinit var appBarLayout: AppBarLayout
 
     // Notification permission launcher
     private val requestPermissionLauncher = registerForActivityResult(
@@ -72,14 +72,14 @@ class MainActivity : AppCompatActivity() {
 
         if (savedInstanceState == null) {
             loadFragment(HomeFragment())
-            showToolbar(true) // Show toolbar for home
+            showToolbar(true)
         }
 
         setupCustomBottomNavigation()
     }
 
     private fun initializeToolbarViews() {
-        appBarLayout = findViewById(R.id.app_bar_layout) // Add this
+        appBarLayout = findViewById(R.id.app_bar_layout)
         notificationBadge = findViewById(R.id.notification_badge)
         profileImage = findViewById(R.id.toolbar_profile_image)
         notificationContainer = findViewById(R.id.notification_icon_container)
@@ -105,7 +105,6 @@ class MainActivity : AppCompatActivity() {
     private fun loadUserProfile() {
         val currentUser = auth.currentUser
         if (currentUser != null) {
-            // Load profile picture from Firebase or use default
             val photoUrl = currentUser.photoUrl
             if (photoUrl != null) {
                 Glide.with(this)
@@ -119,23 +118,37 @@ class MainActivity : AppCompatActivity() {
     private fun loadNotificationCount() {
         val currentUser = auth.currentUser ?: return
 
+        android.util.Log.d("NOTIF_BADGE", "Checking notifications for UID: ${currentUser.uid}")
+
+        // ✅ FIXED: Only whereEqualTo("userId") — no orderBy, no composite index needed
+        // Unread count is filtered in memory
         firestore.collection("notifications")
             .whereEqualTo("userId", currentUser.uid)
-            .whereEqualTo("read", false)
             .addSnapshotListener { snapshot, error ->
-                if (error != null) return@addSnapshotListener
+                if (error != null) {
+                    android.util.Log.e("NOTIF_BADGE", "Error: ${error.message}")
+                    return@addSnapshotListener
+                }
 
-                val unreadCount = snapshot?.size() ?: 0
-                if (unreadCount > 0) {
-                    notificationBadge.visibility = View.VISIBLE
-                    notificationBadge.text = if (unreadCount > 9) "9+" else unreadCount.toString()
-                } else {
-                    notificationBadge.visibility = View.GONE
+                android.util.Log.d("NOTIF_BADGE", "Total notifications: ${snapshot?.documents?.size}")
+
+                val unreadCount = snapshot?.documents?.count { doc ->
+                    doc.getBoolean("read") == false
+                } ?: 0
+
+                android.util.Log.d("NOTIF_BADGE", "Unread count: $unreadCount")
+
+                runOnUiThread {
+                    if (unreadCount > 0) {
+                        notificationBadge.visibility = View.VISIBLE
+                        notificationBadge.text = if (unreadCount > 9) "9+" else unreadCount.toString()
+                    } else {
+                        notificationBadge.visibility = View.GONE
+                    }
                 }
             }
     }
 
-    // Add this new method to show/hide toolbar
     private fun showToolbar(show: Boolean) {
         appBarLayout.visibility = if (show) View.VISIBLE else View.GONE
     }
@@ -174,35 +187,35 @@ class MainActivity : AppCompatActivity() {
             selectTab(R.id.nav_home_custom)
             clearBackStack()
             loadFragment(HomeFragment())
-            showToolbar(true) // Show toolbar
+            showToolbar(true)
         }
 
         navDarshan.setOnClickListener {
             selectTab(R.id.nav_darshan_custom)
             clearBackStack()
             loadFragment(DarshanFragment())
-            showToolbar(false) // Hide toolbar
+            showToolbar(false)
         }
 
         navSchedule.setOnClickListener {
             selectTab(R.id.nav_schedule_custom)
             clearBackStack()
             loadFragment(ScheduleFragment())
-            showToolbar(false) // Hide toolbar
+            showToolbar(false)
         }
 
         navServices.setOnClickListener {
             selectTab(R.id.nav_services_custom)
             clearBackStack()
             loadFragment(ServicesFragment())
-            showToolbar(false) // Hide toolbar
+            showToolbar(false)
         }
 
         navMore.setOnClickListener {
             selectTab(R.id.nav_more_custom)
             clearBackStack()
             loadFragment(MoreFragment())
-            showToolbar(false) // Hide toolbar
+            showToolbar(false)
         }
 
         selectTab(R.id.nav_home_custom)
@@ -220,7 +233,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateTabColor(tabId: Int, isSelected: Boolean) {
-        val tab = findViewById<LinearLayout>(tabId)
         val textView = when (tabId) {
             R.id.nav_home_custom -> findViewById<TextView>(R.id.text_home)
             R.id.nav_darshan_custom -> findViewById<TextView>(R.id.text_darshan)
@@ -254,7 +266,6 @@ class MainActivity : AppCompatActivity() {
     override fun onBackPressed() {
         if (supportFragmentManager.backStackEntryCount > 0) {
             supportFragmentManager.popBackStack()
-            // Check which fragment is showing after popping
             val currentFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
             showToolbar(currentFragment is HomeFragment)
         } else if (currentSelectedTab != R.id.nav_home_custom) {
@@ -266,7 +277,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        loadNotificationCount() // Refresh notification count when returning to activity
-        loadUserProfile() // Refresh profile picture
+        loadNotificationCount()
+        loadUserProfile()
     }
 }

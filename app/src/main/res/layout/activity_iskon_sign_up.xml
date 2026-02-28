@@ -56,16 +56,43 @@
                 android:orientation="vertical"
                 android:padding="24dp">
 
+                <!-- NEW: Name Field -->
+                <EditText
+                    android:id="@+id/devotee_signup_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="Full Name"
+                    android:inputType="textPersonName"
+                    android:background="@drawable/edittext_background"
+                    android:padding="14dp"
+                    android:drawableStart="@drawable/ic_default_profile"
+                    android:drawablePadding="12dp"/>
+
                 <EditText
                     android:id="@+id/devotee_signup_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
                     android:ems="10"
                     android:hint="Email Address"
                     android:inputType="textEmailAddress"
                     android:background="@drawable/edittext_background"
                     android:padding="14dp"
                     android:drawableStart="@drawable/ic_email"
+                    android:drawablePadding="12dp"/>
+
+                <EditText
+                    android:id="@+id/devotee_signup_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:ems="10"
+                    android:hint="Phone Number"
+                    android:inputType="phone"
+                    android:background="@drawable/edittext_background"
+                    android:padding="14dp"
+                    android:drawableStart="@drawable/ic_lock"
                     android:drawablePadding="12dp"/>
 
                 <EditText

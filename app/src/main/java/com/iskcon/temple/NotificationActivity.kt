@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -22,6 +21,8 @@ class NotificationActivity : AppCompatActivity() {
     private lateinit var firestore: FirebaseFirestore
     private val notifications = mutableListOf<NotificationItem>()
     private lateinit var adapter: NotificationAdapter
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var emptyView: LinearLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,38 +43,41 @@ class NotificationActivity : AppCompatActivity() {
     }
 
     private fun setupRecyclerView() {
-        val recyclerView = findViewById<RecyclerView>(R.id.notifications_recycler_view)
-        val emptyView = findViewById<LinearLayout>(R.id.empty_view)
+        recyclerView = findViewById(R.id.notifications_recycler_view)
+        emptyView = findViewById(R.id.empty_view)
 
-        if (recyclerView != null && emptyView != null) {
-            adapter = NotificationAdapter(notifications)
-            recyclerView.layoutManager = LinearLayoutManager(this)
-            recyclerView.adapter = adapter
-        }
+        adapter = NotificationAdapter(notifications)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = adapter
     }
 
     private fun loadNotifications() {
         val currentUser = auth.currentUser
-        val recyclerView = findViewById<RecyclerView>(R.id.notifications_recycler_view)
-        val emptyView = findViewById<LinearLayout>(R.id.empty_view)
 
-        if (currentUser == null || recyclerView == null || emptyView == null) {
-            emptyView?.visibility = View.VISIBLE
-            recyclerView?.visibility = View.GONE
+        if (currentUser == null) {
+            emptyView.visibility = View.VISIBLE
+            recyclerView.visibility = View.GONE
             return
         }
 
+        android.util.Log.d("NOTIF", "Loading notifications for UID: ${currentUser.uid}")
+
+        // ✅ FIXED: Removed orderBy("timestamp") — it requires composite index
+        // Now we sort in memory instead
         firestore.collection("notifications")
             .whereEqualTo("userId", currentUser.uid)
-            .orderBy("timestamp", Query.Direction.DESCENDING)
             .addSnapshotListener { snapshot, error ->
                 if (error != null) {
+                    android.util.Log.e("NOTIF", "Error loading notifications: ${error.message}")
                     emptyView.visibility = View.VISIBLE
                     recyclerView.visibility = View.GONE
                     return@addSnapshotListener
                 }
 
+                android.util.Log.d("NOTIF", "Documents found: ${snapshot?.documents?.size}")
+
                 notifications.clear()
+
                 snapshot?.documents?.forEach { doc ->
                     val notification = NotificationItem(
                         id = doc.id,
@@ -85,6 +89,9 @@ class NotificationActivity : AppCompatActivity() {
                     )
                     notifications.add(notification)
                 }
+
+                // ✅ Sort by timestamp descending in memory (no index needed)
+                notifications.sortByDescending { it.timestamp }
 
                 adapter.notifyDataSetChanged()
 
@@ -130,23 +137,33 @@ class NotificationActivity : AppCompatActivity() {
             holder.title.text = item.title
             holder.message.text = item.message
             holder.time.text = getTimeAgo(item.timestamp)
+
+            // ✅ Show unread dot for unread notifications
             holder.unreadDot.visibility = if (item.read) View.GONE else View.VISIBLE
+
+            // ✅ Dim read notifications slightly
+            holder.itemView.alpha = if (item.read) 0.7f else 1.0f
 
             holder.icon.text = when (item.type) {
                 "festival" -> "🎉"
                 "event" -> "📅"
                 "reminder" -> "⏰"
+                "seva" -> "🙏"
                 else -> "🔔"
             }
 
+            // ✅ Mark as read when user taps on notification
             holder.itemView.setOnClickListener {
-                markAsRead(item.id)
+                if (!item.read) {
+                    markAsRead(item.id)
+                }
             }
         }
 
         override fun getItemCount() = items.size
 
         private fun getTimeAgo(timestamp: Long): String {
+            if (timestamp == 0L) return ""
             val now = System.currentTimeMillis()
             val diff = now - timestamp
 
@@ -163,6 +180,9 @@ class NotificationActivity : AppCompatActivity() {
             firestore.collection("notifications")
                 .document(notificationId)
                 .update("read", true)
+                .addOnSuccessListener {
+                    android.util.Log.d("NOTIF", "Marked as read: $notificationId")
+                }
         }
     }
 }
